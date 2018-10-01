@@ -15,16 +15,11 @@ use Faker\Generator as Faker;
 
 
 $factory->define(App\Models\Player::class, function (Faker $faker) {
-    $guildId = App\Models\Guild::pluck('id')->toArray();
-    
-    // Decided not to include league in the Player table
-    // $leagueId = App\Models\League::pluck('id')->toArray();
     
     return [
         'name' => $faker->userName,
-        'guild_id' => $faker->randomElement($guildId),
-        // No longer needed
-        // 'league_id' => $faker->randomElement($leagueId),
+        // 'guild_id' => $faker->randomElement($guild),  // allocate a defined guild
+        // This will be overridden by the PlayerTableSeeder
     ];
 });
 

@@ -11,7 +11,20 @@ class EventStatTableSeeder extends Seeder
      */
     public function run()
     {
-        // This was just a test, not to be used for seeding. 
-        // factory(App\Models\EventStat::class, 10)->create();
+       // For each event, create event stats for each player in the database
+        $event = DB::table('events')->pluck('id');
+        $player = DB::table('players')->pluck('id');
+
+        foreach ($event as $event){
+            $player = DB::table('players')->pluck('id');
+            foreach ($player as $player){
+                factory(App\Models\EventStat::class)->create(
+                    [
+                        'event_id' => $event,
+                        'player_id' => $player,
+                    ]
+                );
+            };  
+        };
     }
 }

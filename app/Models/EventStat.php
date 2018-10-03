@@ -10,8 +10,8 @@ class EventStat extends Model
 
     // Define Relationships
 
-    public function player(){
-        return $this->belongsto('App\Models\Player');
+    public function member(){
+        return $this->belongsto('App\Models\Member');
     }
 
     public function event(){

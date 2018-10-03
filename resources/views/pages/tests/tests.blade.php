@@ -16,10 +16,10 @@
                 
 
 
-                @foreach($players as $player)
+                @foreach($members as $member)
                 
-                    <h5><a href="">{{$player->name}}</a></h5>
-                    <p>Current League: {{$player->league_id}}</p>
+                    <h5><a href="">{{$member->name}}</a></h5>
+                    <p>Current League: {{$member->league_id}}</p>
                 
                 @endforeach
                 

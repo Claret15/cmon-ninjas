@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlayersTable extends Migration
+class CreateMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', '100');
-            // $table->integer('guild_id');     // Generated from the fk_player_guild migration
-            // $table->integer('league_id');    // generated from the fk_player_league migration
+            // $table->integer('guild_id');     // Generated from the fk_member_guild migration
+            // $table->integer('league_id');    // generated from the fk_member_league migration
                                                 // This is no longer required. 
             $table->boolean('active')->default('1');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreatePlayersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('members');
     }
 }

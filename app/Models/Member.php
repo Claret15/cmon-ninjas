@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Player extends Model
+class Member extends Model
 {
     // Table name
-    protected $table = 'players';
+    protected $table = 'members';
 
     // Primary Key
     public $primaryKey = 'id';

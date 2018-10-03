@@ -14,7 +14,7 @@
                 
                
 
-                {{-- {{$players}};
+                {{-- {{$members}};
                 <br />
                 <br />
                 <br /> --}}
@@ -22,7 +22,7 @@
             <!--
                 <pre>
                     <?php
-                        // print_r($players);
+                        // print_r($members);
                             // echo "<br>";
                             // echo "<br>";
                     ?>
@@ -35,18 +35,18 @@
 <h1>USING $members</h1>
         @foreach($members as $member)
             <div class="mb-3">
-                <h5><a href="/players/{{$member->id}}">{{$member->name}}</a></h5>
+                <h5><a href="/members/{{$member->id}}">{{$member->name}}</a></h5>
                 <span>Guild: {{$member->guild->name}}</span><br/>
                 <span>Current League: {{$member->eventstats}}</span><br/>
             </div>
         @endforeach
 
-        <h1>USING $players</h1>
-        @foreach($players as $player)
+        <h1>USING $members</h1>
+        @foreach($members as $member)
             <div class="mb-3">
-                <h5><a href="/players/{{$player->id}}">{{$player->name}}</a></h5>
-                {{-- <span>Guild: {{$player->guild}}</span><br/> --}}
-                {{-- <span>Current League: {{$player->league}}</span><br/> --}}
+                <h5><a href="/members/{{$member->id}}">{{$member->name}}</a></h5>
+                {{-- <span>Guild: {{$member->guild}}</span><br/> --}}
+                {{-- <span>Current League: {{$member->league}}</span><br/> --}}
             </div>
         @endforeach
                 

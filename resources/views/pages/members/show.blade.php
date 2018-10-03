@@ -5,18 +5,18 @@
         <div class="container">
 
 
-            <p><a href="/players" class="btn btn-primary btn-sm"><< Back to Players</a></p>
+            <p><a href="/members" class="btn btn-primary btn-sm"><< Back to members</a></p>
            {{-- {{$members}} --}}
-        <h5>$playerGuild:</h5>
-           {{$playerGuild}}
+        <h5>$memberGuild:</h5>
+           {{$memberGuild}}
            <br>
-           {{$playerGuild->name}}
+           {{$memberGuild->name}}
            <br><br>
         <h5>$testOutput:</h5>
            {{$testOutput}}
            <br><br>
-        <h5>$allPlayerStats:</h5>
-           {{$allPlayerStats}}
+        <h5>$allMemberStats:</h5>
+           {{$allMemberStats}}
            <br><br>
 
            <div class="mb-3">
@@ -30,7 +30,7 @@
                         <th>Global Rank</th>
                     </tr>
 
-            @foreach($allPlayerStats as $stats)
+            @foreach($allMemberStats as $stats)
                     <tr>
                         <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
                         <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
@@ -56,7 +56,7 @@
                 <table class='table'>
                     <tr>
                         <th>Event</th>
-                        <th>Player Name</th>
+                        <th>Member Name</th>
                         <th>Guild Pts</th>
                         <th>Solo Pts</th>
                         <th>League</th>
@@ -67,7 +67,7 @@
             @foreach($allGuildEventStats as $stats)
                     <tr>
                         <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
-                        <td>{{$stats->player->name}}</td>     {{-- Guild Pts --}}
+                        <td>{{$stats->member->name}}</td>     {{-- Guild Pts --}}
                         <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
                         <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
                         <td>{{$stats->league->name}}</td>     {{-- League --}}
@@ -80,34 +80,34 @@
 
             <br><br>
 
-           {{$player->guild}}
+           {{$member->guild}}
             <br>
-            {{ "Is there anything here - " }} {{ isset($player[0]) ? $player[0] : "Not valid" }}
+            {{ "Is there anything here - " }} {{ isset($member[0]) ? $member[0] : "Not valid" }}
             <br>
             <br>
             <br>
 
-            <h1>{{$player->name}}</h1>
+            <h1>{{$member->name}}</h1>
     <br>
-            {{$player->guild}}
+            {{$member->guild}}
     <br>
-            {{$player->id}}
+            {{$member->id}}
     <br>
     <br>
             <h3>testing output</h3>
     <br>
-            {{$player->event_stats}}
+            {{$member->event_stats}}
     <br>
-            {{$player->id}}
+            {{$member->id}}
     <br>
          
-            {{-- {{ $player->get('name') }} --}}
+            {{-- {{ $member->get('name') }} --}}
 
-            {{-- {{ $player }} --}}
+            {{-- {{ $member }} --}}
             {{-- {{ $guild }} --}}
-            {{-- {{ $player->get('guild') }}       --}}
+            {{-- {{ $member->get('guild') }}       --}}
 
-            {{ "Is there anything here - " }} {{ isset($player) ? $player : "Not valid" }}
+            {{ "Is there anything here - " }} {{ isset($member) ? $member : "Not valid" }}
             <br>
             {{ "Is there anything here - " }} {{ isset($pastEvents1) ? $pastEvents1 : "Not valid" }}
             <br>
@@ -153,7 +153,7 @@
                     <span>Global Rank: {{$pastEvents->global_rank}}</span><br/>
                     <span>League: {{$pastEvents->league}}</span><br/> --}}
                     {{-- <span>{{$pastEvents->leagues->league_name}}</span><br/> --}}
-                    {{-- <span>Current League: {{$player->league}}</span><br/> --}}
+                    {{-- <span>Current League: {{$member->league}}</span><br/> --}}
                 {{-- </div> --}}
             {{-- @endforeach --}}
 
@@ -164,11 +164,16 @@
             <ul>
                 
                 <li><h3>What should be on this page:</h3></li>
-                <li>title with name of player</li>
+                <li>title with name of member</li>
                 <li>list events participated</li>
                 <li>last event participated?</li>
-                <li></li>
-                <li></li>
+                <li>Personal Best:</li>
+                <li>- League and rank</li>
+                <li>- Solo Pts</li>
+                <li>- Guild Pts</li>
+                <li>- Global Rank</li>
+                <li>Pie Chart for Leagues Participated</li>
+                <li>For individual event stat page - show promoted or relegated league</li>
             </ul>
 
             <ul>

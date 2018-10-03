@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFkPlayerLeague extends Migration
+class CreateFkMemberLeague extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFkPlayerLeague extends Migration
      */
     public function up()
     {
-        Schema::table('players', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
 
         // THIS CAN BE DELETED - MOVE TO A FOLDER FOR NOW
         // I WILL NOT INCLUDED LEAGUE IN THE PLAYERS TABLE
@@ -35,8 +35,8 @@ class CreateFkPlayerLeague extends Migration
      */
     public function down()
     {
-        // Schema::table('players', function (Blueprint $table) {
-        //     $table->dropForeign('players_league_id_foreign');
+        // Schema::table('members', function (Blueprint $table) {
+        //     $table->dropForeign('members_league_id_foreign');
         // });
     }
 }

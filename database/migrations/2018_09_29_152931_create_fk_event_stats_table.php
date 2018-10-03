@@ -19,9 +19,9 @@ class CreateFkEventStatsTable extends Migration
                 ->references('id')->on('events')
                 ->onUpdate('cascade');
 
-            $table->integer('player_id')->unsigned()->after('event_id');
-            $table->foreign('player_id')
-                ->references('id')->on('players')
+            $table->integer('member_id')->unsigned()->after('event_id');
+            $table->foreign('member_id')
+                ->references('id')->on('members')
                 ->onUpdate('cascade');    
             
             $table->integer('league_id')->unsigned()->after('solo_pts');
@@ -41,7 +41,7 @@ class CreateFkEventStatsTable extends Migration
     {
         Schema::table('event_stats', function (Blueprint $table) {
             $table->dropForeign('event_stats_event_id_foreign');
-            $table->dropForeign('event_stats_player_id_foreign');
+            $table->dropForeign('event_stats_member_id_foreign');
             $table->dropForeign('event_stats_league_id_foreign');
         });
     }

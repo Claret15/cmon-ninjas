@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Player;
+use App\Models\Member;
 use App\Models\Guild;
 use App\Models\EventStat;
 use App\Models\Event;
 
 
-class PlayerController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::all();
+        $members = Member::all();
 
-        return view('pages.players.index')->with('players', $players);
+        return view('pages.members.index')->with('members', $members);
        
     }
 
@@ -59,31 +59,31 @@ class PlayerController extends Controller
         */
 
         // This works in terms of syntax, but I can't join guild_id to the guild.name
-        // $player = Player::find($id);
+        // $member = Member::find($id);
 
 
         // This works, but I don't think I need to include guild name.  
         // Try to keep it simple.  
-        $player = Player::where('players.id', $id)
-            ->select('players.id', 'players.name as name', 'guilds.name as guild')
-            ->join('guilds', 'players.guild_id', '=', 'guilds.id')
+        $member = Member::where('members.id', $id)
+            ->select('members.id', 'members.name as name', 'guilds.name as guild')
+            ->join('guilds', 'members.guild_id', '=', 'guilds.id')
             // ->get();     // If you use ->get(), this returns a collection as an object.
-                        // I would need to use $player[0]->
+                        // I would need to use $member[0]->
             ->first();      // This will return a single model - Exactly what I want.
-                        // Then I can use $player->name, $player-guild.
+                        // Then I can use $member->name, $member->guild.
 
         /*  
-        *   Get Player Past Event Stats
+        *   Get Members Past Event Stats
         */
 
-        // Obtains all stats for the Player - No table joins
-        $pastEvents1 = EventStat::where('player_id', $id)->get();
+        // Obtains all stats for the Member - No table joins
+        $pastEvents1 = EventStat::where('member_id', $id)->get();
         // $pastEvents1 = EventStat::find($id);
 
-        // Obtains all stats for the Player plus table joins    
-        $pastEvents2 = EventStat::where('player_id', $id)
-            ->select('event_stats.*', 'events.name as event_name', 'players.id as playerID', 'players.name as name', 'leagues.name as league')
-            ->join('players', 'event_stats.player_id', '=', 'players.id')
+        // Obtains all stats for the Member plus table joins    
+        $pastEvents2 = EventStat::where('member_id', $id)
+            ->select('event_stats.*', 'events.name as event_name', 'members.id as memberId', 'members.name as name', 'leagues.name as league')
+            ->join('members', 'event_stats.member_id', '=', 'members.id')
             ->join('events', 'event_stats.event_id', '=', 'events.id')
             ->join('leagues', 'event_stats.league_id', '=', 'leagues.id')
             ->orderby('events.event_date', 'desc')
@@ -95,14 +95,14 @@ class PlayerController extends Controller
         *   Testing Eloquent Relationship Queries
         */
 
-        $allPlayerStats = Player::find($id)->eventStats;
+        $allMemberStats = Member::find($id)->eventStats;
 
         $allEventStats = Event::find(1)->eventStats;
         
         // This retrieves all guild stats
         // $allGuildEventStats = Guild::find(1)->eventStats;
         
-        // This retrieves all guild stats and sorted by player Id - works
+        // This retrieves all guild stats and sorted by member Id - works
         // Only works by one sortBy condition
         // $allGuildEventStats = Guild::find(1)->eventStats->sortBy('event_id');
 
@@ -123,15 +123,15 @@ class PlayerController extends Controller
             
 
 
-        $playerGuild = Player::find($id)->guild;  // This works now.  
+        $memberGuild = Member::find($id)->guild;  // This works now.  
         
 // Move these to the Guild Controller
         $testOutput = Guild::find($id);
 
-        $members = Guild::find(3)->players;  // This works now
+        $members = Guild::find(3)->members;  // This works now
 
-        // return view('pages.players.show')->with('player', $player);
-        return view('pages.players.show', compact('player', 'pastEvents1', 'pastEvents2','members', 'playerGuild', 'testOutput','allPlayerStats','allEventStats','allGuildEventStats'));
+        // return view('pages.members.show')->with('member', $member);
+        return view('pages.members.show', compact('member', 'pastEvents1', 'pastEvents2','members', 'memberGuild', 'testOutput','allMemberStats','allEventStats','allGuildEventStats'));
     }
 
     /**

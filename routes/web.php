@@ -29,4 +29,4 @@ Route::get('/about', 'PageController@about');
 Route::get('/tests', 'PageController@tests');
 
 Route::resource('guild', 'GuildController'); 
-Route::resource('players', 'PlayerController');
+Route::resource('members', 'MemberController');

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PlayerTableSeeder extends Seeder
+class MemberTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,14 +11,14 @@ class PlayerTableSeeder extends Seeder
      */
     public function run()
     {
-        // For each guild that has been created, create 30 players. 
+        // For each guild that has been created, create 30 members. 
         $guild = DB::table('guilds')->pluck('id');
             
         foreach ($guild as $guild)
-            factory(App\Models\Player::class, 30)->create(
+            factory(App\Models\Member::class, 30)->create(
                 [
                     'guild_id' => $guild,
                 ]
             );
-    }
+    } 
 }

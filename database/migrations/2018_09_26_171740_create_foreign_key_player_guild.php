@@ -13,7 +13,7 @@ class CreateForeignKeyPlayerGuild extends Migration
      */
     public function up()
     {
-        Schema::table('players', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
 
             $table->integer('guild_id')->unsigned()->after('name');
 
@@ -30,8 +30,8 @@ class CreateForeignKeyPlayerGuild extends Migration
      */
     public function down()
     {
-        Schema::table('players', function (Blueprint $table) {
-            $table->dropForeign('players_guild_id_foreign');
+        Schema::table('members', function (Blueprint $table) {
+            $table->dropForeign('members_guild_id_foreign');
         });
     }
 }

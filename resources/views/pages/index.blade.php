@@ -12,9 +12,9 @@
         </div>
 
     <?php
-        use App\Models\Player;
+        use App\Models\Member;
         // use Player::class;
-        Player::all();
+        Member::all();
 
 
     ?>

@@ -16,11 +16,11 @@ class Guild extends Model
     public $timestamps = false;
 
     // Define Relationships
-    public function players(){
-        return $this->hasMany('App\Models\Player');
+    public function members(){
+        return $this->hasMany('App\Models\Member');
     }
 
     public function eventStats(){
-        return $this->hasManyThrough('App\Models\EventStat', 'App\Models\Player');
+        return $this->hasManyThrough('App\Models\EventStat', 'App\Models\Member');
     }
 }

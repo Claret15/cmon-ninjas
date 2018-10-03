@@ -13,15 +13,15 @@ class EventStatTableSeeder extends Seeder
     {
        // For each event, create event stats for each player in the database
         $event = DB::table('events')->pluck('id');
-        $player = DB::table('players')->pluck('id');
+        $member = DB::table('members')->pluck('id');
 
         foreach ($event as $event){
-            $player = DB::table('players')->pluck('id');
-            foreach ($player as $player){
+            $member = DB::table('members')->pluck('id');
+            foreach ($member as $member){
                 factory(App\Models\EventStat::class)->create(
                     [
                         'event_id' => $event,
-                        'player_id' => $player,
+                        'member_id' => $member,
                     ]
                 );
             };  

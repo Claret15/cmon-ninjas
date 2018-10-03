@@ -16,7 +16,7 @@ class CreateEventStatsTable extends Migration
         Schema::create('event_stats', function (Blueprint $table) {
             $table->increments('id');
             // event_id         // generated from the fk_event_stats migration
-            // player_id        // generated from the fk_event_stats migration
+            // member_id        // generated from the fk_event_stats migration
             $table->bigInteger('guild_pts')->unsigned();
             $table->bigInteger('solo_pts')->unsigned();
             // league_id        // generated from the fk_event_stats migration

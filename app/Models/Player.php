@@ -18,7 +18,7 @@ class Player extends Model
         return $this->belongsTo('App\Models\Guild');
     }
 
-    public function eventstat(){
+    public function eventStats(){
         return $this->hasmany('App\Models\EventStat');
     }
 }

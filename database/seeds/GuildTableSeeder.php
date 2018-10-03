@@ -11,6 +11,9 @@ class GuildTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Guild::class, 10)->create();
+        factory(App\Models\Guild::class)->create([
+            'name'=>'Infernal Pathfinders'
+        ]);
+        factory(App\Models\Guild::class, 9)->create();
     }
 }

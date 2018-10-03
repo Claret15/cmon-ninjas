@@ -15,7 +15,5 @@
     <body>
         @include('inc.navbar')
         @yield('content')
-        @yield('test-heading')      {{-- Test heading --}}   
-        @yield('tests')             {{-- Test output --}}
     </body>
 </html>

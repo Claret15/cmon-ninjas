@@ -23,8 +23,10 @@
 
 // View pages via controllers
 
-Route::get('/', 'PagesController@index');
-Route::get('/events', 'PagesController@events');
-Route::get('/about', 'PagesController@about'); 
-Route::get('/tests', 'PagesController@tests');
-Route::get('/guild', 'GuildsController@index'); 
+Route::get('/', 'PageController@index');
+Route::get('/events', 'PageController@events');
+Route::get('/about', 'PageController@about'); 
+Route::get('/tests', 'PageController@tests');
+
+Route::resource('guild', 'GuildController'); 
+Route::resource('players', 'PlayerController');

@@ -8,7 +8,7 @@ use App\Models\EventType;
 use App\Models\Player;
 use App\Models\Guild;
 
-class GuildsController extends Controller
+class GuildController extends Controller
 {
     // public function index() {
 
@@ -31,9 +31,9 @@ class GuildsController extends Controller
 
 
     // Trying to show the guild and league names instead of their respective ids as per foreign keys
-        $players = Player::where('guild_id', 3)
+        $players = Player::where('guild_id', 1)
                 // ->select('players.name', 'guilds.name as guild', 'leagues.name as league')
-                ->select('players.name', 'guilds.name as guild')
+                ->select('players.name', 'players.id', 'guilds.name as guild')
                 // Using join 
                 // - first argument is the name of the table you want to join
                 // - remaining arguments specify the column restraints for the join. 
@@ -42,9 +42,12 @@ class GuildsController extends Controller
                 // ->orderBy('name', 'asc')
                 ->get();
 
-        return view('pages.guilds.index')->with('players', $players);
+        // return view('pages.guilds.index')->with('players', $players);
 
-        
+
+    // USE MEMBERS AS THIS IS CLEANER AND SIMPLER.  
+        $members = Guild::find(1)->players;  // This works now
+        return view('pages.guilds.index', compact('members','players'));
 
         
     }

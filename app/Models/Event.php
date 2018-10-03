@@ -11,7 +11,11 @@ class Event extends Model
     
     // Define Relationships
 
-    // public function EventType(){
-    //     return $this->belongsTo('App\Models\EventType');
-    // }
+    public function eventType(){
+        return $this->belongsTo('App\Models\EventType');
+    }
+
+    public function eventStats(){
+        return $this->hasMany('App\Models\EventStat');
+    }
 }

@@ -4,53 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\League;
+use App\Models\Event;
+use App\Models\EventStat;
 use App\Models\EventType;
 use App\Models\Member;
 use App\Models\Guild;
 
 class GuildController extends Controller
 {
-    // public function index() {
-
-    // THIS MAY BE USED AS IT RETURNS ALL MEMBERS FROM A SPECIFIC GUILD. 
-
-    //     // $league = League::all();
-
-    //     $members = Member::where('guild_id', 1)
-    //            ->orderBy('name', 'desc')
-    //            ->get();
-
-    //     return view('pages.guilds.index')->with('members', $members);
-        
-    // }
-
-        public function index() {
-
-// THIS MAY BE USED INSTEAD OF THE ABOVE FUNCTION
-// THIS QUERY RETURNS MORE INFORMATION 
-
-
-    // Trying to show the guild and league names instead of their respective ids as per foreign keys
-        $members = Member::where('guild_id', 1)
-                // ->select('members.name', 'guilds.name as guild', 'leagues.name as league')
-                ->select('members.name', 'members.id', 'guilds.name as guild')
-                // Using join 
-                // - first argument is the name of the table you want to join
-                // - remaining arguments specify the column restraints for the join. 
-                ->join('guilds', 'members.guild_id', '=', 'guilds.id')
-                // ->join('leagues', 'members.league_id', '=', 'leagues.id')
-                // ->orderBy('name', 'asc')
-                ->get();
-
-        // return view('pages.guilds.index')->with('members', $members);
-
-
-    // USE MEMBERS AS THIS IS CLEANER AND SIMPLER.  
-        $members = Guild::find(1)->members;  // This works now
-        return view('pages.guilds.index', compact('members'));
-
-        
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        // Show all guilds
+        $guilds = Guild::all()->sortBy('name');
+        return view('pages.guilds.index', compact('guilds'));
     }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // THIS WILL SHOW ALL MEMBERS WITHIN THE SELECTED GUILD 
+
+        // Get guild details
+        $guild = Guild::findOrFail($id);
+
+        // Get all members from the selected guild. 
+        $members = Guild::find($id)->members->sortBy('name');
+
+        // Get all events that guilds have participated in. 
+
+        // $events = 
+
+
+        return view('pages.guilds.show', compact('guild', 'members'));
+
+        // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.  
+        // ESPECIALLY IF SOMEONE TYPES A RANDOM NUMBER IN THE BROWSER
+
+    }
+
+
+
+
+
+
 }
 
 
@@ -82,3 +87,36 @@ NOTES
 
 
 */
+
+
+/*
+
+        public function index() {
+
+// THIS MAY BE USED INSTEAD OF THE ABOVE FUNCTION
+// THIS QUERY RETURNS MORE INFORMATION 
+
+
+    // Trying to show the guild and league names instead of their respective ids as per foreign keys
+        $members = Member::where('guild_id', 1)
+                // ->select('members.name', 'guilds.name as guild', 'leagues.name as league')
+                ->select('members.name', 'members.id', 'guilds.name as guild')
+                // Using join 
+                // - first argument is the name of the table you want to join
+                // - remaining arguments specify the column restraints for the join. 
+                ->join('guilds', 'members.guild_id', '=', 'guilds.id')
+                // ->join('leagues', 'members.league_id', '=', 'leagues.id')
+                // ->orderBy('name', 'asc')
+                ->get();
+
+        // return view('pages.guilds.index')->with('members', $members);
+
+
+    // USE MEMBERS AS THIS IS CLEANER AND SIMPLER.  
+        $members = Guild::find(1)->members;  // This works now
+        return view('pages.guilds.index', compact('members'));
+
+        
+    }
+
+    */

@@ -10471,6 +10471,38 @@ a.text-dark:focus {
   }
 }
 
+.guild-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.guild-card {
+  text-align: center;
+}
+
+.guild-card h5 {
+  margin: 0;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+table th:nth-child(n + 2) {
+  text-align: center;
+}
+
+table td:nth-child(n + 2) {
+  text-align: center;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

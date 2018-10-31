@@ -1,3 +1,33 @@
+// Guild Index
+
+.guild-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.guild-card {
+    text-align: center;
+    h5 {
+        margin: 0;
+    }
+}
+
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+
+
+
+
+
 table {
     th:nth-child( n + 2) {
         text-align: center;

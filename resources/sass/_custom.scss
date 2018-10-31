@@ -1,0 +1,10 @@
+table {
+    th:nth-child( n + 2) {
+        text-align: center;
+    }
+
+    td:nth-child( n + 2) {
+        text-align: center;
+    }
+
+}

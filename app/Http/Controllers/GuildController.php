@@ -47,7 +47,7 @@ class GuildController extends Controller
 
     // USE MEMBERS AS THIS IS CLEANER AND SIMPLER.  
         $members = Guild::find(1)->members;  // This works now
-        return view('pages.guilds.index', compact('members','members'));
+        return view('pages.guilds.index', compact('members'));
 
         
     }

@@ -18,6 +18,8 @@ export default class Example extends Component {
                 </div>
             </div>
         );
+
+        console.log("react loaded!");
     }
 }
 

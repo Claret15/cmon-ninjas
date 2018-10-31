@@ -16,7 +16,9 @@ class LeagueTableSeeder extends Seeder
 
         // \App\Models\League::truncate();
         \App\Models\League::create(['name' => 'Legends']);
+        \App\Models\League::create(['name' => 'Emperors']);
         \App\Models\League::create(['name' => 'Kings']);
+        \App\Models\League::create(['name' => 'Paladins']);
         \App\Models\League::create(['name' => 'Knights']);
         \App\Models\League::create(['name' => 'Squires']);
 

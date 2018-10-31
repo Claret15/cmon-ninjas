@@ -3,7 +3,6 @@
 @section('content')
 
     <section class="container">
-        <div id="example"></div>
         <h1 class="text-center">{{ $guild->name }}</h1>
         <h3 class="text-center">Guild Members</h3>
         

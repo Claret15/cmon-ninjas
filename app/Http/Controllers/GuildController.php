@@ -21,6 +21,7 @@ class GuildController extends Controller
         // Show all guilds
         $guilds = Guild::all()->sortBy('name');
         return view('pages.guilds.index', compact('guilds'));
+        // return $guilds; // Returns JSON
     }
 
      /**
@@ -45,6 +46,9 @@ class GuildController extends Controller
 
 
         return view('pages.guilds.show', compact('guild', 'members'));
+        // return $guild;
+        // return $members;
+
 
         // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.  
         // ESPECIALLY IF SOMEONE TYPES A RANDOM NUMBER IN THE BROWSER

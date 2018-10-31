@@ -46,5 +46,13 @@ class EventTableSeeder extends Seeder
                 'event_date' => '2018-9-06'
             ]
         );
+        factory(App\Models\Event::class)->create(
+        [
+            'name' => 'The First Dragoon',
+            'event_type_id' => 3,
+            'event_date' => '2018-10-11',
+        ]
+    );
+
     }
 }

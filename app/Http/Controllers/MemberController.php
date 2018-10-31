@@ -64,6 +64,8 @@ class MemberController extends Controller
 
         // This works, but I don't think I need to include guild name.  
         // Try to keep it simple.  
+    
+/*    
         $member = Member::where('members.id', $id)
             ->select('members.id', 'members.name as name', 'guilds.name as guild')
             ->join('guilds', 'members.guild_id', '=', 'guilds.id')
@@ -71,6 +73,7 @@ class MemberController extends Controller
                         // I would need to use $member[0]->
             ->first();      // This will return a single model - Exactly what I want.
                         // Then I can use $member->name, $member->guild.
+*/
 
         /*  
         *   Get Members Past Event Stats
@@ -95,9 +98,7 @@ class MemberController extends Controller
         *   Testing Eloquent Relationship Queries
         */
 
-        $allMemberStats = Member::find($id)->eventStats;
-
-        $allEventStats = Event::find(1)->eventStats;
+        // $allEventStats = Event::find(1)->eventStats;
         
         // This retrieves all guild stats
         // $allGuildEventStats = Guild::find(1)->eventStats;
@@ -124,6 +125,39 @@ class MemberController extends Controller
 
 
         $memberGuild = Member::find($id)->guild;  // This works now.  
+
+        $member = Member::find($id);
+
+        // This will return all EventStats ordered by eventStats.id
+        $allMemberStats = Member::find($id)->eventStats;
+
+        // This will return all EventStats ordered by event dates. 
+        // Join is required to retrieve the columns. 
+        $MemberStatsAll = Member::find($id)->eventStats()
+        ->join('events', 'event_stats.event_id', '=', 'events.id')
+        ->orderby('events.event_date', 'desc')
+        ->get();
+
+        $MemberStatsRaid = Member::find($id)->eventStats()
+        ->where('event_type_id', '1')
+        ->join('events', 'event_stats.event_id', '=', 'events.id')
+        ->orderby('events.event_date', 'desc')
+        ->get();
+
+        $MemberStatsCrusade = Member::find($id)->eventStats()
+        ->where('event_type_id', '2')
+        ->join('events', 'event_stats.event_id', '=', 'events.id')
+        ->orderby('events.event_date', 'desc')
+        ->get();
+
+        $MemberStatsArena = Member::find($id)->eventStats()
+        ->where('event_type_id', '3')
+        ->join('events', 'event_stats.event_id', '=', 'events.id')
+        ->orderby('events.event_date', 'desc')
+        ->get();
+
+
+
         
 // Move these to the Guild Controller
         $testOutput = Guild::find($id);
@@ -131,7 +165,7 @@ class MemberController extends Controller
         $members = Guild::find(3)->members;  // This works now
 
         // return view('pages.members.show')->with('member', $member);
-        return view('pages.members.show', compact('member', 'pastEvents1', 'pastEvents2','members', 'memberGuild', 'testOutput','allMemberStats','allEventStats','allGuildEventStats'));
+        return view('pages.members.show', compact('member', 'pastEvents1', 'pastEvents2','members', 'memberGuild', 'testOutput','MemberStatsAll','MemberStatsRaid','MemberStatsCrusade', 'MemberStatsArena', 'allEventStats','allGuildEventStats'));
     }
 
     /**

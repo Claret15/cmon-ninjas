@@ -2,11 +2,167 @@
 
 @section('content')
 
-        <div class="container">
+{{-- Back Button --}}
+        <div class="container mb-3">
+            <a href="/members" class="btn btn-primary btn-sm"><< Back to members</a>
+        </div>
+{{-- Title --}}
+        <section class="container">
+            <article>
+                <h1 class="text-center">{{$member->name}}</h1>
+                <h3 class="text-center">{{$member->guild->name}}</h3>
+            </article>
+        </section>
+{{-- Event Listing --}}
+        <section class="container mt-5">
+            <div class="card member-events">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="eventsContent" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="All" aria-selected="true">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="raid-tab" data-toggle="tab" href="#raid" role="tab" aria-controls="Raid" aria-selected="false">Raid</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="crusade-tab" data-toggle="tab" href="#crusade" role="tab" aria-controls="Crusade" aria-selected="false">Crusade</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="arena-tab" data-toggle="tab" href="#arena" role="tab" aria-controls="Arena" aria-selected="false">Arena</a>
+                    </li>
+                    </ul>
+                </div>
+            {{-- Tab Content - All Events --}}
+                <div class="tab-content card-body" id="eventsContent">
+                    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                        {{-- <div class="mb-3"> --}}
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Guild Pts</th>
+                                        <th>Solo Pts</th>
+                                        <th>League</th>
+                                        <th>Solo Rank</th>
+                                        <th>Global Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($MemberStatsAll as $stats)
+                                    <tr>
+                                        <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
+                                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
+                                        <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
+                                        <td>{{$stats->league->name}}</td>     {{-- League --}}
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table> 
+                        {{-- </div> --}}
+                    </div>
+            {{-- Tab Content - Raid Events --}}
+                    <div class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="raid-tab">
+                        <div class="mb-3">
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Guild Pts</th>
+                                        <th>Solo Pts</th>
+                                        <th>League</th>
+                                        <th>Solo Rank</th>
+                                        <th>Global Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($MemberStatsRaid as $stats)
+                                    <tr>
+                                        <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
+                                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
+                                        <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
+                                        <td>{{$stats->league->name}}</td>     {{-- League --}}
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+            {{-- Tab Content - Crusade Events --}}
+                    <div class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="crusade-tab">
+                        <div class="mb-3">
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Guild Pts</th>
+                                        <th>League</th>
+                                        <th>Solo Rank</th>
+                                        <th>Global Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($MemberStatsCrusade as $stats)
+                                    <tr>
+                                        <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
+                                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
+                                        <td>{{$stats->league->name}}</td>     {{-- League --}}
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+            {{-- Tab Content - Crusade Events --}}
+                    <div class="tab-pane fade" id="arena" role="tabpanel" aria-labelledby="arena-tab">
+                        <div class="mb-3">
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Guild Pts</th>
+                                        <th>Solo Pts</th>
+                                        <th>League</th>
+                                        <th>Solo Rank</th>
+                                        <th>Global Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($MemberStatsArena as $stats)
+                                    <tr>
+                                        <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
+                                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
+                                        <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
+                                        <td>{{$stats->league->name}}</td>     {{-- League --}}
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="container">
+{{-- 
+            
+           {{$member}}
+<br><br>
+           {{$member->guild->name}}
+<br><br>
+           {{$member->eventStats}}
 
-            <p><a href="/members" class="btn btn-primary btn-sm"><< Back to members</a></p>
-           {{-- {{$members}} --}}
+           <br><br> --}}
+
+{{-- 
         <h5>$memberGuild:</h5>
            {{$memberGuild}}
            <br>
@@ -14,34 +170,8 @@
            <br><br>
         <h5>$testOutput:</h5>
            {{$testOutput}}
-           <br><br>
-        <h5>$allMemberStats:</h5>
-           {{$allMemberStats}}
-           <br><br>
+           <br><br> --}}
 
-           <div class="mb-3">
-                <table class='table'>
-                    <tr>
-                        <th>Event</th>
-                        <th>Guild Pts</th>
-                        <th>Solo Pts</th>
-                        <th>League</th>
-                        <th>Solo Rank</th>
-                        <th>Global Rank</th>
-                    </tr>
-
-            @foreach($allMemberStats as $stats)
-                    <tr>
-                        <td>{{$stats->event->name}}</td>    {{-- Event Name --}}
-                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
-                        <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
-                        <td>{{$stats->league->name}}</td>     {{-- League --}}
-                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
-                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
-                    </tr>
-            @endforeach
-                </table> 
-            </div>
 
            <br><br>
         {{-- <h5>$allEventStats:</h5>  
@@ -80,83 +210,16 @@
 
             <br><br>
 
-           {{$member->guild}}
+
+
+
+            {{-- {{ "Is there anything here - " }} {{ isset($member) ? $member : "Not valid" }}
+            <br> --}}
+            {{-- {{ "Is there anything here - " }} {{ isset($pastEvents1) ? $pastEvents1 : "Not valid" }}
+            <br> --}}
+            {{-- {{ "Is there anything here - " }} {{ isset($pastEvents2) ? $pastEvents2 : "Not valid" }}
             <br>
-            {{ "Is there anything here - " }} {{ isset($member[0]) ? $member[0] : "Not valid" }}
-            <br>
-            <br>
-            <br>
-
-            <h1>{{$member->name}}</h1>
-    <br>
-            {{$member->guild}}
-    <br>
-            {{$member->id}}
-    <br>
-    <br>
-            <h3>testing output</h3>
-    <br>
-            {{$member->event_stats}}
-    <br>
-            {{$member->id}}
-    <br>
-         
-            {{-- {{ $member->get('name') }} --}}
-
-            {{-- {{ $member }} --}}
-            {{-- {{ $guild }} --}}
-            {{-- {{ $member->get('guild') }}       --}}
-
-            {{ "Is there anything here - " }} {{ isset($member) ? $member : "Not valid" }}
-            <br>
-            {{ "Is there anything here - " }} {{ isset($pastEvents1) ? $pastEvents1 : "Not valid" }}
-            <br>
-            {{ "Is there anything here - " }} {{ isset($pastEvents2) ? $pastEvents2 : "Not valid" }}
-            <br>
-            <br>
-
-            {{-- This works for $pastEvents1 --}}
-            {{-- Testing for $pastEvents2 --}}
-            <div class="mb-3">
-                <table class='table'>
-                    <tr>
-                        <th>Event</th>
-                        <th>Guild Pts</th>
-                        <th>Solo Pts</th>
-                        <th>League</th>
-                        <th>Solo Rank</th>
-                        <th>Global Rank</th>
-                    </tr>
-
-            @foreach($pastEvents2 as $pastEvents)
-                    <tr>
-                        <td>{{$pastEvents->event_name}}</td>    {{-- Event Name --}}
-                        <td>{{$pastEvents->guild_pts}}</td>     {{-- Guild Pts --}}
-                        <td>{{$pastEvents->solo_pts}}</td>     {{-- Solo Pts --}}
-                        <td>{{$pastEvents->league}}</td>     {{-- League --}}
-                        <td>{{$pastEvents->solo_rank}}</td>     {{-- Solo Rank --}}    
-                        <td>{{$pastEvents->global_rank}}</td>     {{-- Global Rank --}}
-                    </tr>
-            @endforeach
-                </table> 
-            </div>
-
-
-
-
-            {{-- @foreach($pastEvents2 as $pastEvents) --}}
-                {{-- <div class="mb-3">
-                    <h5>{{$pastEvents->event_id}}</h5>
-                    <span>Guild Points: {{$pastEvents->guild_pts}}</span><br/>
-                    <span>Solo Points: {{$pastEvents->solo_pts}}</span><br/>
-                    <span>Solo Rank: {{$pastEvents->solo_rank}}</span><br/>
-                    <span>Global Rank: {{$pastEvents->global_rank}}</span><br/>
-                    <span>League: {{$pastEvents->league}}</span><br/> --}}
-                    {{-- <span>{{$pastEvents->leagues->league_name}}</span><br/> --}}
-                    {{-- <span>Current League: {{$member->league}}</span><br/> --}}
-                {{-- </div> --}}
-            {{-- @endforeach --}}
-
+            <br> --}}
 
             <br>
 
@@ -198,5 +261,5 @@
 
 
 
-        </div>     
+        </section>     
 @endsection

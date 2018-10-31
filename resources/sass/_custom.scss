@@ -23,11 +23,21 @@
     margin: 0 auto;
 }
 
+// Members Show Page
+
+.member-events {
+    overflow: auto;
+
+    
+    table, table > thead {
+        // border: none;
+        // border-top-color:transparent;
+    }
+}
 
 
 
-
-
+// General Styling
 table {
     th:nth-child( n + 2) {
         text-align: center;

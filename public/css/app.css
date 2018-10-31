@@ -10495,6 +10495,10 @@ a.text-dark:focus {
   margin: 0 auto;
 }
 
+.member-events {
+  overflow: auto;
+}
+
 table th:nth-child(n + 2) {
   text-align: center;
 }

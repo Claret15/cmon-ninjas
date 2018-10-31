@@ -16,6 +16,8 @@ class EventTypeTableSeeder extends Seeder
 
         \App\Models\EventType::create(['name' => 'Raid']);
         \App\Models\EventType::create(['name' => 'Crusade']);
+        \App\Models\EventType::create(['name' => 'Arena']);
+
 
         // factory(App\Models\EventType::class, 10)->create();
     }

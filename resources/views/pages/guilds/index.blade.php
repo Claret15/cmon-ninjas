@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <section>
         <h1 class="text-center mb-5">Guilds</h1>

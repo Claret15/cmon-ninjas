@@ -65,8 +65,6 @@
         </style>
     </head>
     <body>
-        <h1>Welcome To Infernal Pathfinders Guild</h1>
-        <p>After a weary battle against the Legendary Bosses, wondering around Korelis, you find sanctuary at Infernal Pathfinders.</p>
-        <p>Make yourself at home and learn more about the guild.</p>
+        <h1>Welcome To Ninjas Guild</h1>
     </body>
 </html>

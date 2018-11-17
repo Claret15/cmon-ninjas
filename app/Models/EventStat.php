@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventStat extends Model
 {
+    /**
+     * Remove default timestamps from model
+     * @var array
+     */
     public $timestamps = false;
 
-    // Define Relationships
-
+    /**
+     * Define Relationships 
+     */
     public function member(){
         return $this->belongsto('App\Models\Member');
     }

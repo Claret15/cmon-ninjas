@@ -12,10 +12,15 @@ class Guild extends Model
     // Primary Key
     public $primaryKey = 'id';
 
-    // Disable timestamps for this model
+    /**
+     * Remove default timestamps from model
+     * @var array
+     */ 
     public $timestamps = false;
 
-    // Define Relationships
+    /**
+     * Define Relationships 
+     */
     public function members(){
         return $this->hasMany('App\Models\Member');
     }

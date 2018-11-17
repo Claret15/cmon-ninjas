@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventType extends Model
 {
-    // Disable timestamps for this model
+    /**
+     * Remove default timestamps from model
+     * @var array
+     */ 
     public $timestamps = false;
 
-    // Define Relationships
-
+    /**
+     * Define Relationships 
+     */
     public function events(){
         return $this->hasMany('App\Models\Event');
     }

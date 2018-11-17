@@ -21,8 +21,9 @@ class Member extends Model
         'is_active' => 'boolean',
     ];
 
-    // Define Relationships
-    
+    /**
+     * Define Relationships 
+     */
     public function guild(){
         return $this->belongsTo('App\Models\Guild');
     }

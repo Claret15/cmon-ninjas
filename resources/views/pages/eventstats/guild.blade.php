@@ -18,6 +18,7 @@
                 <thead class="thead-dark">
                     <tr>
                         {{-- <th>Event</th> --}}
+                        <th>Position</th>
                         <th>Member</th>
                         <th>Guild Pts</th>
                         <th>Solo Pts</th>
@@ -30,13 +31,13 @@
 
         @foreach($allGuildEventStats as $stats)
                     <tr>
-                        {{-- <td>{{$stats->event->name}}</td> --}}
+                        <td>{{$stats->position}}</td> {{-- position--}}
                         <td><a href="/member/{{$stats->member->id}}/event/{{$stats->event_id}}">{{$stats->member->name}}</a></td>     {{-- Guild Pts --}}
-                        <td>{{ $stats->guild_pts }}</td>     {{-- Guild Pts --}}
-                        <td>{{ $stats->solo_pts }}</td>      {{-- Solo Pts --}}
-                        <td>{{$stats->league->name}}</td>     {{-- League --}}
-                        <td>{{ $stats->solo_rank }}</td>     {{-- Solo Rank --}}  
-                        <td>{{ $stats->global_rank }}</td>   {{-- Global Rank --}}
+                        <td>{{ $stats->guild_pts }}</td>     {{-- guild_pts --}}
+                        <td>{{ $stats->solo_pts }}</td>      {{-- solo_pts --}}
+                        <td>{{$stats->league->name}}</td>     {{-- league --}}
+                        <td>{{ $stats->solo_rank }}</td>     {{-- solo_rank --}}  
+                        <td>{{ $stats->global_rank }}</td>   {{-- global_rank --}}
                     </tr>
         @endforeach
                 </tbody>

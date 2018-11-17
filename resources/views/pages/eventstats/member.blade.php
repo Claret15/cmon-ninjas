@@ -17,7 +17,7 @@
             <table class='table '>
                 <thead class="thead-dark">
                     <tr>
-                        {{-- <th>Event</th> --}}
+                        <th>Position</th>
                         <th>Member</th>
                         <th>Guild Pts</th>
                         <th>Solo Pts</th>
@@ -30,7 +30,7 @@
 
         @foreach($memberStat as $stats)
                     <tr>
-                        {{-- <td>{{$stats->event->name}}</td> --}}
+                        <td>{{$stats->position}}</td>
                         <td><a href="/members/{{$stats->member->id}}">{{$stats->member->name}}</a></td>     {{-- Guild Pts --}}
                         <td>{{ $stats->guild_pts }}</td>     {{-- Guild Pts --}}
                         <td>{{ $stats->solo_pts }}</td>      {{-- Solo Pts --}}

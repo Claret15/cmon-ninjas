@@ -14,6 +14,7 @@ class EventStatTableSeeder extends Seeder
        // For each event, create event stats for each player in the database
         $event = DB::table('events')->pluck('id');
         $member = DB::table('members')->pluck('id');
+        $position = 0;
 
         foreach ($event as $event){
             $member = DB::table('members')->pluck('id');
@@ -22,6 +23,7 @@ class EventStatTableSeeder extends Seeder
                     [
                         'event_id' => $event,
                         'member_id' => $member,
+                        'position' => $position++
                     ]
                 );
             };  

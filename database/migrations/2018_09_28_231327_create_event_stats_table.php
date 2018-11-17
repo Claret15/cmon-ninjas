@@ -18,6 +18,7 @@ class CreateEventStatsTable extends Migration
             // event_id         // generated from the fk_event_stats migration
             // member_id        // generated from the fk_event_stats migration
             $table->bigInteger('guild_pts')->unsigned();
+            $table->bigInteger('position')->unsigned();
             $table->bigInteger('solo_pts')->unsigned();
             // league_id        // generated from the fk_event_stats migration
             $table->integer('solo_rank')->unsigned();

@@ -9,7 +9,7 @@
         {{$guildPtsTotal}}
         <h1 class="mt-3 text-center">{{ $guild->name }}</h1>
         <h1 class="mt-3 text-center">{{ $eventInfo->name }}</h1>
-        <h2 class="text-center">{{ $eventInfo->event_date->format("d M 'y") }}</h2>
+        <h2 class="text-center">{{ $eventInfo->event_date->format("d M 'y")}}</h2>
         <h3 class="text-center">{{ $eventInfo->eventType->name }}</h3>
 <br><br>  
         <div class="mb-3" id="guild">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container w-50">
     <h1 class="text-center">Events</h1>
     <br><br>
 
@@ -31,9 +31,9 @@
         
             @foreach($events as $event)
                         <tr>
-                            <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>     {{-- Guild Pts --}}
-                            <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                            <td>{{ $event->eventType->name }}</td>
+                            <td>{{ $event->event_date->format("d M 'y")  }}</td>
                         </tr>
             @endforeach
                     </tbody>
@@ -54,9 +54,9 @@
         
             @foreach($raid as $event)
                         <tr>
-                            <td>{{ $event->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                            <td>{{ $event->eventType->name }}</td>
+                            <td>{{ $event->event_date->format("d M 'y")  }}</td>
                         </tr>
             @endforeach
                     </tbody>
@@ -77,9 +77,9 @@
         
             @foreach($crusade as $event)
                         <tr>
-                            <td>{{ $event->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                            <td>{{ $event->eventType->name }}</td>
+                            <td>{{ $event->event_date->format("d M 'y")  }}</td>    {{-- Solo Pts --}}
                         </tr>
             @endforeach
                     </tbody>

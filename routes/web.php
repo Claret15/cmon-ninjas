@@ -28,7 +28,9 @@ Route::get('/events', 'PageController@events');
 Route::get('/about', 'PageController@about'); 
 Route::get('/tests', 'PageController@tests');
 
-Route::resource('guild', 'GuildController'); 
-Route::resource('members', 'MemberController');
+Route::get('/guild/{id}/events/', 'EventController@guild');
 Route::get('/guild/{id}/event/{event_id}', 'EventStatController@guild');
 Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member');
+
+Route::resource('guild', 'GuildController'); 
+Route::resource('members', 'MemberController');

@@ -19,7 +19,7 @@ class CreateMembersTable extends Migration
             // $table->integer('guild_id');     // Generated from the fk_member_guild migration
             // $table->integer('league_id');    // generated from the fk_member_league migration
                                                 // This is no longer required. 
-            $table->boolean('active')->default('1');
+            $table->boolean('is_active')->default('1');
             $table->timestamps();
         });
     }

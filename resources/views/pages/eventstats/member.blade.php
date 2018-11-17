@@ -4,9 +4,9 @@
 
     <main class="container">
         
-        {{-- <p><a href="/members" class="btn btn-primary btn-sm"><< Back to members</a></p> --}}
+        <p><a href="/members" class="btn btn-primary btn-sm"><< Back to members</a></p>
         {{-- <br><br> --}}
-        {{$guildPtsTotal}}
+        
         <h1 class="mt-3 text-center">{{ $guild->name }}</h1>
         <h1 class="mt-3 text-center">{{ $eventInfo->name }}</h1>
         <h2 class="text-center">{{ $eventInfo->event_date->format("d M 'y") }}</h2>
@@ -28,10 +28,10 @@
                 </thead>
                 <tbody>
 
-        @foreach($allGuildEventStats as $stats)
+        @foreach($memberStat as $stats)
                     <tr>
                         {{-- <td>{{$stats->event->name}}</td> --}}
-                        <td><a href="/member/{{$stats->member->id}}/event/{{$stats->event_id}}">{{$stats->member->name}}</a></td>     {{-- Guild Pts --}}
+                        <td><a href="/members/{{$stats->member->id}}">{{$stats->member->name}}</a></td>     {{-- Guild Pts --}}
                         <td>{{ $stats->guild_pts }}</td>     {{-- Guild Pts --}}
                         <td>{{ $stats->solo_pts }}</td>      {{-- Solo Pts --}}
                         <td>{{$stats->league->name}}</td>     {{-- League --}}

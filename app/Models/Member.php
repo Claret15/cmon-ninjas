@@ -11,6 +11,15 @@ class Member extends Model
 
     // Primary Key
     public $primaryKey = 'id';
+   
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     // Define Relationships
     
@@ -21,4 +30,6 @@ class Member extends Model
     public function eventStats(){
         return $this->hasmany('App\Models\EventStat');
     }
+
+
 }

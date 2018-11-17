@@ -9,6 +9,7 @@ use App\Models\EventStat;
 use App\Models\EventType;
 use App\Models\Member;
 use App\Models\Guild;
+use App\Http\Resources\Guilds as GuildsResource;
 
 class GuildController extends Controller
 {
@@ -21,7 +22,6 @@ class GuildController extends Controller
         // Show all guilds
         $guilds = Guild::all()->sortBy('name');
         return view('pages.guilds.index', compact('guilds'));
-        // return $guilds; // Returns JSON
     }
 
      /**
@@ -41,20 +41,35 @@ class GuildController extends Controller
         $members = Guild::find($id)->members->sortBy('name');
 
         // Get all events that guilds have participated in. 
-
+        // May not need this 
         // $events = 
 
-
         return view('pages.guilds.show', compact('guild', 'members'));
-        // return $guild;
-        // return $members;
-
 
         // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.  
         // ESPECIALLY IF SOMEONE TYPES A RANDOM NUMBER IN THE BROWSER
 
     }
 
+    /**
+     * API - Display a listing of the resource.
+     * Experimenting with API - on hold for now
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexAPI() {
+        // // Show all guilds
+        // $guilds = Guild::all()->sortBy('name');
+        // return view('pages.guilds.index', compact('guilds'));
+        // // return $guilds; // Returns JSON
+
+        // Show all guilds
+        $guilds = Guild::all()->sortBy('name');
+
+        // Return collection of all Guilds as a resource
+        return GuildsResource::collection($guilds);
+
+    }
 
 
 

@@ -35,7 +35,7 @@
                             {{-- <td>{{$stats->event->name}}</td> --}}
                             <td>{{ $event->name }}</td>     {{-- Guild Pts --}}
                             <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td>{{ $event->event_date->format("d M 'y") }}</td>      {{-- Solo Pts --}}
                         </tr>
             @endforeach
                     </tbody>
@@ -60,7 +60,7 @@
                             {{-- <td>{{$stats->event->name}}</td> --}}
                             <td>{{ $event->name }}</td>     {{-- Guild Pts --}}
                             <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td>{{ $event->event_date->format("d M 'y") }}</td>      {{-- Solo Pts --}}
                         </tr>
             @endforeach
                     </tbody>
@@ -85,7 +85,7 @@
                             {{-- <td>{{$stats->event->name}}</td> --}}
                             <td>{{ $event->name }}</td>     {{-- Guild Pts --}}
                             <td>{{ $event->eventType->name }}</td>     {{-- Guild Pts --}}
-                            <td>{{ $event->event_date }}</td>      {{-- Solo Pts --}}
+                            <td>{{ $event->event_date->format("d M 'y") }}</td>      {{-- Solo Pts --}}
                         </tr>
             @endforeach
                     </tbody>

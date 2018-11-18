@@ -1,4 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.guild-grid {
+@import url(https://fonts.googleapis.com/css?family=Nunito);.guild-img {
+  height: 100vh;
+  display: inline-block;
+}
+
+.guild-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 10px;

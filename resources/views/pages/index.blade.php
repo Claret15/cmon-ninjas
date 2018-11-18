@@ -3,15 +3,17 @@
 @section('head')
 <style>
     body{
-        background-image: url('ninja.jpg');
+        background-image: url('bg.jpg');
     }
 </style>
 
 
 @section('content')
 {{-- <div id="example"></div> --}}
-    <div class="container">
-
+    {{-- <div class="container"> --}}
+        <div class="guild-img d-flex align-items-center">
+        <img src='ninja.png' alt="ninjas guild">
+        </div>
         {{-- <div class="jumbotron">
             <h1>Welcome To Infernal Pathfinders Guild</h1>
             <p>After a weary battle against the Legendary Bosses, wondering around Korelis, you find sanctuary at Infernal Pathfinders.</p>
@@ -19,7 +21,7 @@
         </div> --}}
 
 
-        <a class="btn btn-primary" href="/guild">Enter</a>
-    </div>
+        {{-- <a class="btn btn-primary" href="/guild">Enter</a> --}}
+    {{-- </div> --}}
 
 @endsection

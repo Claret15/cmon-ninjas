@@ -7,8 +7,8 @@
     
     {!! Form::open(['action' => ['EventController@update', $event->id], 'method' => 'POST']) !!}
     <div class="form-group ">
-      {{Form::label('name', 'Event Name', ['class' => ''])}}
-      {{Form::text('name', $event->name, ['class' => 'form-control']) }}
+      {{Form::label('event_name', 'Event Name', ['class' => ''])}}
+      {{Form::text('event_name', $event->name, ['class' => 'form-control']) }}
     </div>
     <div class="form-row">
       <div class="form-group col-md-6"">
@@ -25,7 +25,7 @@
       </div>
     </div>
     {{Form::hidden('_method', 'PUT')}}
-    {{Form::submit('Update',['class' => 'btn btn-primary btn-block'])}}
+    {{Form::submit('Update Event',['class' => 'btn btn-primary btn-block'])}}
     {!! Form::close() !!}
 
   </div>

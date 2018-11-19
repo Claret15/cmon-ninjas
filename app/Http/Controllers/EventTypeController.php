@@ -17,7 +17,6 @@ class EventTypeController extends Controller
     public function index()
     {
         $eventTypes = EventType::all();
-
         return view('pages.eventtype.index', compact('eventTypes'));
     }
 
@@ -108,8 +107,9 @@ class EventTypeController extends Controller
     public function destroy($id)
     {
         $eventType = EventType::find($id);
-        $message = $eventType . ' removed!';
+        $message = $eventType->name . ' removed!';
         $eventType->delete();
+        
         return redirect('/event_type')->with('success', $message);
     }
 }

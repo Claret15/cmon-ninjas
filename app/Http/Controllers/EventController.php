@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Guild;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EventController extends Controller
 {
@@ -16,7 +18,7 @@ class EventController extends Controller
     public function index()
     {
         // All Events
-        $events = Event::all()->sortBy('event_date');
+        $events = Event::all()->sortByDesc('event_date');
 
         // Raid Events
         $raid = $events->where('event_type_id', 1);
@@ -49,14 +51,13 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'event_type' => 'required',
+            'event_name' => 'required',
             'event_date' => 'required',
+            'event_type' => 'required'
         ]);
-
-        // Create Event;    
+ 
         $event = new Event;
-        $event->name = $request->input('name');
+        $event->name = $request->input('event_name');
         $event->event_date = $request->input('event_date');
         $event->event_type_id = $request->input('event_type');
         $event->save();
@@ -85,7 +86,12 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::find($id);
+        try{
+            $event = Event::findOrfail($id);
+        } catch(ModelNotFoundException $e) {
+            return redirect('/events')->with('error', 'Invalid Event');
+        }
+        
         $eventType = $event->event_type_id;
     
         // Check if user is Admin
@@ -106,14 +112,13 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'event_type' => 'required',
+            'event_name' => 'required',
+            'event_type' => 'required|min:1',
             'event_date' => 'required',
         ]);
-
-        // Update Event;    
+ 
         $event = Event::find($id);
-        $event->name = $request->input('name');
+        $event->name = $request->input('event_name');
         $event->event_date = $request->input('event_date');
         $event->event_type_id = $request->input('event_type');
         $event->save();
@@ -137,15 +142,13 @@ class EventController extends Controller
 
         return redirect('/events')->with('success', $message);
     }
-
+    /**
+     * Show all Events
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function guild($guild_id)
     {
-        /**
-         * Show all Events
-         *
-         * @return \Illuminate\Http\Response
-         */
-
         // All Events
         $events = Event::all()->sortBy('event_date');
 

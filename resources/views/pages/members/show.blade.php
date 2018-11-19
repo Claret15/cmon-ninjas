@@ -38,7 +38,7 @@
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         {{-- <div class="mb-3"> --}}
                             <table class='table'>
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>Event</th>
                                         <th>Guild Pts</th>

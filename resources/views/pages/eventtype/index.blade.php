@@ -6,7 +6,7 @@
     <br><br>
      
     <table class='table table-sm  mx-auto' style="min-width:350px;max-width: 600px;">
-        <thead class="thead-light">
+        <thead class="thead-dark">
             <tr>
                 <th>Event Type</th>
                 <th></th>
@@ -28,7 +28,7 @@
             </tr>
     @endforeach
             <tr>
-                <td colspan="3"><a class="nav-link btn btn-success btn-sm" id="new-event" href="/event_type/create">New Event Type</a></td>
+                <td colspan="3"><a class="nav-link btn btn-success btn-sm" id="new-event-type" href="/event_type/create">Add Event Type</a></td>
             </tr>
         </tbody>
     </table> 

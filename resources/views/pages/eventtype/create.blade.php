@@ -11,7 +11,7 @@
       {{Form::label('name', 'Event Type', ['class' => ''])}}
       {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Event Type']) }}
     </div>
-    {{Form::submit('Submit',['class' => 'btn btn-primary btn-block'])}}
+    {{Form::submit('Add Event Type',['class' => 'btn btn-success btn-block'])}}
     {!! Form::close() !!}
 
   </div>

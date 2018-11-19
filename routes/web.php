@@ -21,15 +21,16 @@ Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member')
 
 Route::resource('guild', 'GuildController'); 
 Route::resource('members', 'MemberController');
+Route::resource('event_type', 'EventTypeController');
 
 Route::resource('/events', 'EventController')->except([
   'show'
 ]);
 
 //Fallback route - Needs further testings
-Route::fallback(function () {
-    return back()->with('error', 'Page not available/Does not exist');
-});
+// Route::fallback(function () {
+//     return back()->with('error', 'Page not available/Does not exist');
+// });
 
 
 // Routes to configure

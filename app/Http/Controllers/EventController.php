@@ -9,29 +9,29 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     /**
-     * Show all events
+     * Show all Events
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // All events
+        // All Events
         $events = Event::all()->sortBy('event_date');
 
-        // Raid events
+        // Raid Events
         $raid = $events->where('event_type_id', 1);
 
-        // Crusade events
+        // Crusade Events
         $crusade = $events->where('event_type_id', 2);
 
-        // Arena events
+        // Arena Events
         $arena = $events->where('event_type_id', 3);
 
         return view('pages.events.index', compact('events', 'raid', 'crusade', 'arena'));
     }
 
     /**
-     * Show the form for creating a new event.
+     * Show the form for creating a new Event.
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,7 +41,7 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Event.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -65,7 +65,7 @@ class EventController extends Controller
     }
 
     /**
-     * Show the event.
+     * Show the Event.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -74,11 +74,11 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         return view('pages.events.show', compact('event'));
-
+        // May not be required
     }
 
     /**
-     * Show the form to edit an event.
+     * Show the form to edit an Event.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -87,6 +87,7 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $eventType = $event->event_type_id;
+    
         // Check if user is Admin
         // if(auth()->user()->id !== $post->user_id){
             // return redirect('/events')->with("error", 'Unauthorised action: edit event.');
@@ -96,7 +97,7 @@ class EventController extends Controller
     }
 
     /**
-     * Update an event.
+     * Update an Event.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -117,11 +118,13 @@ class EventController extends Controller
         $event->event_type_id = $request->input('event_type');
         $event->save();
 
-        return redirect('/events')->with('success', 'Event Updated!');
+        $message = $event->name . ' updated!';
+
+        return redirect('/events')->with('success', $message);
     }
 
     /**
-     * Remove the event.
+     * Remove Event.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -129,25 +132,27 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::find($id);
+        $message = $event->name . ' removed!';
         $event->delete();
-        return redirect('/events')->with('success', 'Event Removed!');
+
+        return redirect('/events')->with('success', $message);
     }
 
     public function guild($guild_id)
     {
         /**
-         * Show all events
+         * Show all Events
          *
          * @return \Illuminate\Http\Response
          */
 
-        // All events
+        // All Events
         $events = Event::all()->sortBy('event_date');
 
-        // Raid events
+        // Raid Events
         $raid = $events->where('event_type_id', 1);
 
-        // Crusade events
+        // Crusade Events
         $crusade = $events->where('event_type_id', 2);
 
         $guild = Guild::findorfail($guild_id);
@@ -167,18 +172,12 @@ class EventController extends Controller
             ->orderby('guild_pts', 'desc')
             ->get();
 
-        // Using pagination
-        $allGuildEventStatsPaginate = Guild::find($guild_id)->eventStats()
-            ->where('event_id', $event_id)
-            ->orderby('guild_pts', 'desc')
-            ->paginate(10);
 
         $eventInfo = Event::find($event_id);
 
         $guild = Guild::findorfail($guild_id);
 
-        // return view('pages.members.show')->with('member', $member);
-        return view('pages.events.show', compact('allGuildEventStats', 'allGuildEventStatsPaginate', 'eventInfo', 'guild'));
+        return view('pages.events.show', compact('allGuildEventStats', 'eventInfo', 'guild'));
     }
 
 }

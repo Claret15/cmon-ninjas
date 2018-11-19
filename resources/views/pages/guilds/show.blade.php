@@ -15,7 +15,19 @@
             <a href="/members/{{$member->id}}">
             <div class="card-body">
                 {{$member->name}}
+                <div class="mt-2">
+                    <div class="d-inline-block mr-2">
+                        <a href="/members/{{$member->id}}/edit" class="btn btn-warning btn-sm ">Edit</a>
+                    </div>
+                    <div class="d-inline-block">
+                        {!!Form::open(['action' => ['MemberController@destroy', $member->id], 'method' => 'POST'])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::submit('Delete',['class' => 'btn btn-sm btn-danger'])}}
+                        {!!Form::close() !!}
+                    </div>
+                </div>
             </div>
+        
             </a>
         </div>
         @endforeach

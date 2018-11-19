@@ -19,7 +19,7 @@ class MemberController extends Controller
     public function index()
     {   
         /**
-         * Shall members from all guilds
+         * Show members from all guilds
          */
         $members = Member::all();
 
@@ -28,28 +28,42 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a Member.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        // 
+        return view('pages.members.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Member.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // Add member 
+        $request->validate([
+            'name' => 'required',
+            'guild' => 'required',
+            'is_active' => 'required'
+        ]);
+ 
+        $guild = Guild::where('name', $request->input('guild'))->first();
+
+        $member = new Member;
+        $member->name = $request->input('name');
+        $member->guild_id = $guild->id;
+        $member->is_active = $request->input('is_active');
+        $member->save();
+
+        return redirect('/guild/'.$guild->id)->with('success', 'Member created!');
     }
 
     /**
-     * Display the specified resource.
+     * Display Member.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -108,18 +122,19 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the Member.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        // Show Edit member page
+        $member = Member::find($id);
+        return view('pages.members.edit', compact('member'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Member.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -127,19 +142,50 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Update member details
+        $request->validate([
+            'name' => 'required',
+            'guild' => 'required',
+            'is_active' => 'required'
+        ]);
+ 
+        $guild = Guild::where('name', $request->input('guild'))->first();
+
+        $member = Member::find($id);
+        $member->name = $request->input('name');
+        $member->guild_id = $guild->id;
+        $member->is_active = $request->input('is_active');
+        $member->save();
+
+        return redirect('/guild/'.$guild->id)->with('success', 'Member Updated!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * PERMANENTLY REMOVE MEMBER.
+     * WARNING! THIS CANNOT BE UNDONE
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        // Delete member - Won't need this.  
-        // Will need to change is_active to false
-        // This way member is still intact and eventstats will be displayed. 
+        $member = Member::find($id);
+        $guild = $member->guild->id;
+        $message = $member->name . ' deleted!';
+        $member->delete();
+
+        return redirect('/guild/'.$guild)->with('success', $message);
+    }
+
+    /**
+     * Toggle Active status of Member
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function isActive($id)
+    {
+      // Create a function to toggle Active status.  
+      // This will replace the Destroy function for safe reporting
+      // Otherwise, database will fall apart.  
     }
 }

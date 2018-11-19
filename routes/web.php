@@ -20,12 +20,13 @@ Route::get('/guild/{id}/event/{event_id}', 'EventStatController@guild');
 Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member');
 
 Route::resource('guild', 'GuildController'); 
-Route::resource('members', 'MemberController');
 Route::resource('event_type', 'EventTypeController')->except(['show']);
 Route::resource('events', 'EventController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
+Route::resource('members', 'MemberController');
 
-//Fallback route - Needs further testings
+
+//Fallback route - Needs further testing or replacement
 Route::fallback(function () {
     return back()->with('error', 'Page not available/Does not exist');
 });

@@ -20,9 +20,10 @@
     @yield('head')
 </head>
 <body>
+    @include('inc.navbar')
     <main> 
+        @include('inc.messages')
         {{-- <div id="example"></div> <!-- React hook --> --}}
-        @include('inc.navbar')
         @yield('content')
     </main>
 </body>

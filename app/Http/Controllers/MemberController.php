@@ -45,7 +45,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Add member 
     }
 
     /**
@@ -115,7 +115,7 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Show Edit member page
     }
 
     /**
@@ -127,7 +127,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Update member details
     }
 
     /**
@@ -138,6 +138,8 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete member - Won't need this.  
+        // Will need to change is_active to false
+        // This way member is still intact and eventstats will be displayed. 
     }
 }

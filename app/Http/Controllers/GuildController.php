@@ -14,14 +14,45 @@ use App\Http\Resources\Guilds as GuildsResource;
 class GuildController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all Guilds
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        // Show all guilds
+    public function index() 
+    {
         $guilds = Guild::all()->sortBy('name');
         return view('pages.guilds.index', compact('guilds'));
+    }
+
+    /**
+     * Show the form for creating a new Guild.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.guilds.create');
+    }
+
+    /**
+     * Store a newly created Guild.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+ 
+        $guild = new Guild;
+        $guild->name = $request->input('name');
+        $guild->save();
+
+        $message = $guild->name . ' added!';
+
+        return redirect('/guild')->with('success', $message);
     }
 
      /**
@@ -52,6 +83,53 @@ class GuildController extends Controller
     }
 
     /**
+     * Show the form for editing the Guild.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $guild = Guild::find($id);
+        return view('pages.guilds.edit', compact('guild'));
+    }
+
+    /**
+     * Update Guild.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $guild = Guild::find($id);
+        $guild->name = $request->input('name');
+        $guild->save();
+
+        $message = $guild->name . ' updated!';
+
+        return redirect('/guild')->with('success', $message);
+    }
+    /**
+     * Remove Guild.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $guild = Guild::find($id);
+        $message = $guild->name . ' removed!';
+        $guild->delete();
+        
+        return redirect('/guild')->with('success', $message);
+    }
+    /**
      * API - Display a listing of the resource.
      * Experimenting with API - on hold for now
      *
@@ -71,71 +149,4 @@ class GuildController extends Controller
 
     }
 
-
-
-
-
 }
-
-
-/*
-*************************************************************************
-NOTES
-
-// Returns all rows from Leagues table
-    // $league = League::all();
-
-// Returns all members from the Members table
-// This displays all the column names
-    // $members = Member::all();
-
-// Returns all players from the Members table
-// This displays only the name and league_id columns
-    // $members = Member::select('name', 'league_id')->get();
-
-// This obtains all members in a specific guild
-// This works            
-    // $members = member::where('guild_id', 1)
-    // ->orderBy('name', 'desc')
-    // ->get();
-
-// return Member::all();
-// return Guild::all();
-// return League::all();
-// return EventType::all();
-
-
-*/
-
-
-/*
-
-        public function index() {
-
-// THIS MAY BE USED INSTEAD OF THE ABOVE FUNCTION
-// THIS QUERY RETURNS MORE INFORMATION 
-
-
-    // Trying to show the guild and league names instead of their respective ids as per foreign keys
-        $members = Member::where('guild_id', 1)
-                // ->select('members.name', 'guilds.name as guild', 'leagues.name as league')
-                ->select('members.name', 'members.id', 'guilds.name as guild')
-                // Using join 
-                // - first argument is the name of the table you want to join
-                // - remaining arguments specify the column restraints for the join. 
-                ->join('guilds', 'members.guild_id', '=', 'guilds.id')
-                // ->join('leagues', 'members.league_id', '=', 'leagues.id')
-                // ->orderBy('name', 'asc')
-                ->get();
-
-        // return view('pages.guilds.index')->with('members', $members);
-
-
-    // USE MEMBERS AS THIS IS CLEANER AND SIMPLER.  
-        $members = Guild::find(1)->members;  // This works now
-        return view('pages.guilds.index', compact('members'));
-
-        
-    }
-
-    */

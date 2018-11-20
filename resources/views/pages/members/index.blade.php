@@ -14,7 +14,7 @@
                 
 
 
-                @foreach($memberS as $member)
+                @foreach($members as $member)
                 <div class="mb-3">
                     <h5><a href="/players/{{$member->id}}">{{$member->name}}</a></h5>
                     {{-- <span>Guild: {{$member->guild}}</span><br/> --}}

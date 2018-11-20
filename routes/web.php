@@ -23,12 +23,13 @@ Route::resource('guild', 'GuildController');
 Route::resource('event_type', 'EventTypeController')->except(['show']);
 Route::resource('events', 'EventController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
-Route::resource('members', 'MemberController');
+Route::resource('members', 'MemberController')->except(['index']);
 
 
 //Fallback route - Needs further testing or replacement
 Route::fallback(function () {
-    return back()->with('error', 'Page not available/Does not exist');
+    // return back()->with('error', 'Page not available/Does not exist');
+    return redirect('/')->with('error', 'Page not available/Does not exist');
 });
 
 

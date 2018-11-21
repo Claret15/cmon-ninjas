@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-nav bg-light pl-3">
+<nav class="navbar navbar-expand-md navbar-dark navbar-nav pl-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            {{-- {{ config('app.name', 'Laravel') }} --}}
+            <img src='{{ asset('ninja.png') }}' alt="ninjas guild" height="50">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -9,14 +10,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            {{-- mr-auto automatically adjusts the right margin and pushes the next div to the right --}}
-            {{-- use this instead of float-right --}}
-            <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/events">Events</a>
-                <a class="nav-item nav-link" href="/about">About</a>
-                <a class="nav-item nav-link" href="/tests">Tests</a>
-                <a class="nav-item nav-link" href="/guild/">Guild</a>
+            <div class="navbar-nav ">
+                <a class="nav-item nav-link" href="/guild/1">Guild</a>
+                <a class="nav-item nav-link" href="/guild/1/events">Events</a>
+                {{-- <a class="nav-item nav-link" href="/about">About</a> --}}
+                {{-- <a class="nav-item nav-link" href="/tests">Tests</a> --}}
+                {{-- <a class="nav-item nav-link" href="/">Home</a> --}}
             </div>
 
 

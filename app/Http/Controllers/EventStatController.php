@@ -48,7 +48,7 @@ class EventStatController extends Controller
 
     public function member($member_id,$event_id)
     {
-        // Find a specific guild and return all member stats from a specific event
+        // Find a specific Member and return all Event Stats
         $member = Member::find($member_id);
         $memberStat = Member::find($member_id)->eventStats()
         ->where('event_id', $event_id)

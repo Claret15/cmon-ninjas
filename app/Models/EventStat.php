@@ -30,25 +30,25 @@ class EventStat extends Model
     /**
      * Define number accessors
      */
-    public function getGuildPtsAttribute($value)
-    {
-        return number_format($value);
-    }
+    // public function getGuildPtsAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
-    public function getSoloPtsAttribute($value)
-    {
-        return number_format($value);
-    }
+    // public function getSoloPtsAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
-    public function getSoloRankAttribute($value)
-    {
-        return number_format($value);
-    }
+    // public function getSoloRankAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
-    public function getGlobalRankAttribute($value)
-    {
-        return number_format($value);
-    }
+    // public function getGlobalRankAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
 
 }

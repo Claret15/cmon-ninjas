@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GuildFormRequest;
 use App\Models\League;
 use App\Models\Event;
 use App\Models\EventStat;
@@ -18,7 +19,7 @@ class GuildController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $guilds = Guild::all()->sortBy('name');
         return view('pages.guilds.index', compact('guilds'));
@@ -37,15 +38,11 @@ class GuildController extends Controller
     /**
      * Store a newly created Guild.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  GuildFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GuildFormRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
- 
         $guild = new Guild;
         $guild->name = $request->input('name');
         $guild->save();
@@ -63,21 +60,21 @@ class GuildController extends Controller
      */
     public function show($id)
     {
-        // THIS WILL SHOW ALL MEMBERS WITHIN THE SELECTED GUILD 
+        // THIS WILL SHOW ALL MEMBERS WITHIN THE SELECTED GUILD
 
         // Get guild details
         $guild = Guild::findOrFail($id);
 
-        // Get all members from the selected guild. 
-        $members = Guild::find($id)->members->sortBy('name');
+        // Get all members from the selected guild.
+        $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
-        // Get all events that guilds have participated in. 
-        // May not need this 
-        // $events = 
+        // Get all events that guilds have participated in.
+        // May not need this
+        // $events =
 
         return view('pages.guilds.show', compact('guild', 'members'));
 
-        // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.  
+        // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.
         // ESPECIALLY IF SOMEONE TYPES A RANDOM NUMBER IN THE BROWSER
 
     }
@@ -97,16 +94,12 @@ class GuildController extends Controller
     /**
      * Update Guild.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  GuildFormRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GuildFormRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-
         $guild = Guild::find($id);
         $guild->name = $request->input('name');
         $guild->save();
@@ -126,7 +119,7 @@ class GuildController extends Controller
         $guild = Guild::find($id);
         $message = $guild->name . ' removed!';
         $guild->delete();
-        
+
         return redirect('/guild')->with('success', $message);
     }
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LeagueFormRequest;
 use App\Models\League;
 
 class LeagueController extends Controller
@@ -32,15 +33,11 @@ class LeagueController extends Controller
     /**
      * Store a newly created League.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  LeagueFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LeagueFormRequest $request)
     {
-          $request->validate([
-            'name' => 'required',
-        ]);
-   
         $league = new League;
         $league->name = $request->input('name');
         $league->save();
@@ -76,18 +73,14 @@ class LeagueController extends Controller
     /**
      * Update League.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  LeagueFormRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LeagueFormRequest $request, $id)
     {
-          $request->validate([
-            'name' => 'required',
-        ]);
- 
         $league = League::find($id);
-        $league->name = $request->input('name');
+        $league->name = $request->name;
         $league->save();
 
         $message = $league->name . ' updated!';
@@ -104,7 +97,7 @@ class LeagueController extends Controller
     public function destroy($id)
     {
         $league = League::find($id);
-        $message = $League->name . ' removed!';
+        $message = $league->name . ' removed!';
         $league->delete();
         return redirect('/leagues')->with('success', $message);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Guild;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventFormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -45,17 +46,11 @@ class EventController extends Controller
     /**
      * Store a newly created Event.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EventFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventFormRequest $request)
     {
-        $request->validate([
-            'event_name' => 'required',
-            'event_date' => 'required',
-            'event_type' => 'required'
-        ]);
- 
         $event = new Event;
         $event->name = $request->input('event_name');
         $event->event_date = $request->input('event_date');
@@ -91,13 +86,13 @@ class EventController extends Controller
         } catch(ModelNotFoundException $e) {
             return redirect('/events')->with('error', 'Invalid Event');
         }
-        
+
         $eventType = $event->event_type_id;
-    
+
         // Check if user is Admin
         // if(auth()->user()->id !== $post->user_id){
             // return redirect('/events')->with("error", 'Unauthorised action: edit event.');
-        // } 
+        // }
 
         return view('pages.events.edit', compact('event', 'eventType'));
     }
@@ -105,18 +100,12 @@ class EventController extends Controller
     /**
      * Update an Event.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EventFormRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EventFormRequest $request, $id)
     {
-        $request->validate([
-            'event_name' => 'required',
-            'event_type' => 'required|min:1',
-            'event_date' => 'required',
-        ]);
- 
         $event = Event::find($id);
         $event->name = $request->input('event_name');
         $event->event_date = $request->input('event_date');

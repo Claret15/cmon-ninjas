@@ -3,28 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MemberFormRequest;
 use App\Models\Member;
 use App\Models\Guild;
 use App\Models\EventStat;
 use App\Models\Event;
 
-
 class MemberController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show members from all guilds
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        /**
-         * Show members from all guilds
-         */
+    {
         $members = Member::all();
-
         return view('pages.members.index')->with('members', $members);
-       
     }
 
     /**
@@ -40,21 +35,15 @@ class MemberController extends Controller
     /**
      * Store a newly created Member.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MemberFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemberFormRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'guild' => 'required',
-            'is_active' => 'required'
-        ]);
- 
         $guild = Guild::where('name', $request->input('guild'))->first();
 
         $member = new Member;
-        $member->name = $request->input('name');
+        $member->name = $request->name;
         $member->guild_id = $guild->id;
         $member->is_active = $request->input('is_active');
         $member->save();
@@ -69,12 +58,12 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         // Member details
         $member = Member::find($id); // Keep
 
-        // This will return all EventStats ordered by event dates. 
-        // Join is required to retrieve the correct columns. 
+        // This will return all EventStats ordered by event dates.
+        // Join is required to retrieve the correct columns.
         $memberStatsAll = Member::find($id)->eventStats()
         ->join('events', 'event_stats.event_id', '=', 'events.id')
         ->orderby('events.event_date', 'desc')
@@ -107,17 +96,17 @@ class MemberController extends Controller
          *   - Solo pts
          *   - Guild pts
          *   - Global Rank
-         * 
+         *
          * - Charts for league Participations
-         * 
-         * - Show promoted or relegated?  
-         * 
+         *
+         * - Show promoted or relegated?
+         *
          * Try to calculate following:
          * - Overall total pts
-         * 
+         *
          * Tables:
          * - Ability to order the columns?
-         * - 
+         * -
          */
     }
 
@@ -136,18 +125,12 @@ class MemberController extends Controller
     /**
      * Update Member.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MemberFormRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberFormRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'guild' => 'required',
-            'is_active' => 'required'
-        ]);
- 
         $guild = Guild::where('name', $request->input('guild'))->first();
 
         $member = Member::find($id);
@@ -174,18 +157,5 @@ class MemberController extends Controller
         $member->delete();
 
         return redirect('/guild/'.$guild)->with('success', $message);
-    }
-
-    /**
-     * Toggle Active status of Member
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function isActive($id)
-    {
-      // Create a function to toggle Active status.  
-      // This will replace the Destroy function for safe reporting
-      // Otherwise, database will fall apart.  
     }
 }

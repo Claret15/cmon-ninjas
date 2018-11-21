@@ -11,10 +11,10 @@
         <h4 class="mt-3 text-center">{{ $eventInfo->name }} - {{ $eventInfo->eventType->name }}</h4>
         {{-- <h4 class="text-center">{{ $eventInfo->event_date->format("d M 'y")}}</h4> --}}
         {{-- <h4 class="text-center">{{ $eventInfo->eventType->name }}</h4> --}}
-    
+
     {{-- <h1 class="text-center">Add Event Stat</h1> --}}
 
-    <!-- Button trigger modal -->        
+    <!-- Button trigger modal -->
 
         <ul class="nav mb-1">
             <li>Guild points check - {{$guildPtsTotal}}</li>
@@ -25,12 +25,8 @@
             </li>
         </ul>
 
-
-
-
-
         <div class="mb-3" id="guild">
-            <div class="table-responsive">            
+            <div class="table-responsive">
             <table class='table'>
                 <thead class="thead-dark">
                     <tr>
@@ -50,13 +46,13 @@
                         <td>
                             {{ $stats->position }}
                             <br>
-                            <button 
+                            <button
                                 class="btn btn-danger btn-sm mt-2"
-                                data-toggle="modal" 
+                                data-toggle="modal"
                                 data-target="#deleteModal"
-                                data-stat="{{ $stats->id }}" 
+                                data-stat="{{ $stats->id }}"
                                 data-guild="{{ $stats->member->guild_id }}"
-                                data-event="{{ $stats->event_id }}"                            
+                                data-event="{{ $stats->event_id }}"
                             >
                                 <i class="fas fa-trash-alt"></i>
                                 {{-- <i class="fas fa-trash-alt fa-lg mt-2"></i> --}}
@@ -65,13 +61,13 @@
                         </td> {{-- position--}}
                         <td>
                             <a href="/member/{{ $stats->member->id }}/event/{{ $stats->event_id }}">{{ $stats->member->name }}</a>
-                            
+
                             <br>
-                            <button 
+                            <button
                                 class="btn btn-success btn-sm mt-2"
-                                data-toggle="modal" 
+                                data-toggle="modal"
                                 data-target="#editModal"
-                                data-stat="{{ $stats->id }}" 
+                                data-stat="{{ $stats->id }}"
                                 data-guild="{{ $stats->member->guild_id }}"
                                 data-event="{{ $stats->event_id }}"
                                 data-member="{{ $stats->member->id }}"
@@ -89,12 +85,12 @@
                         <td>{{ number_format($stats->guild_pts) }}</td>     {{-- guild_pts --}}
                         <td>{{ number_format($stats->solo_pts) }}</td>      {{-- solo_pts --}}
                         <td>{{ $stats->league->name }}</td>                   {{-- league --}}
-                        <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}  
+                        <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}
                         <td>{{ number_format($stats->global_rank) }}</td>   {{-- global_rank --}}
                     </tr>
         @endforeach
                 </tbody>
-            </table> 
+            </table>
             </div>
         </div>
 
@@ -290,7 +286,7 @@
         <div class="form-group"">
             {{Form::label('member_id', 'Member Name', ['class' => ''])}}
             {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
-        </div> 
+        </div>
 
         <div class="form-row">
             <div class="form-group col-md-6"">
@@ -328,7 +324,7 @@
         {!! Form::close() !!}
     </div> --}}
 
-    </main>     
+    </main>
 @endsection
 
 @section('scripts')
@@ -368,7 +364,7 @@ $(document).ready(function() {
         var guild = eventStat.data('guild');
         var event = eventStat.data('event');
         var modal = $(this);
-        
+
         modal.find('.modal-body input[name="eventStat"]').val(stat);
         modal.find('.modal-body input[name="guild_id"]').val(guild);
         modal.find('.modal-body input[name="event_id"]').val(event);
@@ -376,7 +372,7 @@ $(document).ready(function() {
     })
 
 })
-    
+
 </script>
 
 @endsection

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\EventTypeFormRequest;
 use App\Models\EventType;
-
 
 class EventTypeController extends Controller
 {
@@ -33,16 +32,11 @@ class EventTypeController extends Controller
     /**
      * Store a newly created Event Type.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EventTypeFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventTypeFormRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-
-        // Create Event Type;    
         $eventType = new EventType;
         $eventType->name = $request->input('name');
         $eventType->save();
@@ -78,17 +72,12 @@ class EventTypeController extends Controller
     /**
      * Update Event Type.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EventTypeFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EventTypeFormRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-
-        // Update Event Type;    
         $eventType = EventType::find($id);
         $eventType->name = $request->input('name');
         $eventType->save();
@@ -109,7 +98,7 @@ class EventTypeController extends Controller
         $eventType = EventType::find($id);
         $message = $eventType->name . ' removed!';
         $eventType->delete();
-        
+
         return redirect('/event_type')->with('success', $message);
     }
 }

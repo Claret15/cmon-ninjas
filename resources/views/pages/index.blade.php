@@ -1,27 +1,17 @@
-@extends('layouts.app')
-
-@section('head')
-<style>
-    body{
-        background-image: url('bg.jpg');
-    }
-</style>
-
+@extends('layouts.welcome')
 
 @section('content')
-{{-- <div id="example"></div> --}}
-    {{-- <div class="container"> --}}
-        <div class="guild-img d-flex align-items-center">
-        <img src='ninja.png' alt="ninjas guild">
+<div class="ninja">
+    <div class="intro d-inline-flex flex-column justify-content-end">
+        <div class="mx-auto">
+            <img src='ninja.png' alt="ninjas guild" class="img-ninja">
         </div>
-        {{-- <div class="jumbotron">
-            <h1>Welcome To Infernal Pathfinders Guild</h1>
-            <p>After a weary battle against the Legendary Bosses, wondering around Korelis, you find sanctuary at Infernal Pathfinders.</p>
-            <p>Make yourself at home and learn more about the guild.</p>
-        </div> --}}
+        <div class="mx-auto p-4">
+            <a href="/guild/1"><button class="enter-button">Enter</button></a>
+        </div>
+    </div>
 
+</div>
 
-        {{-- <a class="btn btn-primary" href="/guild">Enter</a> --}}
-    {{-- </div> --}}
 
 @endsection

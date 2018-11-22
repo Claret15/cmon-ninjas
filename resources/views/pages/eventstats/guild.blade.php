@@ -6,9 +6,9 @@
         <div class="container my-3">
             <a href="/guild/{{$guild->id}}/events" class="btn btn-primary btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
         </div>
-        <h1 class="mt-3 text-center">{{ $guild->name }}</h1>
-        <h1 class="mt-3 text-center">{{ $eventInfo->name }}</h1>
-        <h2 class="text-center">{{ $eventInfo->eventType->name }}</h2>
+        {{-- <h1 class="mt-3 text-center">{{ $guild->name }}</h1> --}}
+        <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
+        <h3 class="text-center">{{ $eventInfo->eventType->name }}</h3>
 
 {{-- Button trigger Modal Create --}}
         <ul class="nav mt-5 mb-1">
@@ -83,7 +83,7 @@
                         <td>{{ $stats->league->name }}</td>                   {{-- league --}}
                         <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}
                         <td>{{ number_format($stats->global_rank) }}</td>   {{-- global_rank --}}
-                        <td>{{ round($stats->guild_pts/$guildPtsTotal, 2).'%' }}</td>   {{-- Performance --}}
+                        <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>   {{-- Performance --}}
                     </tr>
         @endforeach
                 </tbody>

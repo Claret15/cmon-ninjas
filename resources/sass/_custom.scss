@@ -37,7 +37,6 @@
 .member-events {
     overflow: auto;
 
-    
     table, table > thead {
         // border: none;
         // border-top-color:transparent;
@@ -47,6 +46,15 @@
 
 
 // General Styling
+
+.heading {
+    color: rgba(218,8,8,1);
+}
+
+.show-events{
+    max-width: 600px;
+    margin: 0 auto;
+}
 
 body {
     // background-color: black;

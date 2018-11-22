@@ -5,10 +5,10 @@
     <main class="container">
 
         <p><a href="/guild/{{$member->guild_id}}/event/{{ $eventInfo->id}}" class="btn btn-primary btn-sm"><i class="fas fa-caret-left"></i> Event</a></p>
-
-        <h1 class="mt-3 text-center">{{ $member->guild->name }}</h1>
-        <h1 class="mt-3 text-center">{{ $eventInfo->name }}</h1>
-        <h2 class="text-center">{{ $eventInfo->eventType->name }}</h2>
+{{-- 
+        <h1 class="mt-3 text-center">{{ $member->guild->name }}</h1> --}}
+        <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
+        <h3 class="text-center">{{ $eventInfo->eventType->name }}</h3>
 
         <div class="mt-5" id="guild">
             <div class="table-responsive">
@@ -36,7 +36,7 @@
                         <td>{{ $stats->league->name }}</td>     {{-- League --}}
                         <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
                         <td>{{ number_format($stats->global_rank) }}</td>   {{-- Global Rank --}}
-                        <td>{{ round($stats->guild_pts/$guildPtsTotal, 2).'%' }}</td>   {{-- Performance --}}
+                        <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>   {{-- Performance --}}
                     </tr>
         @endforeach
                 </tbody>

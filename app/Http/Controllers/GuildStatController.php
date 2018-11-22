@@ -2,65 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use App\Http\Requests\EventStatFormRequest;
 use App\Models\Event;
 use App\Models\EventStat;
 use App\Models\Guild;
 use App\Models\League;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use App\Http\Requests\EventStatFormRequest;
 
 class GuildStatController extends Controller
 {
-
-    /**
-     * Show the form for creating Guild Event Stats.
-     * @param  int  $guild_id
-     * @param  int  $event_id
-     * @return \Illuminate\Http\Response
-     */
-    public function create($guild_id, $event_id)
-    {
-        // May not need this route.
-        // Relevant buttons will be shown if logged in as Admin on the show route.
-
-        try {
-            $guild = Guild::findOrfail($guild_id);
-        } catch (ModelNotFoundException $e) {
-            $message = 'Guild does not exist';
-            return redirect('/')->with('error', $message);
-        }
-
-        try {
-            $eventInfo = Event::findOrfail($event_id);
-        } catch (ModelNotFoundException $e) {
-            $message = 'Event does not exist';
-            return redirect('/')->with('error', $message);
-        }
-
-        // Get all ACTIVE Guild members.
-        $members = Guild::find($guild_id)->members
-            ->where('is_active', true)
-            ->sortBy('name')
-            ->pluck('name', 'id');
-
-        // Get all league types
-        $leagues = League::pluck('name', 'id');
-
-        // Find a specific guild and return all member stats from a specific event
-        $allGuildEventStats = Guild::find($guild_id)->eventStats()
-            ->where('event_id', $event_id)
-            ->orderby('guild_pts', 'desc')
-            ->get();
-
-        // Calculate Total Guild Points
-        $guildPtsTotal = Guild::find($guild_id)->eventStats()
-            ->where('event_id', $event_id)
-            ->sum('guild_pts');
-
-        return view('pages.eventstats.guildcreate', compact('allGuildEventStats', 'eventInfo', 'guild', 'guildPtsTotal', 'members', 'leagues'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -96,7 +48,7 @@ class GuildStatController extends Controller
         $message = 'Event Stat added!';
 
         return redirect()->action(
-            'GuildStatController@create', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 
@@ -146,7 +98,7 @@ class GuildStatController extends Controller
             ->where('event_id', $event_id)
             ->sum('guild_pts');
 
-        return view('pages.eventstats.guildcreate', compact('allGuildEventStats', 'eventInfo', 'guild', 'guildPtsTotal', 'members', 'leagues'));
+        return view('pages.eventstats.guild', compact('allGuildEventStats', 'eventInfo', 'guild', 'guildPtsTotal', 'members', 'leagues'));
     }
 
     /**
@@ -175,7 +127,7 @@ class GuildStatController extends Controller
         $message = 'Event Stat Updated!';
 
         return redirect()->action(
-            'GuildStatController@create', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 

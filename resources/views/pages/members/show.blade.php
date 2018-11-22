@@ -38,7 +38,7 @@
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         {{-- <div class="mb-3"> --}}
                             <table class='table'>
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr>
                                         <th>Event</th>
                                         <th>Guild Pts</th>
@@ -52,15 +52,15 @@
                                 @foreach($memberStatsAll as $stats)
                                     <tr>
                                         <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
-                                        <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
-                                        <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
-                                        <td>{{$stats->league->name}}</td>     {{-- League --}}
-                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
-                                        <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
+                                        <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
+                                        <td>{{ number_format($stats->solo_pts) }}</td>     {{-- Solo Pts --}}
+                                        <td>{{ $stats->league->name }}</td>     {{-- League --}}
+                                        <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
+                                        <td>{{ number_format($stats->global_rank) }}</td>     {{-- Global Rank --}}
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table> 
+                            </table>
                         {{-- </div> --}}
                     </div>
             {{-- Tab Content - Raid Events --}}
@@ -84,12 +84,12 @@
                                         <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
                                         <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
                                         <td>{{$stats->league->name}}</td>     {{-- League --}}
-                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}
                                         <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table> 
+                            </table>
                         </div>
                     </div>
             {{-- Tab Content - Crusade Events --}}
@@ -111,12 +111,12 @@
                                         <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
                                         <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
                                         <td>{{$stats->league->name}}</td>     {{-- League --}}
-                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}
                                         <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table> 
+                            </table>
                         </div>
                     </div>
             {{-- Tab Content - Crusade Events --}}
@@ -140,12 +140,12 @@
                                         <td>{{$stats->guild_pts}}</td>     {{-- Guild Pts --}}
                                         <td>{{$stats->solo_pts}}</td>     {{-- Solo Pts --}}
                                         <td>{{$stats->league->name}}</td>     {{-- League --}}
-                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}    
+                                        <td>{{$stats->solo_rank}}</td>     {{-- Solo Rank --}}
                                         <td>{{$stats->global_rank}}</td>     {{-- Global Rank --}}
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table> 
+                            </table>
                         </div>
                     </div>
                 </div>

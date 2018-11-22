@@ -139,7 +139,7 @@ class EventController extends Controller
     public function guild($guild_id)
     {
         // All Events
-        $events = Event::all()->sortBy('event_date');
+        $events = Event::all()->sortByDesc('event_date');
 
         // Raid Events
         $raid = $events->where('event_type_id', 1);

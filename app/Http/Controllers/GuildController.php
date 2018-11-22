@@ -11,6 +11,7 @@ use App\Models\EventType;
 use App\Models\Member;
 use App\Models\Guild;
 use App\Http\Resources\Guilds as GuildsResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GuildController extends Controller
 {
@@ -21,7 +22,7 @@ class GuildController extends Controller
      */
     public function index()
     {
-        $guilds = Guild::all()->sortBy('name');
+        $guilds = Guild::all()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         return view('pages.guilds.index', compact('guilds'));
     }
 
@@ -62,8 +63,12 @@ class GuildController extends Controller
     {
         // THIS WILL SHOW ALL MEMBERS WITHIN THE SELECTED GUILD
 
-        // Get guild details
-        $guild = Guild::findOrFail($id);
+        try {
+            $guild = Guild::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            $message = 'Guild does not exist';
+            return redirect('/')->with('error', $message);
+        }
 
         // Get all members from the selected guild.
         $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);

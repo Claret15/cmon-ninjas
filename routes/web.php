@@ -12,14 +12,11 @@
 */
 
 Route::get('/', 'PageController@index');
-// Route::get('/about', 'PageController@about'); 
-// Route::get('/tests', 'PageController@tests');
 
 Route::get('/guild/{id}/events/', 'EventController@guild');
 Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member');
 
 Route::get('/guild/{guild_id}/event/{event_id}', 'GuildStatController@show');
-Route::get('/guild/{guild_id}/event/{event_id}/create', 'GuildStatController@create');
 Route::post('/guild/{guild_id}/event/{event_id}', 'GuildStatController@store');
 Route::put('/guild/{guild_id}/event/{event_id}', 'GuildStatController@update');
 Route::delete('/guild/{guild_id}/event/{event_id}', 'GuildStatController@destroy');
@@ -30,10 +27,7 @@ Route::resource('events', 'EventController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
 Route::resource('members', 'MemberController')->except(['index']);
 
-
-//Fallback route - Needs further testing or replacement
 Route::fallback(function () {
-    // return back()->with('error', 'Page not available/Does not exist');
     return redirect('/')->with('error', 'Page does not exist');
 });
 

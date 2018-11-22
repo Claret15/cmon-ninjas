@@ -2,21 +2,16 @@
 
 @section('content')
 
-    <main class="container">
-
+    <div class="container">
         <div class="container my-3">
             <a href="/guild/{{$guild->id}}/events" class="btn btn-primary btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
         </div>
-        <h4 class="mt-3 text-center">{{ $guild->name }}</h4>
-        <h4 class="mt-3 text-center">{{ $eventInfo->name }} - {{ $eventInfo->eventType->name }}</h4>
-        {{-- <h4 class="text-center">{{ $eventInfo->event_date->format("d M 'y")}}</h4> --}}
-        {{-- <h4 class="text-center">{{ $eventInfo->eventType->name }}</h4> --}}
+        <h1 class="mt-3 text-center">{{ $guild->name }}</h1>
+        <h1 class="mt-3 text-center">{{ $eventInfo->name }}</h1>
+        <h2 class="text-center">{{ $eventInfo->eventType->name }}</h2>
 
-    {{-- <h1 class="text-center">Add Event Stat</h1> --}}
-
-    <!-- Button trigger modal -->
-
-        <ul class="nav mb-1">
+{{-- Button trigger Modal Create --}}
+        <ul class="nav mt-5 mb-1">
             <li>Guild points check - {{$guildPtsTotal}}</li>
             <li class="ml-auto">
                 <button type="button" class="btn btn-success ml-auto" data-toggle="modal" data-target="#createModal">
@@ -25,18 +20,19 @@
             </li>
         </ul>
 
-        <div class="mb-3" id="guild">
+        <div class="mt-5" id="guild">
             <div class="table-responsive">
             <table class='table'>
                 <thead class="thead-dark">
                     <tr>
-                        <th>Position</th>
+                        <th>Pos.</th>
                         <th>Member</th>
                         <th>Guild Pts</th>
                         <th>Solo Pts</th>
                         <th>League</th>
                         <th>Solo Rank</th>
                         <th>Global Rank</th>
+                        <th>Perf.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,6 +83,7 @@
                         <td>{{ $stats->league->name }}</td>                   {{-- league --}}
                         <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}
                         <td>{{ number_format($stats->global_rank) }}</td>   {{-- global_rank --}}
+                        <td>{{ round($stats->guild_pts/$guildPtsTotal, 2).'%' }}</td>   {{-- Performance --}}
                     </tr>
         @endforeach
                 </tbody>
@@ -94,237 +91,178 @@
             </div>
         </div>
 
-
-
 {{-- Modal - Create Stat --}}
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Add Event Stat</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-{{-- Modal Body --}}
-            <div class="modal-body">
-                <div class="add-event">
-                    {!! Form::open(['action' => ['GuildStatController@store', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
-                    {{Form::hidden('guild_id', $guild->id)}}
-                    {{Form::hidden('event_id', $eventInfo->id)}}
-                    <div class="form-group">
-                        {{Form::label('member_id', 'Member Name', ['class' => ''])}}
-                        {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createModalLabel">Add Event Stat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+        {{-- Modal Body --}}
+                    <div class="modal-body">
+                        <div class="add-event">
+                            {!! Form::open(['action' => ['GuildStatController@store', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
+                            {{Form::hidden('guild_id', $guild->id)}}
+                            {{Form::hidden('event_id', $eventInfo->id)}}
+                            <div class="form-group">
+                                {{Form::label('member_id', 'Member Name', ['class' => ''])}}
+                                {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('guild_pts', 'Guild Points', ['class' => ''])}}
-                            {{Form::number('guild_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Guild points', 'step' => '0'])}}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{Form::label('position', 'Guild Position', ['class' => ''])}}
-                            {{Form::number('position', '', ['class' => 'form-control', 'min' => '1', 'max' => '30', 'placeholder' => 'Guild Position'])}}
-                        </div>
-                    </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('guild_pts', 'Guild Points', ['class' => ''])}}
+                                    {{Form::number('guild_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Guild points', 'step' => '0'])}}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{Form::label('position', 'Guild Position', ['class' => ''])}}
+                                    {{Form::number('position', '', ['class' => 'form-control', 'min' => '1', 'max' => '30', 'placeholder' => 'Guild Position'])}}
+                                </div>
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('solo_pts', 'Solo Points', ['class' => ''])}}
-                            <div>
-                                {{Form::number('solo_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('solo_pts', 'Solo Points', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('solo_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{Form::label('league_id', 'League', ['class' => ''])}}
+                                    <div>
+                                        {{Form::select('league_id', $leagues, null, ['class' => 'form-control'])}}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{Form::label('league_id', 'League', ['class' => ''])}}
-                            <div>
-                                {{Form::select('league_id', $leagues, null, ['class' => 'form-control'])}}
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
-                            <div>
-                                {{Form::number('solo_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('solo_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{Form::label('global', 'Global Rank', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('global_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{Form::label('global', 'Global Rank', ['class' => ''])}}
-                            <div>
-                                {{Form::number('global_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
-                            </div>
+                            {{Form::submit('Add Event Stat', ['class' => 'btn btn-primary btn-block'])}}
+                            {!! Form::close() !!}
                         </div>
                     </div>
-                    {{Form::submit('Add Event Stat', ['class' => 'btn btn-primary btn-block'])}}
-                    {!! Form::close() !!}
+        {{-- Modal Body - End --}}
                 </div>
             </div>
-{{-- Modal Body - End --}}
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> --}}
         </div>
-    </div>
-</div>
-
 
 {{-- Modal - Edit Stat --}}
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Update Event Stat</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-{{-- Modal Body --}}
-            <div class="modal-body">
-                <div class="add-event">
-                    {!! Form::open(['action' => ['GuildStatController@update', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
-                    {{Form::hidden('_method', 'Put')}}
-                    {{Form::hidden('eventStat', '')}}
-                    {{Form::hidden('guild_id', $guild->id)}}
-                    {{Form::hidden('event_id', $eventInfo->id)}}
-                    <div class="form-group">
-                        {{Form::label('member_id', 'Member Name', ['class' => ''])}}
-                        {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Update Event Stat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+        {{-- Modal Body --}}
+                    <div class="modal-body">
+                        <div class="add-event">
+                            {!! Form::open(['action' => ['GuildStatController@update', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
+                            {{Form::hidden('_method', 'Put')}}
+                            {{Form::hidden('eventStat', '')}}
+                            {{Form::hidden('guild_id', $guild->id)}}
+                            {{Form::hidden('event_id', $eventInfo->id)}}
+                            <div class="form-group">
+                                {{Form::label('member_id', 'Member Name', ['class' => ''])}}
+                                {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('guild_pts', 'Guild Points', ['class' => ''])}}
-                            {{Form::number('guild_pts', '', ['class' => 'form-control'])}}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{Form::label('position', 'Guild Position', ['class' => ''])}}
-                            {{Form::number('position', '', ['class' => 'form-control'])}}
-                        </div>
-                    </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('guild_pts', 'Guild Points', ['class' => ''])}}
+                                    {{Form::number('guild_pts', '', ['class' => 'form-control'])}}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{Form::label('position', 'Guild Position', ['class' => ''])}}
+                                    {{Form::number('position', '', ['class' => 'form-control'])}}
+                                </div>
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('solo_pts', 'Solo Points', ['class' => ''])}}
-                            <div>
-                                {{Form::number('solo_pts', '', ['class' => 'form-control'])}}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('solo_pts', 'Solo Points', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('solo_pts', '', ['class' => 'form-control'])}}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{Form::label('league_id', 'League', ['class' => ''])}}
+                                    <div>
+                                        {{Form::select('league_id', $leagues, null, ['class' => 'form-control'])}}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{Form::label('league_id', 'League', ['class' => ''])}}
-                            <div>
-                                {{Form::select('league_id', $leagues, null, ['class' => 'form-control'])}}
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
-                            <div>
-                                {{Form::number('solo_rank', '', ['class' => 'form-control'])}}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('solo_rank', '', ['class' => 'form-control'])}}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6"">
+                                    {{Form::label('global', 'Global Rank', ['class' => ''])}}
+                                    <div>
+                                        {{Form::number('global_rank', '', ['class' => 'form-control'])}}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6"">
-                            {{Form::label('global', 'Global Rank', ['class' => ''])}}
-                            <div>
-                                {{Form::number('global_rank', '', ['class' => 'form-control'])}}
-                            </div>
+                            {{Form::submit('Update Event Stat', ['class' => 'btn btn-primary btn-block'])}}
+                            {!! Form::close() !!}
                         </div>
                     </div>
-                    {{Form::submit('Update Event Stat', ['class' => 'btn btn-primary btn-block'])}}
-                    {!! Form::close() !!}
+        {{-- Modal Body - End --}}
                 </div>
             </div>
-{{-- Modal Body - End --}}
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> --}}
         </div>
-    </div>
-</div>
-
-
 
 {{-- Modal - Delete Stat --}}
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete...</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-{{-- Modal Body --}}
-            <div class="modal-body">
-                <div class="delete-stat">
-                    <h5>Are you sure?</h5>
-                    {!!Form::open(['action' => ['GuildStatController@destroy', $guild->id, $eventInfo->id], 'method' => 'POST'])!!}
-                    {{Form::hidden('_method', 'DELETE')}}
-                    {{Form::hidden('eventStat', '')}}
-                    {{Form::hidden('guild_id', '')}}
-                    {{Form::hidden('event_id', '')}}
-                    {{Form::submit('Delete',['class' => 'btn btn-sm btn-danger'])}}
-                    {!!Form::close() !!}
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete...</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+        {{-- Modal Body --}}
+                    <div class="modal-body">
+                        <div class="delete-stat">
+                            <h5>Are you sure?</h5>
+                            {!!Form::open(['action' => ['GuildStatController@destroy', $guild->id, $eventInfo->id], 'method' => 'POST'])!!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::hidden('eventStat', '')}}
+                            {{Form::hidden('guild_id', '')}}
+                            {{Form::hidden('event_id', '')}}
+                            {{Form::submit('Delete',['class' => 'btn btn-sm btn-danger'])}}
+                            {!!Form::close() !!}
 
+                        </div>
+                    </div>
+        {{-- Modal Body - End --}}
                 </div>
             </div>
-{{-- Modal Body - End --}}
         </div>
+
     </div>
-</div>
-
-
-{{-- Original Form  --}}
-    {{-- <div class="add-event">
-        {!! Form::open(['action' => ['GuildStatController@store', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
-        {{Form::hidden('event_id', $eventInfo->id)}}
-        <div class="form-group"">
-            {{Form::label('member_id', 'Member Name', ['class' => ''])}}
-            {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6"">
-                {{Form::label('guild_pts', 'Guild Points', ['class' => ''])}}
-                {{Form::number('guild_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Guild points', 'step' => '0']) }}
-            </div>
-            <div class="form-group col-md-6"">
-                {{Form::label('position', 'Guild Position', ['class' => ''])}}
-                {{Form::number('position', '', ['class' => 'form-control', 'placeholder' => 'Guild Position']) }}
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6"">
-                {{Form::label('solo_pts', 'Solo Points', ['class' => ''])}}
-                {{Form::number('solo_pts', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points']) }}
-            </div>
-            <div class="form-group col-md-6"">
-                {{Form::label('league_id', 'League', ['class' => ''])}}
-                {{Form::select('league_id', $leagues, null, ['class' => 'form-control']) }}
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6"">
-                {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
-                {{Form::number('solo_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points']) }}
-            </div>
-            <div class="form-group col-md-6"">
-                {{Form::label('global', 'Global Rank', ['class' => ''])}}
-                {{Form::number('global_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points']) }}
-            </div>
-        </div>
-        {{Form::submit('Add Event',['class' => 'btn btn-primary btn-block'])}}
-        {!! Form::close() !!}
-    </div> --}}
-
-    </main>
 @endsection
 
 @section('scripts')

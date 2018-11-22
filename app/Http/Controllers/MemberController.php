@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use App\Http\Requests\MemberFormRequest;
 use App\Models\Member;
 use App\Models\Guild;
-use App\Models\EventStat;
-use App\Models\Event;
 
 class MemberController extends Controller
 {
@@ -59,11 +59,14 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        // Member details
-        $member = Member::find($id); // Keep
+        try {
+            $member = Member::findOrfail($id);
+        } catch (ModelNotFoundException $e) {
+            $message = 'Member does not exist';
+            return redirect('/')->with('error', $message);
+        }
 
         // This will return all EventStats ordered by event dates.
-        // Join is required to retrieve the correct columns.
         $memberStatsAll = Member::find($id)->eventStats()
         ->join('events', 'event_stats.event_id', '=', 'events.id')
         ->orderby('events.event_date', 'desc')

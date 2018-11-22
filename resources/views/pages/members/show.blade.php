@@ -2,20 +2,20 @@
 
 @section('content')
 
-{{-- Back Button --}}
-        <div class="container my-3">
-            <a href="/guild/{{$member->guild_id}}" class="btn btn-primary btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-torii-gate fa-lg"></i></a>
-        </div>
 {{-- Title --}}
         <section class="container">
             <article>
                 <h1 class="text-center"><i class="fas fa-user-ninja fa-2x mb-2"></i></h1>
-                <h1 class="text-center heading">{{$member->name}}</h1>
+                <h2 class="text-center heading mb-3">{{$member->name}}</h2>
                 {{-- <h3 class="text-center">{{$member->guild->name}}</h3> --}}
             </article>
         </section>
+{{-- Back Button --}}
+        <div class="container mt-2">
+            <a href="/guild/{{$member->guild_id}}" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-torii-gate fa-lg"></i></a>
+        </div>
 {{-- Event Listing --}}
-        <section class="container my-5">
+        <section class="container mt-2">
             <div class="card member-events">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="eventsContent" role="tablist">

@@ -3,24 +3,24 @@
 @section('content')
 
     <div class="container">
-        <div class="container my-3">
-            <a href="/guild/{{$guild->id}}/events" class="btn btn-primary btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
-        </div>
         {{-- <h1 class="mt-3 text-center">{{ $guild->name }}</h1> --}}
         <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
-        <h3 class="text-center">{{ $eventInfo->eventType->name }}</h3>
+        <h3 class="text-center mb-3">{{ $eventInfo->eventType->name }}</h3>
 
+@auth
 {{-- Button trigger Modal Create --}}
         <ul class="nav mt-5 mb-1">
-            <li>Guild points check - {{$guildPtsTotal}}</li>
+            <li><h3>Guild points check - {{ number_format($guildPtsTotal)}}</h3></li>
             <li class="ml-auto">
                 <button type="button" class="btn btn-success ml-auto" data-toggle="modal" data-target="#createModal">
                 Add Event Stat
                 </button>
             </li>
         </ul>
+@endauth
 
-        <div class="mt-5" id="guild">
+        <a href="/guild/{{$guild->id}}/events" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
+        <div class="mt-2" id="guild">
             <div class="table-responsive">
             <table class='table'>
                 <thead class="thead-dark">
@@ -41,6 +41,7 @@
                     <tr>
                         <td>
                             {{ $stats->position }}
+                        @auth
                             <br>
                             <button
                                 class="btn btn-danger btn-sm mt-2"
@@ -53,11 +54,11 @@
                                 <i class="fas fa-trash-alt"></i>
                                 {{-- <i class="fas fa-trash-alt fa-lg mt-2"></i> --}}
                             </button>
-
+                        @endauth
                         </td> {{-- position--}}
                         <td>
                             <a href="/member/{{ $stats->member->id }}/event/{{ $stats->event_id }}">{{ $stats->member->name }}</a>
-
+                        @auth
                             <br>
                             <button
                                 class="btn btn-success btn-sm mt-2"
@@ -76,7 +77,7 @@
                             >
                                 <i class="fas fa-edit"></i>
                             </button>
-
+                        @endauth
                         </td>     {{-- member --}}
                         <td>{{ number_format($stats->guild_pts) }}</td>     {{-- guild_pts --}}
                         <td>{{ number_format($stats->solo_pts) }}</td>      {{-- solo_pts --}}

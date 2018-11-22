@@ -12,6 +12,15 @@ use App\Models\Guild;
 class MemberController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+    /**
      * Show members from all guilds
      *
      * @return \Illuminate\Http\Response

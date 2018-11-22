@@ -1,8 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark navbar-nav pl-3">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-dark">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{-- {{ config('app.name', 'Laravel') }} --}}
-            <img src='{{ asset('ninja.png') }}' alt="ninjas guild" height="50">
+            <img src='{{ asset('ninja.png') }}' alt="ninjas guild" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -10,16 +8,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <div class="navbar-nav ">
+            <div class="navbar-nav mx-auto">
                 <a class="nav-item nav-link" href="/guild/1">Guild</a>
                 <a class="nav-item nav-link" href="/guild/1/events">Events</a>
-                {{-- <a class="nav-item nav-link" href="/about">About</a> --}}
-                {{-- <a class="nav-item nav-link" href="/tests">Tests</a> --}}
-                {{-- <a class="nav-item nav-link" href="/">Home</a> --}}
             </div>
 
-
-            {{-- <!-- Right Side Of Navbar -->
+            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
@@ -49,8 +43,6 @@
                         </div>
                     </li>
                 @endguest
-            </ul> --}}
-
+            </ul>
         </div>
-    </div>
 </nav>

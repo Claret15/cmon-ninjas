@@ -12,6 +12,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class EventController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['index', 'guild']]);
+    }
+
+    /**
      * Show all Events
      *
      * @return \Illuminate\Http\Response
@@ -150,26 +160,9 @@ class EventController extends Controller
         $guild = Guild::findorfail($guild_id);
 
         return view('pages.events.guild', compact('events', 'raid', 'crusade', 'guild'));
-    }
 
-    public function guildShow($guild_id, $event_id)
-    {
-
-        // check if $guild_id or $event_id is valid.
-        // If not, redirect to previous page and display a flash message.
-
-        // Find a specific guild and return all member stats from a specific event
-        $allGuildEventStats = Guild::find($guild_id)->eventStats()
-            ->where('event_id', $event_id)
-            ->orderby('guild_pts', 'desc')
-            ->get();
-
-
-        $eventInfo = Event::find($event_id);
-
-        $guild = Guild::findorfail($guild_id);
-
-        return view('pages.events.show', compact('allGuildEventStats', 'eventInfo', 'guild'));
+        // NB: In this view, when you click on the listed event name, 
+        // this is being handled by GuildStatController.
     }
 
 }

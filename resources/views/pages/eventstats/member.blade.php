@@ -4,13 +4,12 @@
 
     <main class="container">
 
-        <p><a href="/guild/{{$member->guild_id}}/event/{{ $eventInfo->id}}" class="btn btn-primary btn-sm"><i class="fas fa-caret-left"></i> Event</a></p>
-{{-- 
-        <h1 class="mt-3 text-center">{{ $member->guild->name }}</h1> --}}
+        {{-- <h1 class="mt-3 text-center">{{ $member->guild->name }}</h1> --}}
         <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
-        <h3 class="text-center">{{ $eventInfo->eventType->name }}</h3>
+        <h3 class="text-center mb-3">{{ $eventInfo->eventType->name }}</h3>
 
-        <div class="mt-5" id="guild">
+        <a href="/guild/{{$member->guild_id}}/event/{{ $eventInfo->id}}" class="btn btn-danger btn-sm mb-2"><i class="fas fa-caret-left"></i> <i class="fas fa-list-ol fa-lg"></i></a>
+        <div id="guild">
             <div class="table-responsive">
             <table class='table '>
                 <thead class="thead-dark">

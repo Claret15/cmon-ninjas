@@ -22,7 +22,7 @@
         <a href="/guild/{{$guild->id}}/events" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
         <div class="mt-2" id="guild">
             <div class="table-responsive">
-            <table class='table'>
+            <table class="table table-stats">
                 <thead class="thead-dark">
                     <tr>
                         <th>Pos.</th>

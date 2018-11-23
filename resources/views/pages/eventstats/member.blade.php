@@ -11,10 +11,10 @@
         <a href="/guild/{{$member->guild_id}}/event/{{ $eventInfo->id}}" class="btn btn-danger btn-sm mb-2"><i class="fas fa-caret-left"></i> <i class="fas fa-list-ol fa-lg"></i></a>
         <div id="guild">
             <div class="table-responsive">
-            <table class='table '>
+            <table class="table table-stats">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Position</th>
+                        <th>Pos.</th>
                         <th>Member</th>
                         <th>Guild Pts</th>
                         <th>Solo Pts</th>

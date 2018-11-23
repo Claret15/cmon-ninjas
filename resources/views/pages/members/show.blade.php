@@ -16,7 +16,7 @@
         </div>
 {{-- Event Listing --}}
         <section class="container mt-2">
-            <div class="card member-events">
+            <div class="card member-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="eventsContent" role="tablist">
                     <li class="nav-item">
@@ -36,8 +36,8 @@
             {{-- Tab Content - All Events --}}
                 <div class="tab-content card-body" id="eventsContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                        {{-- <div class="mb-3"> --}}
-                            <table class='table'>
+                        <div class="table-responsive">
+                            <table class='table  table-hover'>
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Event</th>
@@ -61,11 +61,11 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        {{-- </div> --}}
+                        </div>
                     </div>
             {{-- Tab Content - Raid Events --}}
                     <div class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="raid-tab">
-                        <div class="mb-3">
+                        <div class="table-responsive">
                             <table class='table'>
                                 <thead class="thead-dark">
                                     <tr>
@@ -94,7 +94,7 @@
                     </div>
             {{-- Tab Content - Crusade Events --}}
                     <div class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="crusade-tab">
-                        <div class="mb-3">
+                        <div class="table-responsive">
                             <table class='table'>
                                 <thead class="thead-dark">
                                     <tr>
@@ -121,7 +121,7 @@
                     </div>
             {{-- Tab Content - Crusade Events --}}
                     <div class="tab-pane fade" id="arena" role="tabpanel" aria-labelledby="arena-tab">
-                        <div class="mb-3">
+                        <div class="table-responsive">
                             <table class='table'>
                                 <thead class="thead-dark">
                                     <tr>

@@ -1,4 +1,5 @@
 // Home page
+
 $color-primary: #4CAF50;
 $color-primary-light: #66BB6A;
 $color-text-light: snow;
@@ -18,12 +19,12 @@ $color-text-light: snow;
   z-index:100;
       @media only screen and (max-width: 500px) {
        font-size: 1em;
-    } 
+    }
 
   &:hover {
     animation: glow 1s ease-in infinite;
   }
-  
+
   &::before {
     animation: glow 1s ease-in infinite;
     background: $color-primary;
@@ -39,7 +40,7 @@ $color-text-light: snow;
     right: 0;
     z-index: -1;
   }
-  
+
   &:hover::before {
     filter: blur(20px);
     opacity: 1;
@@ -72,14 +73,14 @@ $color-text-light: snow;
     display: inline-block;
     // background-color: yellow;
     z-index: 100;
-    
+
     @media only screen and (max-width: 500px) {
         width: 70vw;
     }
         img {
             width: 40vw;
             margin-left: 2em;
-            
+
             @media only screen and (max-width: 500px) {
                 width: 60vw;
             }
@@ -87,8 +88,7 @@ $color-text-light: snow;
 }
 
 
-
-// Guild Index
+// Guild
 
 .guild-grid {
     display: grid;
@@ -105,6 +105,8 @@ $color-text-light: snow;
     }
 }
 
+// Members
+
 .members-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -113,18 +115,26 @@ $color-text-light: snow;
     margin: 0 auto;
 }
 
-// Members Show Page
-
-.member-events {
+.member-card {
     overflow: auto;
 
-    table, table > thead {
-        // border: none;
-        // border-top-color:transparent;
+    table {
+
+        th:first-child {
+            min-width: 175px;
+        }
+
+        th:nth-child(n+2) {
+            min-width: 100px;
+            text-align: center;
+        }
+
+        td:nth-child(n + 2) {
+            text-align: center;
+        }
+
     }
 }
-
-
 
 // General Styling
 
@@ -137,16 +147,30 @@ $color-text-light: snow;
     margin: 0 auto;
 }
 
-body {
-    // background-color: black;
-}
 
 table {
-    th:nth-child( n + 3) {
+    // th:nth-child( n + 3) {
+    //     text-align: center;
+    // }
+
+    // td:nth-child( n + 3) {
+    //     text-align: center;
+    // }
+
+}
+
+table.table-stats {
+
+    th:nth-child(n+2) {
+        min-width: 175px;
+    }
+
+    th:nth-child(n+3) {
+        min-width: 100px;
         text-align: center;
     }
 
-    td:nth-child( n + 3) {
+    td:nth-child(n + 3) {
         text-align: center;
     }
 

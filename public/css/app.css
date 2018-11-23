@@ -1,1 +1,174 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.enter-button{background:#4caf50;border:none;border-radius:25px;color:snow;cursor:pointer;font-size:1.25em;letter-spacing:.1em;outline:none;padding:.75em 2em;position:relative;text-transform:uppercase;z-index:100}@media only screen and (max-width:500px){.enter-button{font-size:1em}}.enter-button:before,.enter-button:hover{-webkit-animation:glow 1s ease-in infinite;animation:glow 1s ease-in infinite}.enter-button:before{background:#4caf50;border-radius:inherit;content:"";-webkit-filter:blur(10px);filter:blur(10px);opacity:.75;position:absolute;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;width:100%;height:100%;top:0;right:0;z-index:-1}.enter-button:hover:before{-webkit-filter:blur(20px);filter:blur(20px);opacity:1}@-webkit-keyframes glow{0%{background:#4caf50}25%{background:#66bb6a}to{background:#4caf50}}@keyframes glow{0%{background:#4caf50}25%{background:#66bb6a}to{background:#4caf50}}.ninja{background-image:url(/images/bg.jpg?71545c1aebf35ae8345f8b19055d722e);background-repeat:no-repeat;background-position:50%;width:100%;background-size:cover}.intro{height:100vh;width:40vw;display:inline-block;z-index:100}@media only screen and (max-width:500px){.intro{width:70vw}}.intro img{width:40vw;margin-left:2em}@media only screen and (max-width:500px){.intro img{width:60vw}}.guild-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));grid-gap:10px;max-width:90%;margin:0 auto}.guild-card{text-align:center}.guild-card h5{margin:0}.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));grid-gap:10px;max-width:90%;margin:0 auto}.member-events{overflow:auto}.heading{color:#da0808}.show-events{max-width:600px;margin:0 auto}table td:nth-child(n+3),table th:nth-child(n+3){text-align:center}
+@import url(https://fonts.googleapis.com/css?family=Nunito);.enter-button {
+  background: #4CAF50;
+  border: none;
+  border-radius: 25px;
+  color: snow;
+  cursor: pointer;
+  font-size: 1.25em;
+  letter-spacing: .1em;
+  outline: none;
+  padding: .75em 2em;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 100;
+}
+
+@media only screen and (max-width: 500px) {
+  .enter-button {
+    font-size: 1em;
+  }
+}
+
+.enter-button:hover {
+  -webkit-animation: glow 1s ease-in infinite;
+          animation: glow 1s ease-in infinite;
+}
+
+.enter-button::before {
+  -webkit-animation: glow 1s ease-in infinite;
+          animation: glow 1s ease-in infinite;
+  background: #4CAF50;
+  border-radius: inherit;
+  content: '';
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  opacity: .75;
+  position: absolute;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.enter-button:hover::before {
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+  opacity: 1;
+}
+
+@-webkit-keyframes glow {
+  0% {
+    background: #4CAF50;
+  }
+
+  25% {
+    background: #66BB6A;
+  }
+
+  100% {
+    background: #4CAF50;
+  }
+}
+
+@keyframes glow {
+  0% {
+    background: #4CAF50;
+  }
+
+  25% {
+    background: #66BB6A;
+  }
+
+  100% {
+    background: #4CAF50;
+  }
+}
+
+.ninja {
+  background-image: url(/images/bg.jpg?71545c1aebf35ae8345f8b19055d722e);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  background-size: cover;
+}
+
+.intro {
+  height: 100vh;
+  width: 40vw;
+  display: inline-block;
+  z-index: 100;
+}
+
+@media only screen and (max-width: 500px) {
+  .intro {
+    width: 70vw;
+  }
+}
+
+.intro img {
+  width: 40vw;
+  margin-left: 2em;
+}
+
+@media only screen and (max-width: 500px) {
+  .intro img {
+    width: 60vw;
+  }
+}
+
+.guild-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.guild-card {
+  text-align: center;
+}
+
+.guild-card h5 {
+  margin: 0;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.member-card {
+  overflow: auto;
+}
+
+.member-card table th:first-child {
+  min-width: 175px;
+}
+
+.member-card table th:nth-child(n+2) {
+  min-width: 100px;
+  text-align: center;
+}
+
+.member-card table td:nth-child(n + 2) {
+  text-align: center;
+}
+
+.heading {
+  color: #da0808;
+}
+
+.show-events {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+table.table-stats th:nth-child(n+2) {
+  min-width: 175px;
+}
+
+table.table-stats th:nth-child(n+3) {
+  min-width: 100px;
+  text-align: center;
+}
+
+table.table-stats td:nth-child(n + 3) {
+  text-align: center;
+}
+

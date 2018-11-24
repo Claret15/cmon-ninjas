@@ -15,44 +15,53 @@ class EventTableSeeder extends Seeder
         // factory(App\Models\Event::class, 3)->create();
 
         // Create 4 specific events 
-        factory(App\Models\Event::class)->create(
-            [
-                'name' => 'The Divinity of Champions',
-                'event_type_id' => 2,
-                'event_date' => '2018-8-16'
-            ]
-        );
-
-        factory(App\Models\Event::class)->create(
-            [
-                'name' => 'Neon Dissent',
-                'event_type_id' => 1,
-                'event_date' => '2018-8-23'
-            ]
-        );
-
-        factory(App\Models\Event::class)->create(
-            [
-                'name' => 'War in the Wasteland',
-                'event_type_id' => 2,
-                'event_date' => '2018-8-30'
-            ]
-        );
-
-        factory(App\Models\Event::class)->create(
-            [
-                'name' => 'Grove of the Titans',
-                'event_type_id' => 1,
-                'event_date' => '2018-9-06'
-            ]
-        );
-        factory(App\Models\Event::class)->create(
+        App\Models\Event::create(
         [
             'name' => 'The First Dragoon',
-            'event_type_id' => 3,
+            'event_type_id' => 2,
             'event_date' => '2018-10-11',
         ]
-    );
+        );
+
+        App\Models\Event::create(
+            [
+                'name' => 'The Arena',
+                'event_type_id' => 3,
+                'event_date' => '2018-10-18'
+            ]
+        );
+
+        App\Models\Event::create(
+            [
+                'name' => 'Fennec Fright Fest',
+                'event_type_id' => 1,
+                'event_date' => '2018-10-25'
+            ]
+        );
+
+        App\Models\Event::create(
+            [
+                'name' => 'The Doomed Mine Of The Wendigo',
+                'event_type_id' => 2,
+                'event_date' => '2018-11-01'
+            ]
+        );
+
+        App\Models\Event::create(
+            [
+                'name' => 'Night Of The Occult',
+                'event_type_id' => 1,
+                'event_date' => '2018-11-08'
+            ]
+        );
+
+        App\Models\Event::create(
+            [
+                'name' => 'Sweet Vengence',
+                'event_type_id' => 2,
+                'event_date' => '2018-11-17'
+            ]
+        );
 
     }
 }

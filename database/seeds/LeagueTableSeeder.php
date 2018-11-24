@@ -13,8 +13,6 @@ class LeagueTableSeeder extends Seeder
     {
         
         // If you want to add specific data, you need to add it here. 
-
-        // \App\Models\League::truncate();
         \App\Models\League::create(['name' => 'Legends']);
         \App\Models\League::create(['name' => 'Emperors']);
         \App\Models\League::create(['name' => 'Kings']);

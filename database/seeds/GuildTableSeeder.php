@@ -14,10 +14,10 @@ class GuildTableSeeder extends Seeder
         factory(App\Models\Guild::class)->create([
             'name'=>'Ninjas Guild'
         ]);
-        factory(App\Models\Guild::class)->create([
-            'name' => 'Infernal Pathfinders',
-        ]);
+        // factory(App\Models\Guild::class)->create([
+        //     'name' => 'Infernal Pathfinders',
+        // ]);
 
-        factory(App\Models\Guild::class, 8)->create();
+        // factory(App\Models\Guild::class, 8)->create();
     }
 }

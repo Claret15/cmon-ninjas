@@ -14,7 +14,7 @@ class EventTableSeeder extends Seeder
         // Generates 3 Random Events
         // factory(App\Models\Event::class, 3)->create();
 
-        // Create 4 specific events 
+        // Create 6 specific events 
         App\Models\Event::create(
         [
             'name' => 'The First Dragoon',

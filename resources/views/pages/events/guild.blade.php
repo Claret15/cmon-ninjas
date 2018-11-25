@@ -40,7 +40,7 @@
                                 <tr>
                                     <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
-                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>
+                                    <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
                             @endforeach
 
@@ -64,7 +64,7 @@
                                 <tr>
                                     <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
-                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>
+                                    <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
                             @endforeach
 
@@ -88,7 +88,7 @@
                                 <tr>
                                     <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
-                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>
+                                    <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
                             @endforeach
 

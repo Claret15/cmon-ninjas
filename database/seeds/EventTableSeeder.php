@@ -63,5 +63,13 @@ class EventTableSeeder extends Seeder
             ]
         );
 
+        App\Models\Event::create(
+            [
+                'name' => 'Lightning Deals Week',
+                'event_type_id' => 1,
+                'event_date' => '2018-11-22'
+            ]
+        );
+
     }
 }

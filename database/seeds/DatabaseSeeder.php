@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EventTypeTableSeeder::class);
         $this->call(EventTableSeeder::class);
         $this->call(GuildTableSeeder::class);
-
+        $this->call(AddMembersSeeder::class);
+        
 //  These will only be used during development
         // Members Table has foreign keys with the above tables
         // $this->call(MemberTableSeeder::class);

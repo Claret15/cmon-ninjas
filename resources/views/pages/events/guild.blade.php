@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('head-meta')
+<meta http-equiv="Content-Language" content="en">
+<meta name="google" content="notranslate" />
+@endsection
+
 @section('content')
     <div class="container">
         <h1 class="text-center heading">Events</h1>
@@ -14,11 +19,14 @@
             <li class="nav-item">
                 <a class="nav-link" id="crusade-tab" data-toggle="tab" href="#crusade" role="tab" aria-controls="crusade" aria-selected="false">Crusade</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="arena-tab" data-toggle="tab" href="#arena" role="tab" aria-controls="arena" aria-selected="false">Arena</a>
+            </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="mb-3">
-                        <table class='table table-sm'>
+                        <table class='table table-sm events'>
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Event</th>
@@ -75,7 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                             @foreach($crusade as $event)
                                 <tr>
                                     <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
@@ -83,7 +91,7 @@
                                     <td>{{ $event->event_date->format("d M 'y")  }}</td>    {{-- Solo Pts --}}
                                 </tr>
                             @endforeach
-                            
+
                             </tbody>
                         </table>
                     </div>

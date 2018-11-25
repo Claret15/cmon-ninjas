@@ -1,30 +1,42 @@
 @extends('layouts.app')
 
-@section('test-heading')
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Tests</h1>
-                <p>Testing queries to ensure that all works as intended</p>
-            </div>
-        </div>     
-@endsection
-
-@section('tests')
-        <div class="container">
-            <div class="">
-                <h1>Tests!</h1>
+@section('content')
+<div class="container">
+    <div class="">
+        <h1>Tests - File upload</h1>
                 
 
+            {!! Form::open(['action' => 'ImportController@importEventStatsCrusade', 'files' => true]) !!}
+            {{Form::file('csv')}}
+            {{Form::submit('Submit',['class' => 'btn btn-primary'])}}
+            {!! Form::close() !!}
+<br><br><br>
+{{print_r($data)}}
+<br><br>
+{{-- 
+        @foreach($data as $data)
+        
+            <h5><a href="">{{$data->member_id}}</a></h5>
+            <p>Current League: {{$data->league_id}}</p>
+        
+        @endforeach --}}
 
-                @foreach($members as $member)
-                
-                    <h5><a href="">{{$member->name}}</a></h5>
-                    <p>Current League: {{$member->league_id}}</p>
-                
-                @endforeach
-                
-                
-                
-            </div>
-        </div>     
+
+<br><br>
+
+
+{{$members}}
+
+<br><br>
+        @foreach($members as $member)
+        
+            <h5><a href="">{{$member->name}}</a></h5>
+            <p>Current League: {{$member->league_id}}</p>
+        
+        @endforeach
+        
+        
+        
+    </div>
+</div>     
 @endsection

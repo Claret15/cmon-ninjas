@@ -157,11 +157,14 @@ class EventController extends Controller
         // Crusade Events
         $crusade = $events->where('event_type_id', 2);
 
+        // Arena Events
+        $arena = $events->where('event_type_id', 3);
+
         $guild = Guild::findorfail($guild_id);
 
-        return view('pages.events.guild', compact('events', 'raid', 'crusade', 'guild'));
+        return view('pages.events.guild', compact('events', 'raid', 'crusade', 'arena', 'guild'));
 
-        // NB: In this view, when you click on the listed event name, 
+        // NB: In this view, when you click on the listed event name,
         // this is being handled by GuildStatController.
     }
 

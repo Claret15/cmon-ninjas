@@ -6,9 +6,9 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <section class="container">
         <h1 class="text-center heading">Events</h1>
-        <div class="show-events mt-5">
+        <section class="show-events mt-5">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
@@ -23,8 +23,8 @@
                 <a class="nav-link" id="arena-tab" data-toggle="tab" href="#arena" role="tab" aria-controls="arena" aria-selected="false">Arena</a>
             </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+            <section class="tab-content" id="myTabContent">
+                <article class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="mb-3">
                         <table class='table table-sm events'>
                             <thead class="thead-dark">
@@ -47,8 +47,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="profile-tab">
+                </article>
+                <article class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="raid-tab">
                     <div class="mb-3">
                         <table class='table table-sm'>
                             <thead class="thead-dark">
@@ -71,8 +71,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="contact-tab">
+                </article>
+                <article class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="crusade-tab">
                     <div class="mb-3">
                         <table class='table table-sm'>
                             <thead class="thead-dark">
@@ -88,15 +88,39 @@
                                 <tr>
                                     <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
-                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>    {{-- Solo Pts --}}
+                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>
                                 </tr>
                             @endforeach
 
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </article>
+                <article class="tab-pane fade" id="arena" role="tabpanel" aria-labelledby="arena-tab">
+                    <div class="mb-3">
+                        <table class='table table-sm'>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($arena as $event)
+                                <tr>
+                                    <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                                    <td>{{ $event->eventType->name }}</td>
+                                    <td>{{ $event->event_date->format("d M 'y")  }}</td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </section>
 @endsection

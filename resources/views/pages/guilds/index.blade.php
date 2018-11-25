@@ -29,7 +29,5 @@
             </article>
             @endforeach
         </section>
-
-
     </section>
 @endsection

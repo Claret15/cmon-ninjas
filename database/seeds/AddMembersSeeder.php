@@ -52,11 +52,11 @@ class AddMembersSeeder extends Seeder
 
         foreach ($members as $member) {
             App\Models\Member::create(
-                    [
-                        'name' => $member,
-                        'guild_id' => 1
-                    ]
-                );
+                [
+                    'name' => $member,
+                    'guild_id' => 1
+                ]
+            );
         }
     }
 }

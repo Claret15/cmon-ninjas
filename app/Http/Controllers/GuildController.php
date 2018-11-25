@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GuildController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -64,15 +64,13 @@ class GuildController extends Controller
     }
 
      /**
-     * Display the specified resource.
+     * Display all members in the Guild
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        // THIS WILL SHOW ALL MEMBERS WITHIN THE SELECTED GUILD
-
         try {
             $guild = Guild::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -80,17 +78,9 @@ class GuildController extends Controller
             return redirect('/')->with('error', $message);
         }
 
-        // Get all members from the selected guild.
         $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
-        // Get all events that guilds have participated in.
-        // May not need this
-        // $events =
-
         return view('pages.guilds.show', compact('guild', 'members'));
-
-        // NEED TO CATCH EXPECTIONS IF FAIL TO FIND GUILD.
-        // ESPECIALLY IF SOMEONE TYPES A RANDOM NUMBER IN THE BROWSER
 
     }
 
@@ -123,6 +113,7 @@ class GuildController extends Controller
 
         return redirect('/guild')->with('success', $message);
     }
+
     /**
      * Remove Guild.
      *
@@ -137,6 +128,7 @@ class GuildController extends Controller
 
         return redirect('/guild')->with('success', $message);
     }
+
     /**
      * API - Display a listing of the resource.
      * Experimenting with API - on hold for now

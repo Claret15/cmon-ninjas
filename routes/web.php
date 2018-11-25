@@ -22,9 +22,9 @@ Route::post('/guild/{guild_id}/event/{event_id}', 'GuildStatController@store');
 Route::put('/guild/{guild_id}/event/{event_id}', 'GuildStatController@update');
 Route::delete('/guild/{guild_id}/event/{event_id}', 'GuildStatController@destroy');
 
-Route::resource('guild', 'GuildController'); 
+Route::resource('guild', 'GuildController');
 Route::resource('event_type', 'EventTypeController')->except(['show']);
-Route::resource('events', 'EventController')->except(['show']); 
+Route::resource('events', 'EventController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
 Route::resource('members', 'MemberController')->except(['index']);
 

@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<section class="container">
 
     <h1 class="text-center">Events</h1>
 
-    <br><br>
-    <div class="show-events">
+    <section class="show-events mt-5">
         <ul class="nav nav-tabs" id="events" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="events-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
@@ -26,8 +25,8 @@
         </li>
     @endif
         </ul>
-        <div class="tab-content" id="eventsContnet">
-            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="home-tab">
+        <section class="tab-content" id="eventsContnet">
+            <article class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="home-tab">
                 <div class="mb-3">
                     <table class='table table-sm'>
                         <thead class="thead-dark">
@@ -62,8 +61,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="profile-tab">
+            </article>
+            <article class="tab-pane fade" id="raid" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="mb-3">
                     <table class='table table-sm'>
                         <thead class="thead-dark">
@@ -98,8 +97,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="contact-tab">
+            </article>
+            <article class="tab-pane fade" id="crusade" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="mb-3">
                     <table class='table table-sm'>
                         <thead class="thead-dark">
@@ -134,8 +133,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="arena" role="tabpanel" aria-labelledby="contact-tab">
+            </article>
+            <article class="tab-pane fade" id="arena" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="mb-3">
                     <table class='table table-sm'>
                         <thead class="thead-dark">
@@ -170,8 +169,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </article>
+        </section>
+    </section>
+</section>
 @endsection

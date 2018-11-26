@@ -15,4 +15,4 @@ yarn-error.log
 .phpunit.result.cache
 .editorconfig
 .env.prod
-
+.env.backup

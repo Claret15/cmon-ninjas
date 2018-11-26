@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Resources\Json\Resource;
 use App\Console\Commands\ModelMakeCommand;
+use Illuminate\Routing\UrlGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,8 +15,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(urlGenerator $url)
     {
+
+        // Switch between secure_asset and asset
+        if(env('APP_ENV') !== 'local')
+        {
+            $url->forceScheme('https');
+        }
 
         // Fix issue with migrations where there is a string length error
         Schema::defaultStringLength(191);

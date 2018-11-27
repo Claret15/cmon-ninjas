@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="container mt-3">
+    <section class="container">
+
+        <div class="text-center">
+            <a href="/guild/1/events/" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fas fa-calendar-alt fa-lg"></i>&nbsp; Events</a>
+        </div>
         <h1 class="text-center"><i class="fas fa-torii-gate fa-2x"></i></h1>
         {{-- <h1 class="text-center">{{ $guild->name }}</h1> --}}
         <h1 class="text-center heading">Guild Members</h1>

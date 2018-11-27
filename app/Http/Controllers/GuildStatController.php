@@ -61,9 +61,6 @@ class GuildStatController extends Controller
      */
     public function show($guild_id, $event_id)
     {
-        // check if $guild_id or $event_id is valid.
-        // If not, redirect and display a flash message.
-
         try {
             $guild = Guild::findOrfail($guild_id);
         } catch (ModelNotFoundException $e) {

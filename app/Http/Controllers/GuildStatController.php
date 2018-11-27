@@ -153,7 +153,7 @@ class GuildStatController extends Controller
         $eventStat->delete();
 
         return redirect()->action(
-            'GuildStatController@create', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 }

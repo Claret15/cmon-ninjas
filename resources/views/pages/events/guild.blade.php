@@ -7,6 +7,10 @@
 
 @section('content')
     <section class="container">
+        <div class="text-center">
+            <a href="/guild/1" class="btn btn-danger btn-lg mb-4"><i class="fas fa-torii-gate"></i>&nbsp; Members</a>
+        </div>
+        
         <h1 class="text-center heading">Events</h1>
         <section class="show-events mt-5">
             <ul class="nav nav-tabs" id="myTab" role="tablist">

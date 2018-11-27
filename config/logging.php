@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', 'heroku_stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,6 +41,16 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            'level' => 'debug',
+        ],
+        
+        'heroku_stack' => [
+            'driver' => 'stack',
+            'channels' => ['heroku_single'],
+        ],
+
+        'heroku_single' => [
+            'driver' => 'errorlog',
             'level' => 'debug',
         ],
 

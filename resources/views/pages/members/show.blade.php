@@ -39,6 +39,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Event</th>
+                                    <th>Pos.</th>
                                     <th>Guild Pts</th>
                                     <th>Solo Pts</th>
                                     <th>League</th>
@@ -49,12 +50,13 @@
                             <tbody>
                             @foreach($memberStatsAll as $stats)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
-                                    <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
-                                    <td>{{ number_format($stats->solo_pts) }}</td>     {{-- Solo Pts --}}
-                                    <td>{{ $stats->league->name }}</td>     {{-- League --}}
-                                    <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
-                                    <td>{{ number_format($stats->global_rank) }}</td>     {{-- Global Rank --}}
+                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td>{{ number_format($stats->position) }}</td>
+                                    <td>{{ number_format($stats->guild_pts) }}</td>
+                                    <td>{{ number_format($stats->solo_pts) }}</td>
+                                    <td>{{ $stats->league->name }}</td>
+                                    <td>{{ number_format($stats->solo_rank) }}</td>
+                                    <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -68,6 +70,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Event</th>
+                                    <th>Pos.</th>
                                     <th>Guild Pts</th>
                                     <th>Solo Pts</th>
                                     <th>League</th>
@@ -78,12 +81,13 @@
                             <tbody>
                             @foreach($memberStatsRaid as $stats)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
-                                    <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
-                                    <td>{{ number_format($stats->solo_pts) }}</td>     {{-- Solo Pts --}}
-                                    <td>{{$stats->league->name }}</td>     {{-- League --}}
-                                    <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
-                                    <td>{{ number_format($stats->global_rank) }}</td>     {{-- Global Rank --}}
+                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td>{{ number_format($stats->position) }}</td>
+                                    <td>{{ number_format($stats->guild_pts) }}</td>
+                                    <td>{{ number_format($stats->solo_pts) }}</td>
+                                    <td>{{$stats->league->name }}</td>
+                                    <td>{{ number_format($stats->solo_rank) }}</td>
+                                    <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -97,6 +101,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Event</th>
+                                    <th>Pos.</th>
                                     <th>Guild Pts</th>
                                     <th>League</th>
                                     <th>Solo Rank</th>
@@ -106,11 +111,12 @@
                             <tbody>
                             @foreach($memberStatsCrusade as $stats)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
-                                    <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
-                                    <td>{{ $stats->league->name }}</td>     {{-- League --}}
-                                    <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
-                                    <td>{{ number_format($stats->global_rank) }}</td>     {{-- Global Rank --}}
+                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td>{{ number_format($stats->position) }}</td>
+                                    <td>{{ number_format($stats->guild_pts) }}</td>
+                                    <td>{{ $stats->league->name }}</td>
+                                    <td>{{ number_format($stats->solo_rank) }}</td>
+                                    <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -124,6 +130,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Event</th>
+                                    <th>Pos.</th>
                                     <th>Guild Pts</th>
                                     <th>Solo Pts</th>
                                     <th>League</th>
@@ -134,12 +141,13 @@
                             <tbody>
                             @foreach($memberStatsArena as $stats)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>    {{-- Event Name --}}
-                                    <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
-                                    <td>{{ number_format($stats->solo_pts) }}</td>     {{-- Solo Pts --}}
-                                    <td>{{ $stats->league->name }}</td>     {{-- League --}}
-                                    <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
-                                    <td>{{ number_format($stats->global_rank) }}</td>     {{-- Global Rank --}}
+                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td>{{ number_format($stats->position) }}</td>
+                                    <td>{{ number_format($stats->guild_pts) }}</td>
+                                    <td>{{ number_format($stats->solo_pts) }}</td>
+                                    <td>{{ $stats->league->name }}</td>
+                                    <td>{{ number_format($stats->solo_rank) }}</td>
+                                    <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

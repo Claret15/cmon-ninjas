@@ -1,3 +1,4 @@
+/config/database.php
 /node_modules
 /public/hot
 /public/storage
@@ -16,3 +17,5 @@ yarn-error.log
 .editorconfig
 .env.prod
 .env.backup
+*.dump
+*.log

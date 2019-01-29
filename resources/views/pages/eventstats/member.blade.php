@@ -15,6 +15,7 @@
                             <th>Member</th>
                             <th>Guild Pts</th>
                             <th>Solo Pts</th>
+                            <th>G/S</th>
                             <th>League</th>
                             <th>Solo Rank</th>
                             <th>Global Rank</th>
@@ -28,6 +29,7 @@
                             <td><a href="/members/{{$stats->member->id}}">{{$stats->member->name}}</a></td>     {{-- Guild Pts --}}
                             <td>{{ number_format($stats->guild_pts) }}</td>     {{-- Guild Pts --}}
                             <td>{{ number_format($stats->solo_pts) }}</td>      {{-- Solo Pts --}}
+                            <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td>  {{-- g/s --}}
                             <td>{{ $stats->league->name }}</td>     {{-- League --}}
                             <td>{{ number_format($stats->solo_rank) }}</td>     {{-- Solo Rank --}}
                             <td>{{ number_format($stats->global_rank) }}</td>   {{-- Global Rank --}}

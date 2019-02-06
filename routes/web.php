@@ -37,7 +37,7 @@ Route::fallback(function () {
     return redirect('/')->with('error', 'Page does not exist');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/dashboard', 'DashboardController@index');
 

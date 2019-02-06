@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\GuildFormRequest;
-use App\Models\League;
-use App\Models\Event;
-use App\Models\EventStat;
-use App\Models\EventType;
-use App\Models\Member;
-use App\Models\Guild;
 use App\Http\Resources\Guilds as GuildsResource;
+use App\Models\Guild;
+use App\Models\Member;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class GuildController extends Controller
 {
@@ -32,7 +28,7 @@ class GuildController extends Controller
      */
     public function index()
     {
-        $guilds = Guild::all()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
+        $guilds = Guild::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
         return view('pages.guilds.index', compact('guilds'));
     }
 
@@ -63,7 +59,7 @@ class GuildController extends Controller
         return redirect('/guild')->with('success', $message);
     }
 
-     /**
+    /**
      * Display all members in the Guild
      *
      * @param  int  $id
@@ -78,7 +74,7 @@ class GuildController extends Controller
             return redirect('/')->with('error', $message);
         }
 
-        $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
+        $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
 
         return view('pages.guilds.show', compact('guild', 'members'));
 
@@ -135,11 +131,12 @@ class GuildController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexAPI() {
-        // // Show all guilds
+    public function indexAPI()
+    {
+        // Show all guilds
         // $guilds = Guild::all()->sortBy('name');
         // return view('pages.guilds.index', compact('guilds'));
-        // // return $guilds; // Returns JSON
+        // return $guilds; // Returns JSON
 
         // Show all guilds
         $guilds = Guild::all()->sortBy('name');

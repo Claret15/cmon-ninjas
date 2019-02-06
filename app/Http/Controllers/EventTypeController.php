@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\EventTypeFormRequest;
 use App\Models\EventType;
+use Illuminate\Http\Request;
 
 class EventTypeController extends Controller
 {

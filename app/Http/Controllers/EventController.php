@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
 use App\Models\Guild;
-use Illuminate\Http\Request;
-use App\Http\Requests\EventFormRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -18,7 +17,7 @@ class EventController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except'=>['index', 'guild']]);
+        $this->middleware('auth', ['except' => ['index', 'guild']]);
     }
 
     /**
@@ -91,9 +90,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        try{
+        try {
             $event = Event::findOrfail($id);
-        } catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return redirect('/events')->with('error', 'Invalid Event');
         }
 
@@ -101,7 +100,7 @@ class EventController extends Controller
 
         // Check if user is Admin
         // if(auth()->user()->id !== $post->user_id){
-            // return redirect('/events')->with("error", 'Unauthorised action: edit event.');
+        // return redirect('/events')->with("error", 'Unauthorised action: edit event.');
         // }
 
         return view('pages.events.edit', compact('event', 'eventType'));

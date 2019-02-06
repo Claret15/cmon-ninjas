@@ -70,7 +70,7 @@
                     var chartData = {
                         datasets: [
                             {
-                                label: 'Average',
+                                label: 'Guild Average',
                                 data: [average],
                                 backgroundColor: [
                                     'rgba(255, 179, 25, 0.5)',
@@ -96,16 +96,6 @@
                     var chartData = {
                         datasets: [
                             {
-                                label: 'Average',
-                                data: [average],
-                                backgroundColor: [
-                                    'rgba(255, 179, 25, 0.5)',
-                                ],
-                                borderColor: [
-                                    'rgba(255, 179, 25, 1)',
-                                ],
-                                borderWidth: 1
-                            },{
                                 label: 'Solo',
                                 data: [solo],
                                 backgroundColor: [
@@ -126,7 +116,17 @@
                                     'rgba(255, 0, 0, 1)'
                                 ],
                                 borderWidth: 1
-                        }]
+                        },                            {
+                                label: 'Guild Average',
+                                data: [average],
+                                backgroundColor: [
+                                    'rgba(255, 179, 25, 0.5)',
+                                ],
+                                borderColor: [
+                                    'rgba(255, 179, 25, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
                     };
                 }
 

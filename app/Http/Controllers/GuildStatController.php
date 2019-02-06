@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use App\Http\Requests\EventStatFormRequest;
 use App\Models\Event;
 use App\Models\EventStat;
 use App\Models\Guild;
 use App\Models\League;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class GuildStatController extends Controller
 {
@@ -135,7 +134,7 @@ class GuildStatController extends Controller
      */
     public function destroy(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'eventStat' => 'required',
             'guild_id' => 'required',
             'event_id' => 'required',

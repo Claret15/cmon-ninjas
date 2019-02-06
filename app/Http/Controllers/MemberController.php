@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use App\Http\Requests\MemberFormRequest;
-use App\Models\Member;
 use App\Models\Guild;
+use App\Models\Member;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -57,7 +56,7 @@ class MemberController extends Controller
         $member->is_active = $request->input('is_active');
         $member->save();
 
-        return redirect('/guild/'.$guild->id)->with('success', 'Member created!');
+        return redirect('/guild/' . $guild->id)->with('success', 'Member created!');
     }
 
     /**
@@ -77,29 +76,29 @@ class MemberController extends Controller
 
         // This will return all EventStats ordered by event dates.
         $memberStatsAll = Member::find($id)->eventStats()
-        ->join('events', 'event_stats.event_id', '=', 'events.id')
-        ->orderby('events.event_date', 'desc')
-        ->get();
+            ->join('events', 'event_stats.event_id', '=', 'events.id')
+            ->orderby('events.event_date', 'desc')
+            ->get();
 
         $memberStatsRaid = Member::find($id)->eventStats()
-        ->where('event_type_id', '1')
-        ->join('events', 'event_stats.event_id', '=', 'events.id')
-        ->orderby('events.event_date', 'desc')
-        ->get();
+            ->where('event_type_id', '1')
+            ->join('events', 'event_stats.event_id', '=', 'events.id')
+            ->orderby('events.event_date', 'desc')
+            ->get();
 
         $memberStatsCrusade = Member::find($id)->eventStats()
-        ->where('event_type_id', '2')
-        ->join('events', 'event_stats.event_id', '=', 'events.id')
-        ->orderby('events.event_date', 'desc')
-        ->get();
+            ->where('event_type_id', '2')
+            ->join('events', 'event_stats.event_id', '=', 'events.id')
+            ->orderby('events.event_date', 'desc')
+            ->get();
 
         $memberStatsArena = Member::find($id)->eventStats()
-        ->where('event_type_id', '3')
-        ->join('events', 'event_stats.event_id', '=', 'events.id')
-        ->orderby('events.event_date', 'desc')
-        ->get();
+            ->where('event_type_id', '3')
+            ->join('events', 'event_stats.event_id', '=', 'events.id')
+            ->orderby('events.event_date', 'desc')
+            ->get();
 
-        return view('pages.members.show', compact('member','memberStatsAll','memberStatsRaid','memberStatsCrusade', 'memberStatsArena'));
+        return view('pages.members.show', compact('member', 'memberStatsAll', 'memberStatsRaid', 'memberStatsCrusade', 'memberStatsArena'));
 
         /**
          * Add the following:
@@ -151,7 +150,7 @@ class MemberController extends Controller
         $member->is_active = $request->input('is_active');
         $member->save();
 
-        return redirect('/guild/'.$guild->id)->with('success', 'Member Updated!');
+        return redirect('/guild/' . $guild->id)->with('success', 'Member Updated!');
     }
 
     /**
@@ -168,6 +167,6 @@ class MemberController extends Controller
         $message = $member->name . ' deleted!';
         $member->delete();
 
-        return redirect('/guild/'.$guild)->with('success', $message);
+        return redirect('/guild/' . $guild)->with('success', $message);
     }
 }

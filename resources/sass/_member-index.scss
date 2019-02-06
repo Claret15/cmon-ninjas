@@ -1,0 +1,26 @@
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.member-card {
+  overflow: auto;
+
+  table {
+    th:first-child {
+      min-width: 175px;
+    }
+
+    th:nth-child(n + 2) {
+      min-width: 100px;
+      text-align: center;
+    }
+
+    td:nth-child(n + 2) {
+      text-align: center;
+    }
+  }
+}

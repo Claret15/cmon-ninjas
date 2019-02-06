@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Member;
-use App\Models\Guild;
-use App\Models\EventStat;
 use App\Models\Event;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Guild;
+use App\Models\Member;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EventStatController extends Controller
 {
-    public function member($member_id,$event_id)
+    public function member($member_id, $event_id)
     {
         try {
             $member = Member::findOrfail($member_id);
@@ -30,20 +27,19 @@ class EventStatController extends Controller
 
         // Find a specific Member and return all Event Stats
         $memberStat = Member::find($member_id)->eventStats()
-        ->where('event_id', $event_id)
-        ->orderby('guild_pts', 'desc')
-        ->get();
+            ->where('event_id', $event_id)
+            ->orderby('guild_pts', 'desc')
+            ->get();
 
         // Calculate Total Guild Points
         $guildPtsTotal = Guild::find($member->guild_id)->eventStats()
-        ->where('event_id', $event_id)
-        ->sum('guild_pts');
+            ->where('event_id', $event_id)
+            ->sum('guild_pts');
 
         $participants = Guild::find($member->guild_id)->eventStats()
-        ->where('event_id', $event_id)
-        ->count();
+            ->where('event_id', $event_id)
+            ->count();
 
         return view('pages.eventstats.member', compact('eventInfo', 'member', 'memberStat', 'guildPtsTotal', 'participants'));
     }
-
 }

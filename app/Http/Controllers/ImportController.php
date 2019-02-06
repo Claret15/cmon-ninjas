@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\CsvImportRequest;
 use App\Models\EventStat;
 use App\Models\League;
-Use App\Models\Member;
+use App\Models\Member;
 
 class ImportController extends Controller
 {
@@ -16,7 +15,7 @@ class ImportController extends Controller
         $csv_data = array_map('str_getcsv', file($path));
         $data = array_slice($csv_data, 1);
 
-        foreach($data as $row){
+        foreach ($data as $row) {
 
             $member = Member::where('name', $row[1])->first();
             $league = League::where('name', $row[4])->first();
@@ -72,11 +71,11 @@ class ImportController extends Controller
         $data = array_slice($csv_data, 0, 3);
         $keys = array_shift($data);
 
-        foreach ($data as $i=>$row) {
+        foreach ($data as $i => $row) {
             $data[$i] = array_combine($keys, $row);
         }
 
-        foreach($data as $row){
+        foreach ($data as $row) {
             // $eventStat = new EventStat();
             $member = Member::where('name', $row['member_id'])->first();
             $league = League::where('name', $row['league_id'])->first();

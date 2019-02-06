@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\LeagueFormRequest;
 use App\Models\League;
+use Illuminate\Http\Request;
 
 class LeagueController extends Controller
 {
@@ -27,7 +27,7 @@ class LeagueController extends Controller
      */
     public function create()
     {
-       return view('pages.league.create');
+        return view('pages.league.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class LeagueController extends Controller
      */
     public function edit($id)
     {
-     $league = League::find($id);
+        $league = League::find($id);
         return view('pages.league.edit', compact('league'));
     }
 

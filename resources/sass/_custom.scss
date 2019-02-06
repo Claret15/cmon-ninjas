@@ -5,69 +5,91 @@ $color-primary-light: #66BB6A;
 $color-text-light: snow;
 
 .enter-button {
-  background: $color-primary;
-  border: none;
-  border-radius: 25px;
-  color: $color-text-light;
-  cursor: pointer;
-  font-size: 1.25em;
-  letter-spacing: .1em;
-  outline: none;
-  padding: .75em 2em;
-  position: relative;
-  text-transform: uppercase;
-  z-index:100;
-      @media only screen and (max-width: 500px) {
-       font-size: 1em;
+    background: $color-primary;
+    border: none;
+    border-radius: 25px;
+    color: $color-text-light;
+    cursor: pointer;
+    font-size: 1.25em;
+    letter-spacing: .1em;
+    outline: none;
+    padding: .75em 2em;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 100;
+
+    @media only screen and (max-width: 500px) {
+        font-size: 1em;
     }
 
-  &:hover {
-    animation: glow 1s ease-in infinite;
-  }
+    &:hover {
+        -webkit-animation: glow 1s ease-in infinite;
+                animation: glow 1s ease-in infinite;
+    }
 
-  &::before {
-    animation: glow 1s ease-in infinite;
-    background: $color-primary;
-    border-radius: inherit;
-    content: '';
-    filter: blur(10px);
-    opacity: .75;
-    position: absolute;
-    transition: all .3s ease-in-out;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    z-index: -1;
-  }
+    &::before {
+        -webkit-animation: glow 1s ease-in infinite;
+                animation: glow 1s ease-in infinite;
+        background: $color-primary;
+        border-radius: inherit;
+        content: '';
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        opacity: .75;
+        position: absolute;
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+    }
 
-  &:hover::before {
-    filter: blur(20px);
-    opacity: 1;
-  }
+    &:hover::before {
+        -webkit-filter: blur(20px);
+                filter: blur(20px);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes glow {
+    0% {
+        background: $color-primary;
+    }
+
+    25% {
+        background: $color-primary-light;
+    }
+
+    100% {
+        background: $color-primary;
+    }
 }
 
 @keyframes glow {
-  0% {
-    background: $color-primary;
-  }
-  25% {
-    background: $color-primary-light;
-  }
-  100% {
-    background: $color-primary;
-  }
+    0% {
+        background: $color-primary;
+    }
+
+    25% {
+        background: $color-primary-light;
+    }
+
+    100% {
+        background: $color-primary;
+    }
 }
 
 .ninja {
     background-image: url('bg.jpg');
     background-repeat: no-repeat;
     background-position: center center;
-    width:100%;
+    width: 100%;
     background-size: cover;
 }
 
-.intro{
+.intro {
     height: 100vh;
     width: 40vw;
     display: inline-block;
@@ -77,14 +99,15 @@ $color-text-light: snow;
     @media only screen and (max-width: 500px) {
         width: 70vw;
     }
-        img {
-            width: 40vw;
-            margin-left: 2em;
 
-            @media only screen and (max-width: 500px) {
-                width: 60vw;
-            }
+    img {
+        width: 40vw;
+        margin-left: 2em;
+
+        @media only screen and (max-width: 500px) {
+            width: 60vw;
         }
+    }
 }
 
 
@@ -100,6 +123,7 @@ $color-text-light: snow;
 
 .guild-card {
     text-align: center;
+
     h5 {
         margin: 0;
     }
@@ -139,10 +163,10 @@ $color-text-light: snow;
 // General Styling
 
 .heading {
-    color: rgba(218,8,8,1);
+    color: rgba(218, 8, 8, 1);
 }
 
-.show-events{
+.show-events {
     max-width: 600px;
     min-width: 300px;
     margin: 0 auto;
@@ -151,7 +175,7 @@ $color-text-light: snow;
         th:first-child {
             min-width: 150px;
         }
-        
+
         th:last-child {
             min-width: 90px;
         }
@@ -173,4 +197,22 @@ table.table-stats {
         text-align: center;
     }
 
+}
+
+.member-chart-container {
+    position: relative;
+    height: 50vh;
+    width: 50vw;
+
+    @media only screen and (max-width: 768px) {
+        width: 70vw;
+    }
+    
+    @media only screen and (min-width: 769px) {
+        width: 75vw;
+    }
+    
+    @media only screen and (max-width: 400px) {
+        width: 90vw;
+    }
 }

@@ -39,7 +39,11 @@ class EventStatController extends Controller
         ->where('event_id', $event_id)
         ->sum('guild_pts');
 
-        return view('pages.eventstats.member', compact('eventInfo', 'member', 'memberStat', 'guildPtsTotal'));
+        $participants = Guild::find($member->guild_id)->eventStats()
+        ->where('event_id', $event_id)
+        ->count();
+
+        return view('pages.eventstats.member', compact('eventInfo', 'member', 'memberStat', 'guildPtsTotal', 'participants'));
     }
 
 }

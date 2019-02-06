@@ -53,7 +53,6 @@
                                     data-event="{{ $stats->event_id }}"
                                 >
                                     <i class="fas fa-trash-alt"></i>
-                                    {{-- <i class="fas fa-trash-alt fa-lg mt-2"></i> --}}
                                 </button>
                             @endauth
                             </td> {{-- position--}}
@@ -82,11 +81,19 @@
                             </td>     {{-- member --}}
                             <td>{{ number_format($stats->guild_pts) }}</td>     {{-- guild_pts --}}
                             <td>{{ number_format($stats->solo_pts) }}</td>      {{-- solo_pts --}}
+                        @if($stats->guild_pts < 1 || $stats->solo_pts < 1)
+                            <td>N/A</td>                   {{-- g/s --}}
+                        @else
                             <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td>                   {{-- g/s --}}
+                        @endif
                             <td>{{ $stats->league->name }}</td>                   {{-- league --}}
                             <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}
                             <td>{{ number_format($stats->global_rank) }}</td>   {{-- global_rank --}}
+                        @if($stats->guild_pts <1)
+                            <td>0%</td>   {{-- Performance --}}
+                        @else
                             <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>   {{-- Performance --}}
+                        @endIf
                         </tr>
             @endforeach
                     </tbody>

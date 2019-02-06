@@ -13,7 +13,7 @@
             <div class="form-group col-md-6"">
                 {{Form::label('guild', 'Guild', ['class' => ''] )}}
                 <div>
-                {{Form::text('guild', 'Ninjas Guild', ['class' => 'form-control', 'placeholder' => '']) }}
+                {{Form::text('guild', 'Ninjas', ['class' => 'form-control', 'placeholder' => '']) }}
                 </div>
             </div>
             <div class="form-group col-md-6"">

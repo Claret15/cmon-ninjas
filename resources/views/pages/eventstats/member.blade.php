@@ -64,7 +64,7 @@
             <script>
                 var solo = "{{$memberStat[0]->solo_pts}}" ;
                 var guild = "{{$memberStat[0]->guild_pts}}";
-                var average = "{{$guildPtsTotal/$participants}}";
+                var average = "{{round($guildPtsTotal/$participants)}}";
 
                 if(solo == guild){
                     var chartData = {
@@ -158,6 +158,15 @@
                                     display: true,
                                 },
                             }]
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label:  function(tooltipItem, data){
+                                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                                    var value = tooltipItem.yLabel.toString().split(/(?=(?:...)*$)/).join(',');
+                                    return `${label} : ${value}`;
+                                }
+                            }
                         }
                     }
                 });

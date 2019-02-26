@@ -37,11 +37,8 @@ class EventTypeController extends Controller
      */
     public function store(EventTypeFormRequest $request)
     {
-        $eventType = new EventType;
-        $eventType->name = $request->input('name');
-        $eventType->save();
-
-        $message = $eventType->name . ' added!';
+        EventType::Create(request(['name']));
+        $message = $request->name . ' added!';
 
         return redirect('/event_type')->with('success', $message);
     }
@@ -63,9 +60,8 @@ class EventTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(EventType $eventType)
     {
-        $eventType = EventType::find($id);
         return view('pages.eventtype.edit', compact('eventType'));
     }
 
@@ -93,9 +89,8 @@ class EventTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(EventType $eventType)
     {
-        $eventType = EventType::find($id);
         $message = $eventType->name . ' removed!';
         $eventType->delete();
 

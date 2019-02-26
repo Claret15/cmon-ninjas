@@ -127,9 +127,8 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        $member = Member::find($id);
         return view('pages.members.edit', compact('member'));
     }
 

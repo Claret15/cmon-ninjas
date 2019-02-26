@@ -38,11 +38,9 @@ class LeagueController extends Controller
      */
     public function store(LeagueFormRequest $request)
     {
-        $league = new League;
-        $league->name = $request->input('name');
-        $league->save();
+        League::Create(request(['name']));
 
-        $message = $league->name . ' added!';
+        $message = $request->name . ' added!';
 
         return redirect('/leagues')->with('success', $message);
     }
@@ -64,9 +62,8 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(League $league)
     {
-        $league = League::find($id);
         return view('pages.league.edit', compact('league'));
     }
 

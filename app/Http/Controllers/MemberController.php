@@ -98,7 +98,16 @@ class MemberController extends Controller
             ->orderby('events.event_date', 'desc')
             ->get();
 
-        return view('pages.members.show', compact('member', 'memberStatsAll', 'memberStatsRaid', 'memberStatsCrusade', 'memberStatsArena'));
+        return view(
+            'pages.members.show',
+            compact(
+                'member',
+                'memberStatsAll',
+                'memberStatsRaid',
+                'memberStatsCrusade',
+                'memberStatsArena'
+            )
+        );
 
         /**
          * Add the following:
@@ -159,9 +168,8 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Member $member)
     {
-        $member = Member::find($id);
         $guild = $member->guild->id;
         $message = $member->name . ' deleted!';
         $member->delete();

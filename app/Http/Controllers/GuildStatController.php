@@ -47,7 +47,8 @@ class GuildStatController extends Controller
         $message = 'Event Stat added!';
 
         return redirect()->action(
-            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show',
+            ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 
@@ -94,7 +95,14 @@ class GuildStatController extends Controller
             ->where('event_id', $event_id)
             ->sum('guild_pts');
 
-        return view('pages.eventstats.guild', compact('allGuildEventStats', 'eventInfo', 'guild', 'guildPtsTotal', 'members', 'leagues'));
+        return view('pages.eventstats.guild', compact(
+            'allGuildEventStats',
+            'eventInfo',
+            'guild',
+            'guildPtsTotal',
+            'members',
+            'leagues'
+        ));
     }
 
     /**
@@ -123,7 +131,8 @@ class GuildStatController extends Controller
         $message = 'Event Stat Updated!';
 
         return redirect()->action(
-            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show',
+            ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 
@@ -149,7 +158,8 @@ class GuildStatController extends Controller
         $eventStat->delete();
 
         return redirect()->action(
-            'GuildStatController@show', ['$guild_id' => $guildId, '$event_id' => $eventId]
+            'GuildStatController@show',
+            ['$guild_id' => $guildId, '$event_id' => $eventId]
         )->with('success', $message);
     }
 }

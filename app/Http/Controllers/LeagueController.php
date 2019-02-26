@@ -91,9 +91,8 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(League $league)
     {
-        $league = League::find($id);
         $message = $league->name . ' removed!';
         $league->delete();
         return redirect('/leagues')->with('success', $message);

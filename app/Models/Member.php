@@ -11,13 +11,13 @@ class Member extends Model
 
     // Primary Key
     public $primaryKey = 'id';
-   
+
     protected $fillable = [
         'name',
         'guild_id',
-        'is_active'
+        'is_active',
     ];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -28,15 +28,15 @@ class Member extends Model
     ];
 
     /**
-     * Define Relationships 
+     * Define Relationships
      */
-    public function guild(){
+    public function guild()
+    {
         return $this->belongsTo('App\Models\Guild');
     }
 
-    public function eventStats(){
+    public function eventStats()
+    {
         return $this->hasmany('App\Models\EventStat');
     }
-
-
 }

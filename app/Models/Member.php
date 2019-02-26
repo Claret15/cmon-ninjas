@@ -12,6 +12,12 @@ class Member extends Model
     // Primary Key
     public $primaryKey = 'id';
    
+    protected $fillable = [
+        'name',
+        'guild_id',
+        'is_active'
+    ];
+    
     /**
      * The attributes that should be cast to native types.
      *

@@ -50,11 +50,11 @@ class MemberController extends Controller
     {
         $guild = Guild::where('name', $request->input('guild'))->first();
 
-        $member = new Member;
-        $member->name = $request->name;
-        $member->guild_id = $guild->id;
-        $member->is_active = $request->input('is_active');
-        $member->save();
+        Member::create([
+            'name' => request('name'),
+            'guild_id' => $guild->id,
+            'is_active' => request('is_active')
+        ]);
 
         return redirect('/guild/' . $guild->id)->with('success', 'Member created!');
     }

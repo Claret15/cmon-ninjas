@@ -14,6 +14,7 @@
                     {{Form::label('guild', 'Guild', ['class' => ''] )}}
                     <div>
                     {{Form::text('guild', $member->guild->name, ['class' => 'form-control']) }}
+                    {{Form::hidden('guild_id', $member->guild->id)}}
                     </div>
                 </div>
                 <div class="form-group col-md-6"">

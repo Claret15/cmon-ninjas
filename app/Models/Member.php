@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    // Table name
     protected $table = 'members';
-
-    // Primary Key
     public $primaryKey = 'id';
 
     protected $fillable = [
@@ -26,6 +23,19 @@ class Member extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function addMember($request)
+    {
+        $guild = Guild::where('name', $request->input('guild'))->first();
+
+        $attributes = [
+            'name' => $request->input('name'),
+            'guild_id' => $guild->id,
+            'is_active' => $request->input('is_active')
+        ];
+
+        $this->create($attributes);
+    }
 
     /**
      * Define Relationships

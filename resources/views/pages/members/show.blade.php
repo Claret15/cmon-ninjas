@@ -79,7 +79,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($memberStatsRaid as $stats)
+                            @foreach($memberStatsAll as $stats)
+                                @if ($stats->event_type_id == 1)
                                 <tr>
                                     <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
@@ -89,6 +90,7 @@
                                     <td>{{ number_format($stats->solo_rank) }}</td>
                                     <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -109,7 +111,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($memberStatsCrusade as $stats)
+                            @foreach($memberStatsAll as $stats)
+                                @if ($stats->event_type_id == 2)
                                 <tr>
                                     <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
@@ -118,6 +121,7 @@
                                     <td>{{ number_format($stats->solo_rank) }}</td>
                                     <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -139,7 +143,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($memberStatsArena as $stats)
+                            @foreach($memberStatsAll as $stats)
+                                @if ($stats->event_type_id == 3)
                                 <tr>
                                     <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
@@ -149,6 +154,7 @@
                                     <td>{{ number_format($stats->solo_rank) }}</td>
                                     <td>{{ number_format($stats->global_rank) }}</td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberFormRequest;
-use App\Models\Guild;
 use App\Models\Member;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -19,6 +16,7 @@ class MemberController extends Controller
     {
         $this->middleware('auth', ['except' => ['show']]);
     }
+
     /**
      * Show members from all guilds
      *
@@ -44,96 +42,48 @@ class MemberController extends Controller
      * Store a newly created Member.
      *
      * @param  MemberFormRequest $request
+     * @param Member $member
      * @return \Illuminate\Http\Response
      */
-    public function store(MemberFormRequest $request)
+    public function store(MemberFormRequest $request, Member $member)
     {
-        $guild = Guild::where('name', $request->input('guild'))->first();
+        $member->addMember($request);
 
-        Member::create([
-            'name' => request('name'),
-            'guild_id' => $guild->id,
-            'is_active' => request('is_active')
-        ]);
-
-        return redirect('/guild/' . $guild->id)->with('success', 'Member created!');
+        return redirect('/guild/1')->with('success', 'Member created!');
     }
 
     /**
      * Display Member.
      *
-     * @param  int  $id
+     * @param  Member $member
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
-        try {
-            $member = Member::findOrfail($id);
-        } catch (ModelNotFoundException $e) {
-            $message = 'Member does not exist';
-            return redirect('/')->with('error', $message);
-        }
-
-        // This will return all EventStats ordered by event dates.
-        $memberStatsAll = Member::find($id)->eventStats()
+        $memberStatsAll = $member->eventStats()
             ->join('events', 'event_stats.event_id', '=', 'events.id')
             ->orderby('events.event_date', 'desc')
             ->get();
 
-        $memberStatsRaid = Member::find($id)->eventStats()
-            ->where('event_type_id', '1')
-            ->join('events', 'event_stats.event_id', '=', 'events.id')
-            ->orderby('events.event_date', 'desc')
-            ->get();
-
-        $memberStatsCrusade = Member::find($id)->eventStats()
-            ->where('event_type_id', '2')
-            ->join('events', 'event_stats.event_id', '=', 'events.id')
-            ->orderby('events.event_date', 'desc')
-            ->get();
-
-        $memberStatsArena = Member::find($id)->eventStats()
-            ->where('event_type_id', '3')
-            ->join('events', 'event_stats.event_id', '=', 'events.id')
-            ->orderby('events.event_date', 'desc')
-            ->get();
-
-        return view(
-            'pages.members.show',
-            compact(
-                'member',
-                'memberStatsAll',
-                'memberStatsRaid',
-                'memberStatsCrusade',
-                'memberStatsArena'
-            )
-        );
-
-        /**
-         * Add the following:
-         * - Personal Best:
-         *   - League and rank
-         *   - Solo pts
-         *   - Guild pts
-         *   - Global Rank
-         *
-         * - Charts for league Participations
-         *
-         * - Show promoted or relegated?
-         *
-         * Try to calculate following:
-         * - Overall total pts
-         *
-         * Tables:
-         * - Ability to order the columns?
-         * -
-         */
+        return view('pages.members.show', compact('member', 'memberStatsAll'));
     }
+
+    /**
+     * Ideas:
+     * - Personal Best:
+     *   - League and rank
+     *   - Solo pts
+     *   - Guild pts
+     *   - Global Rank
+     *
+     * - Charts for league Participations
+     *
+     */
 
     /**
      * Show the form for editing the Member.
      *
-     * @param  int  $id
+     * @param  Member $member
      * @return \Illuminate\Http\Response
      */
     public function edit(Member $member)
@@ -148,24 +98,17 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MemberFormRequest $request, $id)
+    public function update(MemberFormRequest $request, Member $member)
     {
-        $guild = Guild::where('name', $request->input('guild'))->first();
+        $member->update($request->all());
 
-        $member = Member::find($id);
-        $member->name = $request->input('name');
-        $member->guild_id = $guild->id;
-        $member->is_active = $request->input('is_active');
-        $member->save();
-
-        return redirect('/guild/' . $guild->id)->with('success', 'Member Updated!');
+        return redirect('/guild/' . $request->input('guild_id'))->with('success', 'Member Updated!');
     }
 
     /**
-     * PERMANENTLY REMOVE MEMBER.
-     * WARNING! THIS CANNOT BE UNDONE
+     * PERMANENTLY REMOVE MEMBER
      *
-     * @param  int  $id
+     * @param  Member $member
      * @return \Illuminate\Http\Response
      */
     public function destroy(Member $member)

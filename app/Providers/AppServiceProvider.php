@@ -42,5 +42,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->extend('command.model.make', function ($command, $app) {
             return new ModelMakeCommand($app['files']);
         });
+
+        if ($this->app->isLocal()) {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 }

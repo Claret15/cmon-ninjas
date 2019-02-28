@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Http\Requests\GuildFormRequest;
 use App\Http\Resources\Guilds as GuildsResource;
 use App\Models\Guild;
@@ -67,6 +67,8 @@ class GuildController extends Controller
      */
     public function show($id)
     {
+        DB::connection()->enableQueryLog();
+
         try {
             $guild = Guild::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -75,7 +77,8 @@ class GuildController extends Controller
         }
 
         $members = Guild::find($id)->members->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
-
+        $log = DB::getQueryLog();
+        print_r($log);
         return view('pages.guilds.show', compact('guild', 'members'));
 
     }
@@ -124,26 +127,4 @@ class GuildController extends Controller
 
         return redirect('/guild')->with('success', $message);
     }
-
-    /**
-     * API - Display a listing of the resource.
-     * Experimenting with API - on hold for now
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexAPI()
-    {
-        // Show all guilds
-        // $guilds = Guild::all()->sortBy('name');
-        // return view('pages.guilds.index', compact('guilds'));
-        // return $guilds; // Returns JSON
-
-        // Show all guilds
-        $guilds = Guild::all()->sortBy('name');
-
-        // Return collection of all Guilds as a resource
-        return GuildsResource::collection($guilds);
-
-    }
-
 }

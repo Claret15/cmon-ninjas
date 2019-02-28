@@ -17,7 +17,8 @@ class LeagueController extends Controller
     {
         $leagues = League::all();
 
-        return view('pages.league.index', compact('leagues'));
+        // return view('pages.league.index', compact('leagues'));
+        return League::all();
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Member extends JsonResource
+class Event extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,12 @@ class Member extends JsonResource
      */
     public function toArray($request)
     {
+        // return parent::toArray($request);
         return [
             'id'=> $this->id,
             'name' => $this->name,
-            'guild' => $this->guild->name,
-            'active' => $this->is_active
+            'event_date' => $this->event_date->format('d-M-Y'),
+            'event_type' => $this->eventType->name
         ];
     }
 }

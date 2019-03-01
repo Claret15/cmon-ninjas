@@ -31,10 +31,28 @@ class Member extends Model
         $attributes = [
             'name' => $request->input('name'),
             'guild_id' => $guild->id,
-            'is_active' => $request->input('is_active')
+            'is_active' => $request->input('is_active'),
         ];
 
         $this->create($attributes);
+    }
+
+    public function edit($request)
+    {
+        $this->update($request->all());
+    }
+
+    public function remove()
+    {
+        $this->delete();
+    }
+
+    public function getAllEventStats($member)
+    {
+        return $this->eventStats()
+        ->join('events', 'event_stats.event_id', '=', 'events.id')
+        ->orderby('events.event_date', 'desc')
+        ->get();
     }
 
     /**

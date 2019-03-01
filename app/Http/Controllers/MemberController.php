@@ -60,10 +60,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        $memberStatsAll = $member->eventStats()
-            ->join('events', 'event_stats.event_id', '=', 'events.id')
-            ->orderby('events.event_date', 'desc')
-            ->get();
+        $memberStatsAll = $member->getAllEventStats($member);
 
         return view('pages.members.show', compact('member', 'memberStatsAll'));
     }
@@ -100,7 +97,7 @@ class MemberController extends Controller
      */
     public function update(MemberFormRequest $request, Member $member)
     {
-        $member->update($request->all());
+        $member->edit($request);
 
         return redirect('/guild/' . $request->input('guild_id'))->with('success', 'Member Updated!');
     }
@@ -113,10 +110,9 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        $guild = $member->guild->id;
+        $member->remove();
         $message = $member->name . ' deleted!';
-        $member->delete();
 
-        return redirect('/guild/' . $guild)->with('success', $message);
+        return redirect('/guild/' . $member->guild_id)->with('success', $message);
     }
 }

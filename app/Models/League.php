@@ -14,6 +14,21 @@ class League extends Model
 
     protected $fillable = ['name'];
 
+    public function addLeague($request)
+    {
+        $this->create($request->all());
+    }
+
+    public function edit($request)
+    {
+        $this->update($request->all());
+    }
+
+    public function remove()
+    {
+        $this->delete();
+    }
+
     /**
      * Define Relationships
      */

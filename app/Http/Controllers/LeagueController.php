@@ -16,9 +16,8 @@ class LeagueController extends Controller
     public function index()
     {
         $leagues = League::all();
-
-        // return view('pages.league.index', compact('leagues'));
-        return League::all();
+ 
+        return view('pages.league.index', compact('leagues'));
     }
 
     /**
@@ -37,10 +36,9 @@ class LeagueController extends Controller
      * @param  LeagueFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LeagueFormRequest $request)
+    public function store(LeagueFormRequest $request, League $league)
     {
-        League::Create(request(['name']));
-
+        $league->addLeague($request);
         $message = $request->name . ' added!';
 
         return redirect('/leagues')->with('success', $message);
@@ -48,6 +46,7 @@ class LeagueController extends Controller
 
     /**
      * Display the specified resource.
+     * ! Route disabled
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -75,12 +74,9 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LeagueFormRequest $request, $id)
+    public function update(LeagueFormRequest $request, League $league)
     {
-        $league = League::find($id);
-        $league->name = $request->name;
-        $league->save();
-
+        $league->edit($request);
         $message = $league->name . ' updated!';
 
         return redirect('/leagues')->with('success', $message);
@@ -94,8 +90,9 @@ class LeagueController extends Controller
      */
     public function destroy(League $league)
     {
+        $league->remove();
         $message = $league->name . ' removed!';
-        $league->delete();
+
         return redirect('/leagues')->with('success', $message);
     }
 }

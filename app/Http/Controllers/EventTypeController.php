@@ -35,12 +35,12 @@ class EventTypeController extends Controller
      * @param  EventTypeFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventTypeFormRequest $request)
+    public function store(EventTypeFormRequest $request, EventType $eventType)
     {
-        EventType::Create(request(['name']));
+        $eventType->addEventType($request);
         $message = $request->name . ' added!';
 
-        return redirect('/event_type')->with('success', $message);
+        return redirect('/event_types')->with('success', $message);
     }
 
     /**
@@ -72,15 +72,12 @@ class EventTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EventTypeFormRequest $request, $id)
+    public function update(EventTypeFormRequest $request, EventType $eventType)
     {
-        $eventType = EventType::find($id);
-        $eventType->name = $request->input('name');
-        $eventType->save();
-
+        $eventType->edit($request);
         $message = $eventType->name . ' updated!';
 
-        return redirect('/event_type')->with('success', $message);
+        return redirect('/event_types')->with('success', $message);
     }
 
     /**
@@ -91,9 +88,9 @@ class EventTypeController extends Controller
      */
     public function destroy(EventType $eventType)
     {
+        $eventType->remove();
         $message = $eventType->name . ' removed!';
-        $eventType->delete();
 
-        return redirect('/event_type')->with('success', $message);
+        return redirect('/event_types')->with('success', $message);
     }
 }

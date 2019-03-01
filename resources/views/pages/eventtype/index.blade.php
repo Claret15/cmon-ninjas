@@ -15,7 +15,7 @@
         @foreach($eventTypes as $type)
                 <tr>
                     <td>{{ $type->name}}</td>
-                    <td> <a href="/event_type/{{$type->id}}/edit" class="btn btn-warning btn-sm">Edit</a></td>
+                    <td> <a href="/event_types/{{$type->id}}/edit" class="btn btn-warning btn-sm">Edit</a></td>
                     <td>
                         {!!Form::open(['action' => ['EventTypeController@destroy', $type->id], 'method' => 'POST'])!!}
                         {{Form::hidden('_method', 'DELETE')}}
@@ -25,7 +25,7 @@
                 </tr>
         @endforeach
                 <tr>
-                    <td colspan="3"><a class="nav-link btn btn-success btn-sm" id="new-event-type" href="/event_type/create">Add Event Type</a></td>
+                    <td colspan="3"><a class="nav-link btn btn-success btn-sm" id="new-event-type" href="/event_types/create">Add Event Type</a></td>
                 </tr>
             </tbody>
         </table>

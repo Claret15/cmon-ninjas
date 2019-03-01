@@ -14,6 +14,21 @@ class EventType extends Model
 
     protected $fillable = ['name'];
 
+    public function addEventType($request)
+    {
+        $this->create($request->all());
+    }
+
+    public function edit($request)
+    {
+        $this->update($request->all());
+    }
+
+    public function remove()
+    {
+        $this->delete();
+    }
+
     /**
      * Define Relationships
      */

@@ -60,7 +60,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        $memberStatsAll = $member->getAllEventStats($member);
+        $memberStatsAll = $member->getAllEventStats();
 
         return view('pages.members.show', compact('member', 'memberStatsAll'));
     }

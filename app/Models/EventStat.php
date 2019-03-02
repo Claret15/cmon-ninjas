@@ -18,46 +18,24 @@ class EventStat extends Model
      * @var array
      */
     public $fillable = [
-        'event_id',	'member_id', 'guild_pts', 'position', 'league_id', 'solo_rank', 'global_rank',
+        'event_id', 'member_id', 'guild_pts', 'position', 'league_id', 'solo_rank', 'global_rank',
     ];
 
     /**
-     * Define Relationships 
+     * Define Relationships
      */
-    public function member(){
+    public function member()
+    {
         return $this->belongsto('App\Models\Member');
     }
 
-    public function event(){
+    public function event()
+    {
         return $this->belongsto('App\Models\Event');
     }
 
-    public function league(){
+    public function league()
+    {
         return $this->belongsto('App\Models\League');
     }
-
-    /**
-     * Define number accessors
-     */
-    // public function getGuildPtsAttribute($value)
-    // {
-    //     return number_format($value);
-    // }
-
-    // public function getSoloPtsAttribute($value)
-    // {
-    //     return number_format($value);
-    // }
-
-    // public function getSoloRankAttribute($value)
-    // {
-    //     return number_format($value);
-    // }
-
-    // public function getGlobalRankAttribute($value)
-    // {
-    //     return number_format($value);
-    // }
-
-
 }

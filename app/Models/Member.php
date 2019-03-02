@@ -47,12 +47,21 @@ class Member extends Model
         $this->delete();
     }
 
-    public function getAllEventStats($member)
+    public function getAllEventStats()
     {
         return $this->eventStats()
-        ->join('events', 'event_stats.event_id', '=', 'events.id')
-        ->orderby('events.event_date', 'desc')
-        ->get();
+            ->with('league', 'event')
+            ->join('events', 'event_stats.event_id', '=', 'events.id')
+            ->orderby('events.event_date', 'desc')
+            ->get();
+    }
+
+    public function getEventStat($id)
+    {
+        return $this->eventStats()
+            ->with('league', 'event')
+            ->where('event_id', $id)
+            ->get();
     }
 
     /**

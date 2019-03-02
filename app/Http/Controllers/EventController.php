@@ -110,15 +110,15 @@ class EventController extends Controller
     /**
      * Show all Events
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function guild(Guild $guild)
+    public function guild($id)
     {
         $events = Event::allEvents();
         $raid = $events->where('event_type_id', 1);
         $crusade = $events->where('event_type_id', 2);
         $arena = $events->where('event_type_id', 3);
-        // $guild = Guild::findorfail($guild_id);
+        $guild = Guild::findorfail($id);
 
         return view('pages.events.guild', compact('events', 'raid', 'crusade', 'arena', 'guild'));
     }

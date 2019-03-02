@@ -1,25 +1,21 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('head')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 @endsection
- 
+
 @section('content')
 <section class="container">
     {{-- <h1 class="mt-3 text-center">{{ $member->guild->name }}</h1> --}}
-    <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
-    <h3 class="text-center mb-3">{{ $eventInfo->eventType->name }}</h3>
+    <h1 class="mt-3 text-center heading">{{ $event->name }}</h1>
+    <h3 class="text-center mb-3">{{ $event->eventType->name }}</h3>
     <h2 class="text-center"><a href="/members/{{$member->id}}">{{$member->name}}</a></h2>
-    <a href="/guilds/{{$member->guild_id}}/event/{{ $eventInfo->id}}" class="btn btn-danger btn-sm mb-2">
-        <i class="fas fa-caret-left"></i> 
+    <a href="/guilds/{{$member->guild_id}}/event/{{ $event->id}}" class="btn btn-danger btn-sm mb-2">
+        <i class="fas fa-caret-left"></i>
         <i class="fas fa-list-ol fa-lg"></i>
     </a>
     <article id="guild">
         <div class="table-responsive event-stat-member">
             <table class="table table-stats">
-                <thead class="thead-dark">
-                    {{-- <tr> --}} 
-                    {{-- <th>Member</th> --}} {{-- </tr> --}}
-                </thead>
                 <tbody>
                     @foreach($memberStat as $stats)
                     <tr>
@@ -28,31 +24,31 @@
                     </tr>
                     <tr>
                         <th>Guild Pts</th>
-                        <td>{{ number_format($stats->guild_pts) }}</td> {{-- Guild Pts --}}
+                        <td>{{ number_format($stats->guild_pts) }}</td>
                     </tr>
                     <tr>
                         <th>Solo Pts</th>
-                        <td>{{ number_format($stats->solo_pts) }}</td> {{-- Solo Pts --}}
+                        <td>{{ number_format($stats->solo_pts) }}</td>
                     </tr>
                     <tr>
                         <th>G/S</th>
-                        <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td> {{-- g/s --}}
+                        <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td>
                     </tr>
                     <tr>
                         <th>League</th>
-                        <td>{{ $stats->league->name }}</td> {{-- League --}}
+                        <td>{{ $stats->league->name }}</td>
                     </tr>
                     <tr>
                         <th>Solo Rank</th>
-                        <td>{{ number_format($stats->solo_rank) }}</td> {{-- Solo Rank --}}
+                        <td>{{ number_format($stats->solo_rank) }}</td>
                     </tr>
                     <tr>
                         <th>Global Rank</th>
-                        <td>{{ number_format($stats->global_rank) }}</td> {{-- Global Rank --}}
+                        <td>{{ number_format($stats->global_rank) }}</td>
                     </tr>
                     <tr>
                         <th>Perf.</th>
-                        <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td> {{-- Performance --}}
+                        <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>
                     </tr>
                     @endforeach
                 </tbody>

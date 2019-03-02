@@ -19,7 +19,7 @@
         </ul>
 @endauth
 
-        <a href="/guild/{{$guild->id}}/events" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
+        <a href="/guilds/{{$guild->id}}/events" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-calendar-alt fa-lg"></i></a>
         <section class="mt-2" id="guild">
             <article class="table-responsive">
                 <table class="table table-stats">

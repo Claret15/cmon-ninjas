@@ -49,7 +49,7 @@ class MemberController extends Controller
     {
         $member->addMember($request);
 
-        return redirect('/guild/1')->with('success', 'Member created!');
+        return redirect('/guilds/1')->with('success', 'Member created!');
     }
 
     /**
@@ -99,7 +99,7 @@ class MemberController extends Controller
     {
         $member->edit($request);
 
-        return redirect('/guild/' . $request->input('guild_id'))->with('success', 'Member Updated!');
+        return redirect('/guilds/' . $request->input('guild_id'))->with('success', 'Member Updated!');
     }
 
     /**
@@ -113,6 +113,6 @@ class MemberController extends Controller
         $member->remove();
         $message = $member->name . ' deleted!';
 
-        return redirect('/guild/' . $member->guild_id)->with('success', $message);
+        return redirect('/guilds/' . $member->guild_id)->with('success', $message);
     }
 }

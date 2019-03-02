@@ -10,7 +10,7 @@
     </section>
 {{-- Back Button --}}
     <div class="container mt-2">
-        <a href="/guild/{{$member->guild_id}}" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-torii-gate fa-lg"></i></a>
+        <a href="/guilds/{{$member->guild_id}}" class="btn btn-danger btn-sm p-2"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;<i class="fas fa-torii-gate fa-lg"></i></a>
     </div>
 {{-- Event Listing --}}
     <section class="container mt-2">
@@ -82,7 +82,7 @@
                             @foreach($memberStatsAll as $stats)
                                 @if ($stats->event_type_id == 1)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td><a href="/guilds/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
                                     <td>{{ number_format($stats->guild_pts) }}</td>
                                     <td>{{ number_format($stats->solo_pts) }}</td>
@@ -114,7 +114,7 @@
                             @foreach($memberStatsAll as $stats)
                                 @if ($stats->event_type_id == 2)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td><a href="/guilds/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
                                     <td>{{ number_format($stats->guild_pts) }}</td>
                                     <td>{{ $stats->league->name }}</td>
@@ -146,7 +146,7 @@
                             @foreach($memberStatsAll as $stats)
                                 @if ($stats->event_type_id == 3)
                                 <tr>
-                                    <td><a href="/guild/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td><a href="/guilds/{{$member->guild_id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
                                     <td>{{ number_format($stats->guild_pts) }}</td>
                                     <td>{{ number_format($stats->solo_pts) }}</td>

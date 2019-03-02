@@ -8,7 +8,7 @@
 @section('content')
     <section class="container">
         {{-- <div class="text-center">
-            <a href="/guild/1" class="btn btn-danger btn-lg mb-4"><i class="fas fa-torii-gate"></i>&nbsp; Members</a>
+            <a href="/guilds/1" class="btn btn-danger btn-lg mb-4"><i class="fas fa-torii-gate"></i>&nbsp; Members</a>
         </div> --}}
         <h1 class="text-center heading">Events</h1>
         <section class="show-events mt-5">
@@ -41,7 +41,7 @@
 
                             @foreach($events as $event)
                                 <tr>
-                                    <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                                    <td><a href="/guilds/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
                                     <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
@@ -65,7 +65,7 @@
 
                             @foreach($raid as $event)
                                 <tr>
-                                    <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                                    <td><a href="/guilds/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
                                     <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
@@ -89,7 +89,7 @@
 
                             @foreach($crusade as $event)
                                 <tr>
-                                    <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                                    <td><a href="/guilds/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
                                     <td>{{ $event->event_date->format("d M 'y") }}</td>
                                 </tr>
@@ -113,7 +113,7 @@
 
                             @foreach($arena as $event)
                                 <tr>
-                                    <td><a href="/guild/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
+                                    <td><a href="/guilds/{{$guild->id}}/event/{{$event->id}}">{{ $event->name }}</a></td>
                                     <td>{{ $event->eventType->name }}</td>
                                     <td>{{ $event->event_date->format("d M 'y")  }}</td>
                                 </tr>

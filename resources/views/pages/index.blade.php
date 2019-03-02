@@ -7,7 +7,7 @@
                 <img src='ninja.png' alt="ninjas guild" class="img-ninja">
             </div>
             <div class="mx-auto p-4">
-                <a href="/guild/1/events"><button class="enter-button">Enter</button></a>
+                <a href="/guilds/1/events"><button class="enter-button">Enter</button></a>
             </div>
         </div>
     </div>

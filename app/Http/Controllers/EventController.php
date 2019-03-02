@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
 use App\Models\Guild;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -27,16 +26,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        // All Events
-        $events = Event::all()->sortByDesc('event_date');
-
-        // Raid Events
+        $events = Event::allEvents();
         $raid = $events->where('event_type_id', 1);
-
-        // Crusade Events
         $crusade = $events->where('event_type_id', 2);
-
-        // Arena Events
         $arena = $events->where('event_type_id', 3);
 
         return view('pages.events.index', compact('events', 'raid', 'crusade', 'arena'));
@@ -58,13 +50,9 @@ class EventController extends Controller
      * @param  EventFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventFormRequest $request)
+    public function store(EventFormRequest $request, Event $event)
     {
-        $event = new Event;
-        $event->name = $request->input('event_name');
-        $event->event_date = $request->input('event_date');
-        $event->event_type_id = $request->input('event_type');
-        $event->save();
+        $event->addEvent($request);
 
         return redirect('/events')->with('success', 'Event created!');
     }
@@ -75,11 +63,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        $event = Event::find($id);
-        return view('pages.events.show', compact('event'));
-        // May not be required
+        // Not required
     }
 
     /**
@@ -88,22 +74,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        try {
-            $event = Event::findOrfail($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect('/events')->with('error', 'Invalid Event');
-        }
-
-        $eventType = $event->event_type_id;
-
-        // Check if user is Admin
-        // if(auth()->user()->id !== $post->user_id){
-        // return redirect('/events')->with("error", 'Unauthorised action: edit event.');
-        // }
-
-        return view('pages.events.edit', compact('event', 'eventType'));
+        return view('pages.events.edit', compact('event'));
     }
 
     /**
@@ -113,14 +86,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EventFormRequest $request, $id)
+    public function update(EventFormRequest $request, Event $event)
     {
-        $event = Event::find($id);
-        $event->name = $request->input('event_name');
-        $event->event_date = $request->input('event_date');
-        $event->event_type_id = $request->input('event_type');
-        $event->save();
-
+        $event->edit($request);
         $message = $event->name . ' updated!';
 
         return redirect('/events')->with('success', $message);
@@ -132,11 +100,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        $event = Event::find($id);
+        $event->remove();
         $message = $event->name . ' removed!';
-        $event->delete();
 
         return redirect('/events')->with('success', $message);
     }
@@ -145,26 +112,14 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function guild($guild_id)
+    public function guild(Guild $guild)
     {
-        // All Events
-        $events = Event::all()->sortByDesc('event_date');
-
-        // Raid Events
+        $events = Event::allEvents();
         $raid = $events->where('event_type_id', 1);
-
-        // Crusade Events
         $crusade = $events->where('event_type_id', 2);
-
-        // Arena Events
         $arena = $events->where('event_type_id', 3);
-
-        $guild = Guild::findorfail($guild_id);
+        // $guild = Guild::findorfail($guild_id);
 
         return view('pages.events.guild', compact('events', 'raid', 'crusade', 'arena', 'guild'));
-
-        // NB: In this view, when you click on the listed event name,
-        // this is being handled by GuildStatController.
     }
-
 }

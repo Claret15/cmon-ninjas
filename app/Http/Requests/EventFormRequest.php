@@ -25,8 +25,8 @@ class EventFormRequest extends FormRequest
     {
         $this->sanitize();
         return [
-            'event_name' => 'required',
-            'event_type' => 'required|min:1',
+            'name' => 'required',
+            'event_type_id' => 'required|min:1',
             'event_date' => 'required',
         ];
     }
@@ -35,9 +35,8 @@ class EventFormRequest extends FormRequest
     {
         $input = $this->all();
 
-        $input['event_name'] = filter_var($input['event_name'], FILTER_SANITIZE_STRING);
-        $input['event_type'] = filter_var($input['event_type'], FILTER_SANITIZE_NUMBER_INT);
-        // $input['event_date'] = filter_var($input['name'], FILTER_SANITIZE_STRING);
+        $input['name'] = filter_var($input['name'], FILTER_SANITIZE_STRING);
+        $input['event_type_id'] = filter_var($input['event_type_id'], FILTER_SANITIZE_NUMBER_INT);
 
         $this->replace($input);
     }

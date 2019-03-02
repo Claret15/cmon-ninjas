@@ -6,26 +6,57 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guild extends Model
 {
-    // Table name
     protected $table = 'guilds';
 
-    // Primary Key
     public $primaryKey = 'id';
+
+    protected $fillable = ['name'];
 
     /**
      * Remove default timestamps from model
      * @var array
-     */ 
+     */
     public $timestamps = false;
 
+    public function addGuild($request)
+    {
+        $this->create($request->all());
+    }
+
+    public function edit($request)
+    {
+        $this->update($request->all());
+    }
+
+    public function remove()
+    {
+        $this->delete();
+    }
+
+    // Local Scopes
+
     /**
-     * Define Relationships 
+     * Scope a query to return all guilds in alphbetical order
+     * Eager Load EventType
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function members(){
+    public function scopeAllGuilds($query)
+    {
+        return $query->get()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
+    }
+
+    /**
+     * Define Relationships
+     */
+    public function members()
+    {
         return $this->hasMany('App\Models\Member');
     }
 
-    public function eventStats(){
+    public function eventStats()
+    {
         return $this->hasManyThrough('App\Models\EventStat', 'App\Models\Member');
     }
 }

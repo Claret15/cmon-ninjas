@@ -8,7 +8,7 @@
     </a>
     <div class="mx-auto">
         <a href="/guilds/1" class="btn btn-danger btn-md mx-3 "><i class="fas fa-torii-gate"></i>&nbsp; Members</a>
-        <a href="/guilds/1/events/" class="btn btn-danger btn-md mx-3"><i class="fas fa-calendar-alt fa-lg"></i>&nbsp; Events</a>
+        <a href="/guilds/1/events" class="btn btn-danger btn-md mx-3"><i class="fas fa-calendar-alt fa-lg"></i>&nbsp; Events</a>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">

@@ -4,26 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeagueFormRequest;
 use App\Models\League;
-use Illuminate\Http\Request;
 
 class LeagueController extends Controller
 {
     /**
      * Display all Leagues.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
         $leagues = League::all();
- 
+
         return view('pages.league.index', compact('leagues'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -34,7 +33,8 @@ class LeagueController extends Controller
      * Store a newly created League.
      *
      * @param  LeagueFormRequest $request
-     * @return \Illuminate\Http\Response
+     * @param  League $league
+     * @return RedirectResponse
      */
     public function store(LeagueFormRequest $request, League $league)
     {
@@ -59,8 +59,8 @@ class LeagueController extends Controller
     /**
      * Show the form for editing the League.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  League $league
+     * @return View
      */
     public function edit(League $league)
     {
@@ -71,8 +71,8 @@ class LeagueController extends Controller
      * Update League.
      *
      * @param  LeagueFormRequest $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  League $league
+     * @return RedirectResponse
      */
     public function update(LeagueFormRequest $request, League $league)
     {
@@ -85,8 +85,8 @@ class LeagueController extends Controller
     /**
      * Remove League.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  League $league
+     * @return RedirectResponse
      */
     public function destroy(League $league)
     {

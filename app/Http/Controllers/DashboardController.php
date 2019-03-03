@@ -15,9 +15,9 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {

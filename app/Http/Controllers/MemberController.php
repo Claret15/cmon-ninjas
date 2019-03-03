@@ -19,8 +19,9 @@ class MemberController extends Controller
 
     /**
      * Show members from all guilds
+     * ! Route disabled
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -31,7 +32,7 @@ class MemberController extends Controller
     /**
      * Show the form for creating a Member.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -39,11 +40,11 @@ class MemberController extends Controller
     }
 
     /**
-     * Store a newly created Member.
+     * Create Member
      *
      * @param  MemberFormRequest $request
      * @param Member $member
-     * @return \Illuminate\Http\Response
+     * @return RedirectReponse
      */
     public function store(MemberFormRequest $request, Member $member)
     {
@@ -56,7 +57,7 @@ class MemberController extends Controller
      * Display Member.
      *
      * @param  Member $member
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Member $member)
     {
@@ -81,7 +82,7 @@ class MemberController extends Controller
      * Show the form for editing the Member.
      *
      * @param  Member $member
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(Member $member)
     {
@@ -92,8 +93,8 @@ class MemberController extends Controller
      * Update Member.
      *
      * @param  MemberFormRequest $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Member  $member
+     * @return RedirectResponse
      */
     public function update(MemberFormRequest $request, Member $member)
     {
@@ -106,7 +107,7 @@ class MemberController extends Controller
      * PERMANENTLY REMOVE MEMBER
      *
      * @param  Member $member
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(Member $member)
     {

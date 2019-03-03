@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use App\Models\Guild;
-use App\Models\Member;
-use App\Models\League;
-use App\Models\EventStat;
 use App\Http\Requests\EventStatFormRequest;
+use App\Models\Event;
+use App\Models\EventStat;
+use App\Models\Guild;
+use App\Models\League;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class EventStatController extends Controller
 {
-
     /**
      * Show Member stats for a specific Event.
      *
@@ -43,7 +42,7 @@ class EventStatController extends Controller
     {
         $guild = Guild::findOrfail($guild_id);
         $event = Event::with('eventType')->findOrfail($event_id);
-        $members = $guild->members()->active()->get()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE)->pluck('name', 'id');
+        $members = $guild->members()->active()->get()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'id');
         $leagues = League::orderBy('name', 'asc')->pluck('name', 'id');
         $allGuildEventStats = $guild->getEventStats($event_id);
         $guildPtsTotal = $guild->getTotalGuildPts($event_id);
@@ -58,7 +57,7 @@ class EventStatController extends Controller
         ));
     }
 
-   /**
+    /**
      * Create Event Stat
      *
      * @param  EventStatFormRequest  $request
@@ -75,8 +74,8 @@ class EventStatController extends Controller
     /**
      * Update Event Stat.
      *
-     * @param  EventStatFormRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  EventStatFormRequest $request
+     * @return RedirectResponse
      */
     public function update(EventStatFormRequest $request)
     {
@@ -89,14 +88,14 @@ class EventStatController extends Controller
     /**
      * Remove Event Stat.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return RedirectResponse
      */
     public function destroy(Request $request)
     {
         EventStat::find($request->eventStat)->delete();
         $message = 'Event stat removed!';
-        
+
         return back()->with('success', $message);
     }
 }

@@ -22,7 +22,7 @@ class EventController extends Controller
     /**
      * Show all Events
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -37,7 +37,7 @@ class EventController extends Controller
     /**
      * Show the form for creating a new Event.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -48,7 +48,8 @@ class EventController extends Controller
      * Store a newly created Event.
      *
      * @param  EventFormRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  Event $event
+     * @return RedirectResponse
      */
     public function store(EventFormRequest $request, Event $event)
     {
@@ -59,6 +60,7 @@ class EventController extends Controller
 
     /**
      * Show the Event.
+     *  ! Route disabled
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -71,8 +73,8 @@ class EventController extends Controller
     /**
      * Show the form to edit an Event.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Event $event
+     * @return View
      */
     public function edit(Event $event)
     {
@@ -83,8 +85,8 @@ class EventController extends Controller
      * Update an Event.
      *
      * @param  EventFormRequest $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Event $event
+     * @return RedirectResponse
      */
     public function update(EventFormRequest $request, Event $event)
     {
@@ -97,8 +99,8 @@ class EventController extends Controller
     /**
      * Remove Event.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Event $event
+     * @return RedirectResponse
      */
     public function destroy(Event $event)
     {
@@ -109,8 +111,9 @@ class EventController extends Controller
     }
     
     /**
-     * Show all Events
+     * Show all Events for a specific Guild
      *
+     * @param  int  $id
      * @return View
      */
     public function guild($id)

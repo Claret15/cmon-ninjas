@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventTypeFormRequest;
 use App\Models\EventType;
-use Illuminate\Http\Request;
 
 class EventTypeController extends Controller
 {
     /**
      * Display all Event Types
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -22,7 +21,7 @@ class EventTypeController extends Controller
     /**
      * Show the form for creating a new Event Type.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -30,10 +29,11 @@ class EventTypeController extends Controller
     }
 
     /**
-     * Store a newly created Event Type.
+     * Create Event Type.
      *
      * @param  EventTypeFormRequest $request
-     * @return \Illuminate\Http\Response
+     * @param  EventType $eventType
+     * @return RedirectResponse
      */
     public function store(EventTypeFormRequest $request, EventType $eventType)
     {
@@ -45,6 +45,7 @@ class EventTypeController extends Controller
 
     /**
      * Display the specified resource.
+     * ! Route Disabled
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -57,8 +58,8 @@ class EventTypeController extends Controller
     /**
      * Show the form for editing the Event Type.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  EventType $eventType
+     * @return View
      */
     public function edit(EventType $eventType)
     {
@@ -68,9 +69,9 @@ class EventTypeController extends Controller
     /**
      * Update Event Type.
      *
-     * @param  EventTypeFormRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  EventTypeFormRequest $request
+     * @param  EventType $eventType
+     * @return RedirectResponse
      */
     public function update(EventTypeFormRequest $request, EventType $eventType)
     {
@@ -83,8 +84,8 @@ class EventTypeController extends Controller
     /**
      * Remove Event Type.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  EventType $eventType
+     * @return RedirectResponse
      */
     public function destroy(EventType $eventType)
     {

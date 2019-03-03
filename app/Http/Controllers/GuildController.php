@@ -39,7 +39,7 @@ class GuildController extends Controller
     }
 
     /**
-     * Store a newly created Guild.
+     * Create Guild
      *
      * @param  GuildFormRequest  $request
      * @param  Guild $guild

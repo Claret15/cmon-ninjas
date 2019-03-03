@@ -25,7 +25,6 @@ class EventStatFormRequest extends FormRequest
     {
         $this->sanitize();
         return [
-            'guild_id' => 'required',
             'event_id' => 'required',
             'member_id' => 'required',
             'guild_pts' => 'required',
@@ -40,8 +39,6 @@ class EventStatFormRequest extends FormRequest
     public function sanitize()
     {
         $input = $this->all();
-
-        $input['guild_id'] = filter_var($input['guild_id'], FILTER_SANITIZE_NUMBER_INT);
         $input['event_id'] = filter_var($input['event_id'], FILTER_SANITIZE_NUMBER_INT);
         $input['member_id'] = filter_var($input['member_id'], FILTER_SANITIZE_NUMBER_INT);
         $input['guild_pts'] = filter_var($input['guild_pts'], FILTER_SANITIZE_NUMBER_INT);

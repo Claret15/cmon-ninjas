@@ -47,6 +47,15 @@ class Guild extends Model
         return $query->get()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
     }
 
+    public function getEventStats($id)
+    {
+        return $this->eventStats()
+            ->with('league', 'event', 'member')
+            ->where('event_id', $id)
+            ->orderby('guild_pts', 'desc')
+            ->get();
+    }
+
     public function getTotalGuildPts($id)
     {
         return $this->eventStats()

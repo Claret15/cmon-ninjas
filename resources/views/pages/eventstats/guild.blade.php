@@ -4,8 +4,8 @@
 
     <section class="container">
         {{-- <h1 class="mt-3 text-center">{{ $guild->name }}</h1> --}}
-        <h1 class="mt-3 text-center heading">{{ $eventInfo->name }}</h1>
-        <h3 class="text-center mb-3">{{ $eventInfo->eventType->name }}</h3>
+        <h1 class="mt-3 text-center heading">{{ $event->name }}</h1>
+        <h3 class="text-center mb-3">{{ $event->eventType->name }}</h3>
 
 @auth
 {{-- Button trigger Modal Create --}}
@@ -49,15 +49,13 @@
                                     data-toggle="modal"
                                     data-target="#deleteModal"
                                     data-stat="{{ $stats->id }}"
-                                    data-guild="{{ $stats->member->guild_id }}"
-                                    data-event="{{ $stats->event_id }}"
                                 >
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             @endauth
                             </td> {{-- position--}}
                             <td>
-                                <a href="/member/{{ $stats->member->id }}/event/{{ $stats->event_id }}">{{ $stats->member->name }}</a>
+                                <a href="/member/{{ $stats->member_id }}/event/{{ $stats->event_id }}">{{ $stats->member->name }}</a>
                             @auth
                                 <br>
                                 <button
@@ -65,9 +63,8 @@
                                     data-toggle="modal"
                                     data-target="#editModal"
                                     data-stat="{{ $stats->id }}"
-                                    data-guild="{{ $stats->member->guild_id }}"
                                     data-event="{{ $stats->event_id }}"
-                                    data-member="{{ $stats->member->id }}"
+                                    data-member="{{ $stats->member_id }}"
                                     data-position="{{ $stats->position }}"
                                     data-league="{{ $stats->league_id }}"
                                     data-guild_pts="{{ $stats->guild_pts }}"
@@ -79,20 +76,20 @@
                                 </button>
                             @endauth
                             </td>     {{-- member --}}
-                            <td>{{ number_format($stats->guild_pts) }}</td>     {{-- guild_pts --}}
-                            <td>{{ number_format($stats->solo_pts) }}</td>      {{-- solo_pts --}}
+                            <td>{{ number_format($stats->guild_pts) }}</td>
+                            <td>{{ number_format($stats->solo_pts) }}</td>
                         @if($stats->guild_pts < 1 || $stats->solo_pts < 1)
                             <td>N/A</td>                   {{-- g/s --}}
                         @else
-                            <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td>                   {{-- g/s --}}
+                            <td>{{ round(($stats->solo_pts/$stats->guild_pts), 2) }}</td>
                         @endif
-                            <td>{{ $stats->league->name }}</td>                   {{-- league --}}
-                            <td>{{ number_format($stats->solo_rank) }}</td>     {{-- solo_rank --}}
-                            <td>{{ number_format($stats->global_rank) }}</td>   {{-- global_rank --}}
+                            <td>{{ $stats->league->name }}</td>
+                            <td>{{ number_format($stats->solo_rank) }}</td>
+                            <td>{{ number_format($stats->global_rank) }}</td>
                         @if($stats->guild_pts <1)
-                            <td>0%</td>   {{-- Performance --}}
+                            <td>0%</td>
                         @else
-                            <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>   {{-- Performance --}}
+                            <td>{{ round(($stats->guild_pts/$guildPtsTotal)*100, 2) .'%' }}</td>
                         @endIf
                         </tr>
             @endforeach
@@ -114,9 +111,9 @@
         {{-- Modal Body --}}
                     <div class="modal-body">
                         <div class="add-event">
-                            {!! Form::open(['action' => ['GuildStatController@store', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
-                            {{Form::hidden('guild_id', $guild->id)}}
-                            {{Form::hidden('event_id', $eventInfo->id)}}
+                            {!! Form::open(['action' => ['EventStatController@store', $guild->id, $event->id], 'method' => 'POST']) !!}
+                            {{-- {{Form::hidden('guild_id', $guild->id)}} --}}
+                            {{Form::hidden('event_id', $event->id)}}
                             <div class="form-group">
                                 {{Form::label('member_id', 'Member Name', ['class' => ''])}}
                                 {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
@@ -152,13 +149,13 @@
                                 <div class="form-group col-md-6">
                                     {{Form::label('solo_rank', 'Solo Rank', ['class' => ''])}}
                                     <div>
-                                        {{Form::number('solo_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                                        {{Form::number('solo_rank', '', ['class' => 'form-control', 'placeholder' => 'Solo rank'])}}
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     {{Form::label('global', 'Global Rank', ['class' => ''])}}
                                     <div>
-                                        {{Form::number('global_rank', '', ['class' => 'form-control', 'placeholder' => 'Add Solo points'])}}
+                                        {{Form::number('global_rank', '', ['class' => 'form-control', 'placeholder' => 'Global rank'])}}
                                     </div>
                                 </div>
                             </div>
@@ -184,11 +181,10 @@
         {{-- Modal Body --}}
                     <div class="modal-body">
                         <div class="add-event">
-                            {!! Form::open(['action' => ['GuildStatController@update', $guild->id, $eventInfo->id], 'method' => 'POST']) !!}
+                            {!! Form::open(['action' => ['EventStatController@update', $guild->id, $event->id], 'method' => 'POST']) !!}
                             {{Form::hidden('_method', 'Put')}}
-                            {{Form::hidden('eventStat', '')}}
-                            {{Form::hidden('guild_id', $guild->id)}}
-                            {{Form::hidden('event_id', $eventInfo->id)}}
+                            {{Form::hidden('id', '')}}
+                            {{Form::hidden('event_id', $event->id)}}
                             <div class="form-group">
                                 {{Form::label('member_id', 'Member Name', ['class' => ''])}}
                                 {{Form::select('member_id', $members, null, ['class' => 'form-control'])}}
@@ -257,11 +253,9 @@
                     <div class="modal-body">
                         <div class="delete-stat">
                             <h5>Are you sure?</h5>
-                            {!!Form::open(['action' => ['GuildStatController@destroy', $guild->id, $eventInfo->id], 'method' => 'POST'])!!}
+                            {!!Form::open(['action' => ['EventStatController@destroy', $guild->id, $event->id], 'method' => 'POST'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::hidden('eventStat', '')}}
-                            {{Form::hidden('guild_id', '')}}
-                            {{Form::hidden('event_id', '')}}
                             {{Form::submit('Delete',['class' => 'btn btn-sm btn-danger'])}}
                             {!!Form::close() !!}
 
@@ -283,7 +277,6 @@ $(document).ready(function() {
     $('#editModal').on('show.bs.modal', function (event) {
         var eventStat = $(event.relatedTarget);
         var stat = eventStat.data('stat');
-        var guild = eventStat.data('guild');
         var event = eventStat.data('event');
         var member = eventStat.data('member');
         var position = eventStat.data('position');
@@ -293,8 +286,7 @@ $(document).ready(function() {
         var solo_rank = eventStat.data('solo_rank');
         var global_rank= eventStat.data('global_rank');
         var modal = $(this);
-        modal.find('.modal-body input[name="eventStat"]').val(stat);
-        modal.find('.modal-body input[name="guild_id"]').val(guild);
+        modal.find('.modal-body input[name="id"]').val(stat);
         modal.find('.modal-body input[name="event_id"]').val(event);
         modal.find('.modal-body select[name="member_id"]').val(member);
         modal.find('.modal-body select[name="league_id"]').val(league);
@@ -309,14 +301,9 @@ $(document).ready(function() {
     $('#deleteModal').on('show.bs.modal', function (event) {
         var eventStat = $(event.relatedTarget);
         var stat = eventStat.data('stat');
-        var guild = eventStat.data('guild');
-        var event = eventStat.data('event');
         var modal = $(this);
 
         modal.find('.modal-body input[name="eventStat"]').val(stat);
-        modal.find('.modal-body input[name="guild_id"]').val(guild);
-        modal.find('.modal-body input[name="event_id"]').val(event);
-
     })
 
 })

@@ -13,20 +13,20 @@
 Auth::routes(['register' => false]);
 
 Route::get('/', 'PageController@index');
-
-Route::get('/guilds/{id}/events/', 'EventController@guild');
-Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member');
-
-Route::get('/guilds/{guild_id}/event/{event_id}', 'GuildStatController@show');
-Route::post('/guilds/{guild_id}/event/{event_id}', 'GuildStatController@store');
-Route::put('/guilds/{guild_id}/event/{event_id}', 'GuildStatController@update');
-Route::delete('/guilds/{guild_id}/event/{event_id}', 'GuildStatController@destroy');
-
 Route::resource('guilds', 'GuildController');
 Route::resource('event_types', 'EventTypeController')->except(['show']);
-Route::resource('events', 'EventController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
 Route::resource('members', 'MemberController')->except(['index']);
+
+Route::resource('events', 'EventController')->except(['show']);
+Route::get('/guilds/{id}/events/', 'EventController@guild');
+
+Route::get('/member/{member_id}/event/{event_id}', 'EventStatController@member');
+Route::get('/guilds/{guild_id}/event/{event_id}', 'EventStatController@guild');
+Route::post('/guilds/{guild_id}/event/{event_id}', 'EventStatController@store');
+Route::put('/guilds/{guild_id}/event/{event_id}', 'EventStatController@update');
+Route::delete('/guilds/{guild_id}/event/{event_id}', 'EventStatController@destroy');
+
 
 // Import Files
 Route::post('/import_crusade', 'ImportController@importEventStatsCrusade');

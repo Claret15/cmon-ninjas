@@ -107,6 +107,7 @@ class EventController extends Controller
 
         return redirect('/events')->with('success', $message);
     }
+    
     /**
      * Show all Events
      *

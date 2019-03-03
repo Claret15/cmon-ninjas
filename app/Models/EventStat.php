@@ -13,13 +13,11 @@ class EventStat extends Model
     public $timestamps = false;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
-    public $fillable = [
-        'event_id', 'member_id', 'guild_pts', 'position', 'league_id', 'solo_rank', 'global_rank',
-    ];
+    protected $guarded =[];
 
     /**
      * Define Relationships

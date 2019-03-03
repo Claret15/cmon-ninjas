@@ -64,6 +64,13 @@ class Member extends Model
             ->get();
     }
 
+    // Local Scope Queries
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
     /**
      * Define Relationships
      */

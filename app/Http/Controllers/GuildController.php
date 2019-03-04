@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuildFormRequest;
 use App\Models\Guild;
+use Illuminate\Support\Facades\Cache;
 
 class GuildController extends Controller
 {
@@ -24,7 +25,10 @@ class GuildController extends Controller
      */
     public function index()
     {
-        $guilds = Guild::allGuilds();
+        $guilds = Cache::remember('guilds', 60, function () {
+            return Guild::allGuilds();
+        });
+
         return view('pages.guilds.index', compact('guilds'));
     }
 
@@ -61,7 +65,9 @@ class GuildController extends Controller
      */
     public function show(Guild $guild)
     {
-        $members = $guild->members->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
+        $members = Cache::remember('guild_members', 60, function () use ($guild) {
+            return $guild->members->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
+        });
 
         return view('pages.guilds.show', compact('guild', 'members'));
     }

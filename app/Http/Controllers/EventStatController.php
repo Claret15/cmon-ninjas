@@ -9,6 +9,7 @@ use App\Models\Guild;
 use App\Models\League;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class EventStatController extends Controller
 {
@@ -21,12 +22,29 @@ class EventStatController extends Controller
      */
     public function member($member_id, $event_id)
     {
-        $member = Member::findOrfail($member_id);
-        $event = Event::with('eventType')->findOrfail($event_id);
-        $guild = Guild::find($member->guild_id);
-        $memberStat = $member->getEventStat($event_id);
-        $guildPtsTotal = $guild->getTotalGuildPts($event_id);
-        $participants = $guild->countParticipants($event_id);
+        $member = Cache::remember('member_' . $member_id, 60, function () use ($member_id) {
+            return Member::findOrfail($member_id);
+        });
+
+        $event = Cache::remember('event_' . $event_id, 60, function () use ($event_id) {
+            return Event::with('eventType')->findOrfail($event_id);
+        });
+
+        $guild = Cache::remember('guild_' . $member->guild_id, 60, function () use ($member) {
+            return Guild::find($member->guild_id);
+        });
+
+        $memberStat = Cache::remember('member_stats_' . $event_id, 60, function () use ($member, $event_id) {
+            return $member->getEventStat($event_id);
+        });
+
+        $guildPtsTotal = Cache::remember('total_guild_pts_' . $event_id, 60, function () use ($guild, $event_id) {
+            return $guild->getTotalGuildPts($event_id);
+        });
+
+        $participants = Cache::remember('participants_' . $event_id, 60, function () use ($guild, $event_id) {
+            return $guild->countParticipants($event_id);
+        });
 
         return view('pages.eventstats.member', compact('event', 'member', 'memberStat', 'guildPtsTotal', 'participants'));
     }
@@ -40,12 +58,34 @@ class EventStatController extends Controller
      */
     public function guild($guild_id, $event_id)
     {
-        $guild = Guild::findOrfail($guild_id);
-        $event = Event::with('eventType')->findOrfail($event_id);
-        $members = $guild->members()->active()->get()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'id');
-        $leagues = League::orderBy('name', 'asc')->pluck('name', 'id');
-        $allGuildEventStats = $guild->getEventStats($event_id);
-        $guildPtsTotal = $guild->getTotalGuildPts($event_id);
+        $guild = Cache::remember('guild_' . $guild_id, 60, function () use ($guild_id) {
+            return Guild::find($guild_id);
+        });
+
+        $event = Cache::remember('event_' . $event_id, 60, function () use ($event_id) {
+            return Event::with('eventType')->findOrfail($event_id);
+        });
+
+        $members = Cache::remember('guild_members_pluck_' . $guild_id, 60, function () use ($guild) {
+            return $guild->members()->active()->get()
+                ->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'id');
+        });
+
+        $leagues = Cache::remember('leagues_pluck' . $guild_id, 60, function () {
+            return League::orderBy('name', 'asc')->pluck('name', 'id');
+        });
+        
+        $allGuildEventStats = Cache::remember(
+            'guild_' . $guild_id . '_stats_' . $event_id,
+            60,
+            function () use ($guild, $event_id) {
+                return $guild->getEventStats($event_id);
+            }
+        );
+
+        $guildPtsTotal = Cache::remember('total_guild_pts_' . $event_id, 60, function () use ($guild, $event_id) {
+            return $guild->getTotalGuildPts($event_id);
+        });
 
         return view('pages.eventstats.guild', compact(
             'allGuildEventStats',

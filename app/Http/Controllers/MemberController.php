@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberFormRequest;
 use App\Models\Member;
+use Illuminate\Support\Facades\Cache;
 
 class MemberController extends Controller
 {
@@ -61,7 +62,12 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        $memberStatsAll = $member->getAllEventStats();
+
+        $memberStatsAll = Cache::remember('memberStatsAll_' . $member->id, 60, function () use ($member) {
+            return $member->getAllEventStats();
+        });
+
+        // $memberStatsAll = $member->getAllEventStats();
 
         return view('pages.members.show', compact('member', 'memberStatsAll'));
     }

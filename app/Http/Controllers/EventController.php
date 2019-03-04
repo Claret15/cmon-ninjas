@@ -6,6 +6,7 @@ use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
 use App\Models\Guild;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class EventController extends Controller
 {
@@ -26,7 +27,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::allEvents();
+        $events = Cache::remember('event_all', 60, function () {
+            return Event::allEvents();
+        });
+
         $raid = $events->where('event_type_id', 1);
         $crusade = $events->where('event_type_id', 2);
         $arena = $events->where('event_type_id', 3);
@@ -118,7 +122,10 @@ class EventController extends Controller
      */
     public function guild($id)
     {
-        $events = Event::allEvents();
+        $events = Cache::remember('event_all', 60, function () {
+            return Event::allEvents();
+        });
+        
         $raid = $events->where('event_type_id', 1);
         $crusade = $events->where('event_type_id', 2);
         $arena = $events->where('event_type_id', 3);

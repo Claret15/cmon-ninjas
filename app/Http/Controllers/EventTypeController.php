@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventTypeFormRequest;
 use App\Models\EventType;
+use Illuminate\Support\Facades\Cache;
 
 class EventTypeController extends Controller
 {
@@ -14,7 +15,10 @@ class EventTypeController extends Controller
      */
     public function index()
     {
-        $eventTypes = EventType::all();
+        $eventTypes = Cache::remember('eventTypes', 60, function () {
+            return EventType::all();
+        });
+
         return view('pages.eventtype.index', compact('eventTypes'));
     }
 

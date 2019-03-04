@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeagueFormRequest;
 use App\Models\League;
+use Illuminate\Support\Facades\Cache;
 
 class LeagueController extends Controller
 {
@@ -14,7 +15,10 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        $leagues = League::all();
+        $leagues = Cache::remember('leagues', 60, function () {
+            return League::all();
+        });
+        // $leagues = League::all();
 
         return view('pages.league.index', compact('leagues'));
     }

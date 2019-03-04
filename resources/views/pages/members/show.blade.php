@@ -50,7 +50,7 @@
                             <tbody>
                             @foreach($memberStatsAll as $stats)
                                 <tr>
-                                    <td><a href="/member/{{$member->id}}/event/{{$stats->event_id}}/">{{$stats->event->name}}</a></td>
+                                    <td><a href="/member/{{$member->id}}/event/{{$stats->event_id}}">{{$stats->event->name}}</a></td>
                                     <td>{{ number_format($stats->position) }}</td>
                                     <td>{{ number_format($stats->guild_pts) }}</td>
                                     <td>{{ number_format($stats->solo_pts) }}</td>

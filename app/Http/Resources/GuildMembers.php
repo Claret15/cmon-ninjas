@@ -18,6 +18,7 @@ class GuildMembers extends JsonResource
             'id'=> $this->id,
             'name' => $this->name,
             'guild' => $this->guild->name,
+            'guild_id' => $this->guild_id,
             'active' => $this->is_active
         ];
     }

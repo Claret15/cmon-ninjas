@@ -19,7 +19,8 @@ class Event extends JsonResource
             'id'=> $this->id,
             'name' => $this->name,
             'event_date' => $this->event_date->format('d-M-Y'),
-            'event_type' => $this->eventType->name
+            'event_type' => $this->eventType->name,
+            'event_type_id' => $this->eventType->id
         ];
     }
 }

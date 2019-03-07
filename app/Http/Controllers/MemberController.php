@@ -63,7 +63,7 @@ class MemberController extends Controller
     public function show(Member $member)
     {
 
-        $memberStatsAll = Cache::remember('memberStatsAll_' . $member->id, 60, function () use ($member) {
+        $memberStatsAll = Cache::remember('memberStatsAll_' . $member->id, 2, function () use ($member) {
             return $member->getAllEventStats();
         });
 

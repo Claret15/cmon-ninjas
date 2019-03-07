@@ -17,6 +17,7 @@ class GuildEventStats extends JsonResource
         // return parent::toArray($request);
         return [
             'name' => $this->member->name,
+            'event_id' => $this->event->id,
             'event' => $this->event->name,
             'event_date' => $this->event->event_date->format('d-M-Y'),
             'position' => $this->position,

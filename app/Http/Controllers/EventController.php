@@ -27,7 +27,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Cache::remember('event_all', 60, function () {
+        $events = Cache::remember('event_all', 2, function () {
             return Event::allEvents();
         });
 
@@ -122,7 +122,7 @@ class EventController extends Controller
      */
     public function guild($id)
     {
-        $events = Cache::remember('event_all', 60, function () {
+        $events = Cache::remember('event_all', 2, function () {
             return Event::allEvents();
         });
         

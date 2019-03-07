@@ -65,7 +65,7 @@ class GuildController extends Controller
      */
     public function show(Guild $guild)
     {
-        $members = Cache::remember('guild_members', 60, function () use ($guild) {
+        $members = Cache::remember('guild_members', 2, function () use ($guild) {
             return $guild->members->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
         });
 

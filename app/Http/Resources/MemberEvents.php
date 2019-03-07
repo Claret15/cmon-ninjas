@@ -25,6 +25,8 @@ class MemberEvents extends JsonResource
             'league'=> $this->league->name,
             'solo_rank' => $this->solo_rank,
             'global_rank' => $this->global_rank,
+            'event_id' => $this->event->id,
+            'guild_id' => $this->member->guild_id
         ];
     }
 }

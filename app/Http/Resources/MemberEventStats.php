@@ -18,6 +18,7 @@ class MemberEventStats extends JsonResource
         return [
             'name' => $this->member->name,
             'event' => $this->event->name,
+            'event_type' => $this->event->eventType->name,
             'event_date' => $this->event->event_date->format('d-M-Y'),
             'position' => $this->position,
             'guild_pts' => $this->guild_pts,

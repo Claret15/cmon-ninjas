@@ -45,7 +45,7 @@
             @if ($member->is_active === false)
             <article class="card text-center m-1 " >
                 <a href="/members/{{$member->id}}">
-                <div class="card-body">
+                <div class="card-body member">
                     {{$member->name}}
                 @auth
                     <div class="mt-2">

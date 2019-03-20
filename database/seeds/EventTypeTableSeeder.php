@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\EventType;
 use Illuminate\Database\Seeder;
 
 class EventTypeTableSeeder extends Seeder
@@ -11,14 +12,9 @@ class EventTypeTableSeeder extends Seeder
      */
     public function run()
     {
-
-        // Seed specific data to the table. 
-
-        \App\Models\EventType::create(['name' => 'Raid']);
-        \App\Models\EventType::create(['name' => 'Crusade']);
-        \App\Models\EventType::create(['name' => 'Arena']);
-
-
-        // factory(App\Models\EventType::class, 10)->create();
+        // Seed specific data to the table.
+        EventType::create(['name' => 'Raid']);
+        EventType::create(['name' => 'Crusade']);
+        EventType::create(['name' => 'Arena']);
     }
 }

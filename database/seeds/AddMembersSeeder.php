@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Member;
 use Illuminate\Database\Seeder;
 
 class AddMembersSeeder extends Seeder
@@ -46,15 +47,14 @@ class AddMembersSeeder extends Seeder
             'Sultan Garel Diamond',
             'swavrick',
             'Tdubb',
-            'Tzar Maha Black'
+            'Tzar Maha Black',
         ];
 
-
         foreach ($members as $member) {
-            App\Models\Member::create(
+            Member::create(
                 [
                     'name' => $member,
-                    'guild_id' => 1
+                    'guild_id' => 1,
                 ]
             );
         }

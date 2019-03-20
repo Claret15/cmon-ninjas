@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guild;
 use Illuminate\Database\Seeder;
 
 class GuildTableSeeder extends Seeder
@@ -11,13 +12,8 @@ class GuildTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Models\Guild::create([
-            'name'=>'Ninjas Guild'
+        Guild::create([
+            'name' => 'Ninjas',
         ]);
-        // factory(App\Models\Guild::class)->create([
-        //     'name' => 'Infernal Pathfinders',
-        // ]);
-
-        // factory(App\Models\Guild::class, 8)->create();
     }
 }

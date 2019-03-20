@@ -15,7 +15,7 @@
     </a>
     <article id="guild">
         <div class="table-responsive event-stat-member">
-            <table class="table table-stats">
+            <table class="table">
                 <tbody>
                     @foreach($memberStat as $stats)
                     <tr>

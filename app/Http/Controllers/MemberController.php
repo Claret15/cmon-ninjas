@@ -62,7 +62,6 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-
         $memberStatsAll = Cache::remember('memberStatsAll_' . $member->id, 2, function () use ($member) {
             return $member->getAllEventStats();
         });
@@ -106,7 +105,7 @@ class MemberController extends Controller
     {
         $member->edit($request);
 
-        return redirect('/guilds/' . $request->input('guild_id'))->with('success', 'Member Updated!');
+        return redirect('/guilds/' . $member->guild_id)->with('success', 'Member Updated!');
     }
 
     /**

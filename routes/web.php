@@ -16,7 +16,7 @@ Route::get('/', 'PageController@index');
 Route::resource('guilds', 'GuildController');
 Route::resource('event_types', 'EventTypeController')->except(['show']);
 Route::resource('leagues', 'LeagueController')->except(['show']);
-Route::resource('members', 'MemberController')->except(['index']);
+Route::resource('members', 'MemberController');
 
 Route::resource('events', 'EventController')->except(['show']);
 Route::get('/guilds/{id}/events/', 'EventController@guild');
@@ -35,6 +35,6 @@ Route::post('/import_members', 'ImportController@importMembers');
 
 Route::get('/dashboard', 'DashboardController@index');
 
-    Route::fallback(function () {
-        return redirect('/')->with('error', 'Page does not exist');
-    });
+Route::fallback(function () {
+    return redirect('/')->with('error', 'Page does not exist');
+});

@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Cache;
 class LeagueController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+    
+    /**
      * Display all Leagues.
      *
      * @return View
@@ -55,10 +65,10 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    // public function show($id)
+    // {
         //
-    }
+    // }
 
     /**
      * Show the form for editing the League.

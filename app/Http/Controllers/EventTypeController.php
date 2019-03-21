@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Cache;
 class EventTypeController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display all Event Types
      *
      * @return View
@@ -54,10 +64,10 @@ class EventTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // Not required
-    }
+    // public function show($id)
+    // {
+    // Not required
+    // }
 
     /**
      * Show the form for editing the Event Type.

@@ -69,10 +69,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
-    {
-        // Not required
-    }
+    // public function show(Event $event)
+    // {
+    // Not required
+    // }
 
     /**
      * Show the form to edit an Event.
@@ -113,7 +113,7 @@ class EventController extends Controller
 
         return redirect('/events')->with('success', $message);
     }
-    
+
     /**
      * Show all Events for a specific Guild
      *
@@ -125,7 +125,7 @@ class EventController extends Controller
         $events = Cache::remember('event_all', 2, function () {
             return Event::allEvents();
         });
-        
+
         $raid = $events->where('event_type_id', 1);
         $crusade = $events->where('event_type_id', 2);
         $arena = $events->where('event_type_id', 3);

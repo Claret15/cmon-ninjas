@@ -34,7 +34,7 @@ class EventStatController extends Controller
             return Guild::find($member->guild_id);
         });
 
-        $memberStat = Cache::remember('member_stats_' . $event_id, 10, function () use ($member, $event_id) {
+        $memberStat = Cache::remember('member_stats_' . $event_id . '_' . $member_id, 10, function () use ($member, $event_id) {
             return $member->getEventStat($event_id);
         });
 
